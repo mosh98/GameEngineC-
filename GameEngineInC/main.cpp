@@ -6,10 +6,14 @@
 //  Copyright © 2020 Mosleh Mahamud. All rights reserved.
 //
 
+
 #include <iostream>
+#include <SDL2/SDL.h>
 
 int main(int argc, const char * argv[]) {
-    // insert code here...
-    std::cout << "Hello, World!\n";
+   
+    SDL_Init(SDL_INIT_EVERYTHING);
+    
+    
     return 0;
 }
