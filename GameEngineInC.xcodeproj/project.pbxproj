@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		401368FD249CBCC500A406D6 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 401368FC249CBCC500A406D6 /* main.cpp */; };
 		40136907249CBF1200A406D6 /* libSDL2-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 40136906249CBF1200A406D6 /* libSDL2-2.0.0.dylib */; };
+		4013690A249CCF4F00A406D6 /* GameEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 40136908249CCF4F00A406D6 /* GameEngine.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,6 +29,8 @@
 		401368FC249CBCC500A406D6 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		40136904249CBEFC00A406D6 /* sdl2 */ = {isa = PBXFileReference; lastKnownFileType = folder; name = sdl2; path = ../../../../usr/local/Cellar/sdl2; sourceTree = "<group>"; };
 		40136906249CBF1200A406D6 /* libSDL2-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2-2.0.0.dylib"; path = "../../../../usr/local/Cellar/sdl2/2.0.10/lib/libSDL2-2.0.0.dylib"; sourceTree = "<group>"; };
+		40136908249CCF4F00A406D6 /* GameEngine.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GameEngine.cpp; sourceTree = "<group>"; };
+		40136909249CCF4F00A406D6 /* GameEngine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameEngine.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +66,8 @@
 			isa = PBXGroup;
 			children = (
 				401368FC249CBCC500A406D6 /* main.cpp */,
+				40136908249CCF4F00A406D6 /* GameEngine.cpp */,
+				40136909249CCF4F00A406D6 /* GameEngine.h */,
 			);
 			path = GameEngineInC;
 			sourceTree = "<group>";
@@ -134,6 +139,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				401368FD249CBCC500A406D6 /* main.cpp in Sources */,
+				4013690A249CCF4F00A406D6 /* GameEngine.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
