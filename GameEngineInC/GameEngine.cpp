@@ -23,18 +23,26 @@ void GameEngine::init(const char *title, int xpos, int ypos, int width, int heig
         flag = SDL_WINDOW_FULLSCREEN;
     }
     
-    if( SDL_Init(SDL_INIT_EVERYTHING) == 0)
-    {
+    if( SDL_Init(SDL_INIT_EVERYTHING) == 0) {
         std::cout << "Subsystems Initialized!...." << std::endl;
         
         window = SDL_CreateWindow(title, xpos, ypos, width, height, flag);
         
         renderer = SDL_CreateRenderer(window, -1, 0);
-           if(renderer){
+        
+        if(renderer){
                SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
                std::cout << "Renderer Initialized!...." << std::endl;
            }
-           isRuning = true;
+        
+        screen = SDL_GetWindowSurface(window); //This "canvas" is where we gonna append our bmp picture to!
+        Uint32 red = SDL_MapRGB(screen->format, 255, 0, 0);
+        SDL_FillRect(screen, NULL, red);
+        
+        Sprite object = new Sprite(red, xpos/2, ypos/2);
+        object.draw(screen);
+    
+        isRuning = true;
     }else{
         isRuning = false;
     }
@@ -59,8 +67,7 @@ void GameEngine::handleEvents(){
 }
 
     void GameEngine::update(){
-        
-        
+        cnt++;
     }
 
     void GameEngine::render(){

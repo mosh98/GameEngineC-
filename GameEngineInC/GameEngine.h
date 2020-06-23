@@ -34,9 +34,11 @@ public:
     
 
 private:
+    int cnt;
     bool isRuning;
     SDL_Window *window;
     SDL_Renderer *renderer;
+    SDL_Surface *screen;
     
     
     
