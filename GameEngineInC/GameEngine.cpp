@@ -35,12 +35,16 @@ void GameEngine::init(const char *title, int xpos, int ypos, int width, int heig
                std::cout << "Renderer Initialized!...." << std::endl;
            }
         
-        screen = SDL_GetWindowSurface(window); //This "canvas" is where we gonna append our bmp picture to!
-        Uint32 red = SDL_MapRGB(screen->format, 255, 0, 0);
-        SDL_FillRect(screen, NULL, red);
+        screen = SDL_GetWindowSurface(window);//This "canvas" is where we gonna append our bmp picture to!
         
-        Sprite object = new Sprite(red, xpos/2, ypos/2);
-        object.draw(screen);
+//        Uint32 red = SDL_MapRGB(screen->format, 255, 0, 0); defineing a color
+        
+//        SDL_FillRect(screen, NULL, red); Filling a quick rectangle with red color.
+        
+
+//        Sprite object = new Sprite(red, xpos/2, ypos/2); 
+        
+//        object.draw(screen);
     
         isRuning = true;
     }else{
