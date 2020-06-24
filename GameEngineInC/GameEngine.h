@@ -11,6 +11,7 @@
 
 #include <SDL2/SDL.h>
 #include <iostream>
+#include "Sprite.h"
 
 class GameEngine{
     
@@ -29,6 +30,9 @@ public:
     void render();
     void clean();
     
+    void add(Sprite*);
+    void remove(Sprite*);
+    
     bool running();
     
     
@@ -39,6 +43,8 @@ private:
     SDL_Window *window;
     SDL_Renderer *renderer;
     SDL_Surface *screen;
+    
+    //vector for sprites
     
     
     

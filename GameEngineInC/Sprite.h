@@ -15,7 +15,7 @@ class Sprite{
 public:
     
     //Uint32 color, int x, int y, int w, int h
-    inline Sprite(Uint32 color, int x, int y, int w, int h);
+    Sprite(Uint32 color, int x, int y, int w, int h);
         
         
     void setImage(SDL_Surface *imageParam);
@@ -26,7 +26,7 @@ public:
     
     
     
-private:
+protected:
     SDL_Surface *image;
     SDL_Rect rect;
     
