@@ -35,16 +35,26 @@ void GameEngine::init(const char *title, int xpos, int ypos, int width, int heig
                std::cout << "Renderer Initialized!...." << std::endl;
            }
         
+        
         screen = SDL_GetWindowSurface(window);//This "canvas" is where we gonna append our bmp picture to!
         
+
+
+        TriangleSprite sprite(NULL,0,0);
         
+        sprite.set_image("triangle-clipart-triangle-shape-1-original.bmp");
+        sprite.set_position(100, 100);
+        sprite.draw(screen);
+        Controllersprite = &sprite;
+        
+        SDL_UpdateWindowSurface(window);
         //object.draw(screen);
     
         isRuning = true;
     }else{
         isRuning = false;
     }
-       
+    
 }
 
 void GameEngine::handleEvents(){
@@ -52,10 +62,29 @@ void GameEngine::handleEvents(){
     
     SDL_PollEvent(&event);
     
-        switch (event.type) {
+        switch (event.key.keysym.sym) {
             case SDL_QUIT:
                 isRuning = false;
                 break;
+                
+            case SDLK_LEFT:
+                
+                //active_sprites.draw(screen);
+                
+                Controllersprite->decreaseX();
+                Controllersprite->draw(screen);
+                
+                SDL_UpdateWindowSurface(window);
+                break;
+                
+            case SDLK_RIGHT:
+                SDL_RenderClear(renderer);
+                //block.increaseX();
+                //active_sprites.draw(screen);
+                Controllersprite->increaseX();
+                Controllersprite->draw(screen);
+                
+                SDL_UpdateWindowSurface(window);
                 
             default:
                 break;

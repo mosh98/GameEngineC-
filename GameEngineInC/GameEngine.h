@@ -12,6 +12,7 @@
 #include <SDL2/SDL.h>
 #include <iostream>
 #include "Sprite.h"
+#include "TriangleSprite.h"
 
 class GameEngine{
     
@@ -43,7 +44,8 @@ private:
     SDL_Window *window;
     SDL_Renderer *renderer;
     SDL_Surface *screen;
-    
+    //TriangleSprite *sprite(NULL,0,0);
+    TriangleSprite *Controllersprite;
     //vector for sprites
     
     

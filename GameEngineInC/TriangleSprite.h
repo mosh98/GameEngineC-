@@ -15,7 +15,7 @@
 
 class TriangleSprite: public Sprite {
     
-  
+    
 public:
     TriangleSprite (Uint32 color, int x, int y, int w=48, int h = 64);
     
@@ -26,7 +26,7 @@ public:
     void decreaseX();//left button
     
     
-   void update_properties();
+    void update_properties();
     void set_position(int x , int y);
 };
 
