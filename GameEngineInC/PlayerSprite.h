@@ -13,11 +13,11 @@
 #include <stdio.h>
 
 
-class TriangleSprite: public Sprite {
+class PlayerSprite: public Sprite {
     
     
 public:
-    TriangleSprite (Uint32 color, int x, int y, int w=48, int h = 64);
+    PlayerSprite (Uint32 color, int x, int y, int w=48, int h = 64);
     
     SDL_Texture* set_image(const char filename[] = NULL, SDL_Renderer *ren = nullptr);
     

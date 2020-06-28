@@ -19,6 +19,7 @@ Sprite::Sprite( Uint32 color, int x, int y, int w, int h ) {
     
     rect.x = x - origin_x;
     rect.y = y - origin_y;
+    
 }
 
 void Sprite::setImage(SDL_Surface *imageParam){

@@ -12,16 +12,16 @@
 SDL_Texture *playerTex;
 
 SDL_Rect srcR, destR;
-
+PlayerSprite sprite(NULL,0,0);
 
 GameEngine::GameEngine(){}
 
 GameEngine::~GameEngine(){
-//    SDL_DestroyRenderer(renderer);
-//    SDL_DestroyWindow(window);
-//    IMG_Quit();
-//    SDL_Quit();
-//
+    SDL_DestroyRenderer(renderer);
+    SDL_DestroyWindow(window);
+    IMG_Quit();
+    SDL_Quit();
+
 }
 
 
@@ -49,13 +49,14 @@ void GameEngine::init(const char *title, int xpos, int ypos, int width, int heig
         
         screen = SDL_GetWindowSurface(window);//This "canvas" is where we gonna append our bmp picture to!
         
-        TriangleSprite sprite(NULL,0,0);
-        playerTex = sprite.set_image("/Users/moslehmahamud/Downloads/triangle-clipart-triangle-shape-1/triangle-clipart-triangle-shape-1-original.png", renderer);
+        //TriangleSprite sprite(NULL,0,0);
+        playerTex = sprite.set_image("/Users/moslehmahamud/Documents/GameEngineInC/GameEngineInC/triangle-clipart-triangle-shape-1-original.png", renderer);
         
         sprite.set_position(100, 100);
-        sprite.draw(screen);
         
-        Controllersprite = &sprite;
+        //destR = &sprite.getRect();
+        srcR = sprite.getRect();
+       // SDL_RectEquals(&destR, &sprite.getRect());
         
         SDL_RenderClear(renderer);
         
@@ -92,28 +93,28 @@ void GameEngine::handleEvents(){
                 
                 
             case SDLK_UP:
-                //Controllersprite->increaseY();
-                
-                Controllersprite->draw(screen);
+                sprite.increaseY();
+                //sprite.draw(screen);
                 SDL_UpdateWindowSurface(window);
+                render();
                 break;
                 
             case SDLK_LEFT:
-                Controllersprite->decreaseX();
-                
-                Controllersprite->draw(screen);
-                
+               
+                sprite.decreaseX();
+                //sprite.draw(screen);
                 SDL_UpdateWindowSurface(window);
+                render();
                 break;
                 
             case SDLK_RIGHT:
                 SDL_RenderClear(renderer);
-                Controllersprite->increaseX();
-                Controllersprite->draw(screen);
-                
+
+                sprite.increaseX();
+                //sprite.draw(screen);
                 SDL_FreeSurface(screen);
                 SDL_UpdateWindowSurface(window);
-                
+                render();
             default:
                 break;
         }
@@ -134,6 +135,7 @@ void GameEngine::handleEvents(){
         SDL_RenderClear(renderer);
         //RenderCopy
         SDL_RenderCopy(renderer, playerTex, NULL, &destR);
+        //SDL_RenderCopy(renderer, playerTex, NULL, sprite.getRect());
         SDL_RenderPresent(renderer);
         
     }

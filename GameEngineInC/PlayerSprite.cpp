@@ -6,19 +6,19 @@
 //  Copyright © 2020 Mosleh Mahamud. All rights reserved.
 //
 
-#include "TriangleSprite.h"
+#include "PlayerSprite.h"
 #include <iostream>
 #include <SDL2/SDL_image.h>
 
 
 
-TriangleSprite::TriangleSprite(Uint32 color, int x, int y, int w, int h): Sprite(color, x, y, w, h){
+PlayerSprite::PlayerSprite(Uint32 color, int x, int y, int w, int h): Sprite(color, x, y, w, h){
     
     update_properties();
 }
 
 //void set_image(const char filename[] = NULL);
-SDL_Texture* TriangleSprite :: set_image(const char filename[], SDL_Renderer *ren){
+SDL_Texture* PlayerSprite :: set_image(const char filename[], SDL_Renderer *ren){
     
     SDL_Texture *texMex = NULL;
     
@@ -76,37 +76,37 @@ SDL_Texture* TriangleSprite :: set_image(const char filename[], SDL_Renderer *re
     return texMex;
 }
 
-void TriangleSprite:: increaseX(){
+void PlayerSprite:: increaseX(){
     //            For right key
     rect.x += 10;
     
-    std::cout<<rect.x<<std::endl;
+    std::cout<<"Rect_Increase x: "<<rect.x<<std::endl;
 }
 
-void TriangleSprite::  decreaseX(){
+void PlayerSprite::  decreaseX(){
     rect.x -= 10;
     
-    std::cout<<rect.x<<std::endl;
+    std::cout<<"Rect_decrease x: "<< rect.x<<std::endl;
 }
 
-void TriangleSprite:: increaseY(){
+void PlayerSprite:: increaseY(){
     rect.y -= 10;
-    std::cout<<rect.y<<std::endl;
+    std::cout<<"Rect_increase y: "<<rect.y<<std::endl;
 }
 
-void TriangleSprite:: decreaseY(){
+void PlayerSprite:: decreaseY(){
     rect.y += 10;
     
     std::cout<<rect.y<<std::endl;
 }
 
-void TriangleSprite::update_properties(){
+void PlayerSprite::update_properties(){
     origin_x =0;
     origin_y=0;
     set_position(rect.x,rect.y);
 }
 
-void TriangleSprite::set_position(int x, int y){
+void PlayerSprite::set_position(int x, int y){
     rect.x = x - origin_x;
     rect.y = y - origin_y;
 }

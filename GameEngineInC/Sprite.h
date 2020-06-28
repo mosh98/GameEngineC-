@@ -27,6 +27,8 @@ public:
     
     SDL_Rect getRect();
     
+    Sprite operator=(Sprite);
+    
     
 protected:
     SDL_Surface *image;

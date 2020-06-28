@@ -13,7 +13,7 @@
 #include <SDL2/SDL.h>
 #include <iostream>
 #include "Sprite.h"
-#include "TriangleSprite.h"
+#include "PlayerSprite.h"
 #include <SDL2/SDL_image.h>
 
 
@@ -36,11 +36,9 @@ public:
     
     void add(Sprite*);
     void remove(Sprite*);
-    
     bool running();
     
     
-
 private:
     int cnt;
     bool isRuning;
@@ -48,10 +46,8 @@ private:
     SDL_Renderer *renderer;
     SDL_Surface *screen;
     //TriangleSprite *sprite(NULL,0,0);
-    TriangleSprite *Controllersprite;
+    PlayerSprite *Controllersprite;
     //vector for sprites
-    
-    
     
 };
 
