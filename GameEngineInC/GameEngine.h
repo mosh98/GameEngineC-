@@ -9,10 +9,13 @@
 #ifndef GameEngine_h
 #define GameEngine_h
 
+//#include <SDL2/SDL.h>
 #include <SDL2/SDL.h>
 #include <iostream>
 #include "Sprite.h"
 #include "TriangleSprite.h"
+#include <SDL2/SDL_image.h>
+
 
 class GameEngine{
     

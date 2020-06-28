@@ -23,7 +23,9 @@ public:
     void update();//can be overriden
     
     void draw(SDL_Surface *dest);
+    SDL_Surface* get_image() const;
     
+    SDL_Rect getRect();
     
     
 protected:

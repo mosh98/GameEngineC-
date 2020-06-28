@@ -8,9 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		401368FD249CBCC500A406D6 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 401368FC249CBCC500A406D6 /* main.cpp */; };
-		40136907249CBF1200A406D6 /* libSDL2-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 40136906249CBF1200A406D6 /* libSDL2-2.0.0.dylib */; };
 		4013690A249CCF4F00A406D6 /* GameEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 40136908249CCF4F00A406D6 /* GameEngine.cpp */; };
 		401B0D1424A35BB800FEB26A /* TriangleSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 401B0D1224A35BB800FEB26A /* TriangleSprite.cpp */; };
+		40A74F0324A627D600B96E9F /* libSDL2-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 40A74F0224A627D600B96E9F /* libSDL2-2.0.0.dylib */; };
+		40A74F0424A627D600B96E9F /* libSDL2-2.0.0.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 40A74F0224A627D600B96E9F /* libSDL2-2.0.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		40C14A1D249F6423005B9954 /* Sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 40C14A1B249F6423005B9954 /* Sprite.cpp */; };
 		40C14A1F249F6EC2005B9954 /* libSDL2_image-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 40C14A1E249F6EC2005B9954 /* libSDL2_image-2.0.0.dylib */; };
 /* End PBXBuildFile section */
@@ -25,17 +26,28 @@
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
+		40A74F0124A627B000B96E9F /* Embed Libraries */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				40A74F0424A627D600B96E9F /* libSDL2-2.0.0.dylib in Embed Libraries */,
+			);
+			name = "Embed Libraries";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		401368F9249CBCC500A406D6 /* GameEngineInC */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = GameEngineInC; sourceTree = BUILT_PRODUCTS_DIR; };
 		401368FC249CBCC500A406D6 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		40136904249CBEFC00A406D6 /* sdl2 */ = {isa = PBXFileReference; lastKnownFileType = folder; name = sdl2; path = ../../../../usr/local/Cellar/sdl2; sourceTree = "<group>"; };
-		40136906249CBF1200A406D6 /* libSDL2-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2-2.0.0.dylib"; path = "../../../../usr/local/Cellar/sdl2/2.0.10/lib/libSDL2-2.0.0.dylib"; sourceTree = "<group>"; };
 		40136908249CCF4F00A406D6 /* GameEngine.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GameEngine.cpp; sourceTree = "<group>"; };
 		40136909249CCF4F00A406D6 /* GameEngine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameEngine.h; sourceTree = "<group>"; };
 		401B0D1224A35BB800FEB26A /* TriangleSprite.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TriangleSprite.cpp; sourceTree = "<group>"; };
 		401B0D1324A35BB800FEB26A /* TriangleSprite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TriangleSprite.h; sourceTree = "<group>"; };
+		40A74F0224A627D600B96E9F /* libSDL2-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2-2.0.0.dylib"; path = "../../../../usr/local/Cellar/sdl2/2.0.12_1/lib/libSDL2-2.0.0.dylib"; sourceTree = "<group>"; };
 		40C14A1B249F6423005B9954 /* Sprite.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Sprite.cpp; sourceTree = "<group>"; };
 		40C14A1C249F6423005B9954 /* Sprite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Sprite.h; sourceTree = "<group>"; };
 		40C14A1E249F6EC2005B9954 /* libSDL2_image-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2_image-2.0.0.dylib"; path = "../../../../usr/local/Cellar/sdl2_image/2.0.5/lib/libSDL2_image-2.0.0.dylib"; sourceTree = "<group>"; };
@@ -46,8 +58,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				40A74F0324A627D600B96E9F /* libSDL2-2.0.0.dylib in Frameworks */,
 				40C14A1F249F6EC2005B9954 /* libSDL2_image-2.0.0.dylib in Frameworks */,
-				40136907249CBF1200A406D6 /* libSDL2-2.0.0.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -88,8 +100,8 @@
 		40136903249CBEFC00A406D6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				40A74F0224A627D600B96E9F /* libSDL2-2.0.0.dylib */,
 				40C14A1E249F6EC2005B9954 /* libSDL2_image-2.0.0.dylib */,
-				40136906249CBF1200A406D6 /* libSDL2-2.0.0.dylib */,
 				40136904249CBEFC00A406D6 /* sdl2 */,
 			);
 			name = Frameworks;
@@ -105,6 +117,7 @@
 				401368F5249CBCC500A406D6 /* Sources */,
 				401368F6249CBCC500A406D6 /* Frameworks */,
 				401368F7249CBCC500A406D6 /* CopyFiles */,
+				40A74F0124A627B000B96E9F /* Embed Libraries */,
 			);
 			buildRules = (
 			);
@@ -280,6 +293,7 @@
 					"$(inherited)",
 					/usr/local/Cellar/sdl2/2.0.10/lib,
 					/usr/local/Cellar/sdl2_image/2.0.5/lib,
+					/usr/local/Cellar/sdl2/2.0.12_1/lib,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -294,6 +308,7 @@
 					"$(inherited)",
 					/usr/local/Cellar/sdl2/2.0.10/lib,
 					/usr/local/Cellar/sdl2_image/2.0.5/lib,
+					/usr/local/Cellar/sdl2/2.0.12_1/lib,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

@@ -19,12 +19,13 @@ class TriangleSprite: public Sprite {
 public:
     TriangleSprite (Uint32 color, int x, int y, int w=48, int h = 64);
     
-    void set_image(const char filename[] = NULL);
+    SDL_Texture* set_image(const char filename[] = NULL, SDL_Renderer *ren = nullptr);
     
     
     void increaseX(); //right button
     void decreaseX();//left button
-    
+    void increaseY();
+    void decreaseY();
     
     void update_properties();
     void set_position(int x , int y);

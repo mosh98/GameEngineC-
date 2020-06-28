@@ -19,7 +19,6 @@ Sprite::Sprite( Uint32 color, int x, int y, int w, int h ) {
     
     rect.x = x - origin_x;
     rect.y = y - origin_y;
-    
 }
 
 void Sprite::setImage(SDL_Surface *imageParam){
@@ -28,6 +27,15 @@ void Sprite::setImage(SDL_Surface *imageParam){
 
 void Sprite::update(){
     
+}
+
+SDL_Rect Sprite:: getRect(){
+    return rect;
+}
+
+//    getter for image becuase it is a private variable
+SDL_Surface* Sprite:: get_image() const {
+    return image;
 }
 
 void Sprite::draw(SDL_Surface *dest){
