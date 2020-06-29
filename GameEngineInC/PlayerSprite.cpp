@@ -35,43 +35,9 @@ SDL_Texture* PlayerSprite :: set_image(const char filename[], SDL_Renderer *ren)
     
     //Free the surface aswell SDL_FreeSurface()
     
-    if(imageSurface == NULL){
-        
-    }
-    
-     image = imageSurface;
-    
-    int old_x = rect.x;
-    int old_y = rect.y;
-    
-     rect = image->clip_rect;
-    
-         rect.x = old_x;
-         rect.y = old_y;
-    
     update_properties();
     
     SDL_FreeSurface(imageSurface);
-
-//    if(filename != NULL){
-//        SDL_Surface* loaded_image = NULL;
-//        loaded_image = SDL_LoadBMP(filename);
-//
-//        if(loaded_image != NULL){
-//
-//            image = loaded_image;
-//
-//            int old_x = rect.x;
-//            int old_y = rect.y;
-//
-//            rect = image->clip_rect;
-//
-//            rect.x = old_x;
-//            rect.y = old_y;
-//
-//            update_properties();
-//        }
-//    }
     
     return texMex;
 }

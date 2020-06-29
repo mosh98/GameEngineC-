@@ -4,7 +4,9 @@
 //  Copyright © 2020 Mosleh Mahamud. All rights reserved.
 
 #include "Sprite.h"
-
+#include <SDL2/SDL.h>
+#include <iostream>
+#include <SDL2/SDL_image.h>
 
 
 
@@ -17,8 +19,9 @@ Sprite::Sprite( Uint32 color, int x, int y, int w, int h ) {
     SDL_FillRect(image, NULL, color);
     rect = image -> clip_rect;
     
-    rect.x = x - origin_x;
-    rect.y = y - origin_y;
+    rect.h = 48;
+    rect.w = 48;
+    
     
 }
 
@@ -41,4 +44,25 @@ SDL_Surface* Sprite:: get_image() const {
 
 void Sprite::draw(SDL_Surface *dest){
     SDL_BlitSurface(image, NULL, dest, &rect);
+}
+
+//this dun work
+Sprite &Sprite::operator=(Sprite &rhs){
+//    if(this == &rhs){
+//        return *this;
+//    }
+//
+//    this->rect = rhs.rect;
+//    this->image = rhs.image;
+//
+//    this->rect.x = rhs.origin_x;
+//    this->rect.y = rhs.origin_y;
+//
+
+    
+    return *this;
+}
+void Sprite:: renCpy(SDL_Renderer* ren, SDL_Texture* tex){
+    
+    SDL_RenderCopy(ren, tex, NULL, &rect);
 }

@@ -27,7 +27,9 @@ public:
     
     SDL_Rect getRect();
     
-    Sprite operator=(Sprite);
+    Sprite& operator=(Sprite &rhs);
+    
+    void renCpy(SDL_Renderer* ren, SDL_Texture* tex);
     
     
 protected:
