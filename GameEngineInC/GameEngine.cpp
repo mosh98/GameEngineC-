@@ -63,13 +63,7 @@ void GameEngine::init(const char *title, int xpos, int ypos, int width, int heig
         /* Up until now everything was drawn behind the scenes.
          This will show the new contents of the window. */
         
-        
-//        SDL_Surface* tmpSurface = IMG_Load("/Users/moslehmahamud/Downloads/triangle-clipart-triangle-shape-1/triangle-clipart-triangle-shape-1-original.png");
-//
-//        playerTex = SDL_CreateTextureFromSurface(renderer, tmpSurface);
-//        SDL_FreeSurface(tmpSurface);//Clear surface
-        
-        
+    
         //clearing stuff
         SDL_RenderPresent(renderer);
         SDL_UpdateWindowSurface(window);
@@ -101,7 +95,8 @@ void GameEngine::handleEvents(){
                 
             case SDLK_LEFT:
                
-                sprite.decreaseX();
+                //sprite.decreaseX();
+                destR.x-=10;
                 //sprite.draw(screen);
                 SDL_UpdateWindowSurface(window);
                 render();
@@ -110,7 +105,8 @@ void GameEngine::handleEvents(){
             case SDLK_RIGHT:
                 SDL_RenderClear(renderer);
 
-                sprite.increaseX();
+                //sprite.increaseX();
+                destR.x += 10;
                 //sprite.draw(screen);
                 SDL_FreeSurface(screen);
                 SDL_UpdateWindowSurface(window);
