@@ -10,6 +10,7 @@
 		401368FD249CBCC500A406D6 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 401368FC249CBCC500A406D6 /* main.cpp */; };
 		4013690A249CCF4F00A406D6 /* GameEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 40136908249CCF4F00A406D6 /* GameEngine.cpp */; };
 		401B0D1424A35BB800FEB26A /* PlayerSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 401B0D1224A35BB800FEB26A /* PlayerSprite.cpp */; };
+		403D326124AB380A00B194E4 /* EnemySprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 403D325F24AB380A00B194E4 /* EnemySprite.cpp */; };
 		40A74F0324A627D600B96E9F /* libSDL2-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 40A74F0224A627D600B96E9F /* libSDL2-2.0.0.dylib */; };
 		40A74F0424A627D600B96E9F /* libSDL2-2.0.0.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 40A74F0224A627D600B96E9F /* libSDL2-2.0.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		40C14A1D249F6423005B9954 /* Sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 40C14A1B249F6423005B9954 /* Sprite.cpp */; };
@@ -47,6 +48,8 @@
 		40136909249CCF4F00A406D6 /* GameEngine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameEngine.h; sourceTree = "<group>"; };
 		401B0D1224A35BB800FEB26A /* PlayerSprite.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = PlayerSprite.cpp; sourceTree = "<group>"; };
 		401B0D1324A35BB800FEB26A /* PlayerSprite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayerSprite.h; sourceTree = "<group>"; };
+		403D325F24AB380A00B194E4 /* EnemySprite.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = EnemySprite.cpp; sourceTree = "<group>"; };
+		403D326024AB380A00B194E4 /* EnemySprite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnemySprite.h; sourceTree = "<group>"; };
 		40A74F0224A627D600B96E9F /* libSDL2-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2-2.0.0.dylib"; path = "../../../../usr/local/Cellar/sdl2/2.0.12_1/lib/libSDL2-2.0.0.dylib"; sourceTree = "<group>"; };
 		40C14A1B249F6423005B9954 /* Sprite.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Sprite.cpp; sourceTree = "<group>"; };
 		40C14A1C249F6423005B9954 /* Sprite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Sprite.h; sourceTree = "<group>"; };
@@ -87,6 +90,8 @@
 			isa = PBXGroup;
 			children = (
 				401368FC249CBCC500A406D6 /* main.cpp */,
+				403D325F24AB380A00B194E4 /* EnemySprite.cpp */,
+				403D326024AB380A00B194E4 /* EnemySprite.h */,
 				40136908249CCF4F00A406D6 /* GameEngine.cpp */,
 				40136909249CCF4F00A406D6 /* GameEngine.h */,
 				40C14A1B249F6423005B9954 /* Sprite.cpp */,
@@ -169,6 +174,7 @@
 				401368FD249CBCC500A406D6 /* main.cpp in Sources */,
 				4013690A249CCF4F00A406D6 /* GameEngine.cpp in Sources */,
 				40C14A1D249F6423005B9954 /* Sprite.cpp in Sources */,
+				403D326124AB380A00B194E4 /* EnemySprite.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

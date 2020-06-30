@@ -12,7 +12,7 @@
 SDL_Texture *playerTex;
 
 SDL_Rect srcR, destR;
-PlayerSprite sprite(NULL,0,0);
+PlayerSprite sprite(NULL,400,500,48,48);
 
 GameEngine::GameEngine(){}
 
@@ -21,7 +21,7 @@ GameEngine::~GameEngine(){
     SDL_DestroyWindow(window);
     IMG_Quit();
     SDL_Quit();
-
+    
 }
 
 
@@ -42,26 +42,22 @@ void GameEngine::init(const char *title, int xpos, int ypos, int width, int heig
         renderer = SDL_CreateRenderer(window, -1, 0);
         
         if(renderer){
-               SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
-               std::cout << "Renderer Initialized!...." << std::endl;
-           }
+            SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
+            std::cout << "Renderer Initialized!...." << std::endl;
+        }
         
         
         screen = SDL_GetWindowSurface(window);//This "canvas" is where we gonna append our bmp picture to!
         
-      
         playerTex = sprite.set_image("/Users/moslehmahamud/Documents/GameEngineInC/GameEngineInC/triangle-clipart-triangle-shape-1-original.png", renderer);
         
-        sprite.set_position(100, 100);
         sprite.renCpy(renderer, playerTex);
-        
         
         SDL_RenderClear(renderer);
         
         /* Up until now everything was drawn behind the scenes.
          This will show the new contents of the window. */
         
-    
         //clearing stuff
         SDL_RenderPresent(renderer);
         SDL_UpdateWindowSurface(window);
@@ -70,7 +66,6 @@ void GameEngine::init(const char *title, int xpos, int ypos, int width, int heig
     else{
         isRuning = false;
     }
-    
 }
 
 void GameEngine::handleEvents(){
@@ -78,60 +73,41 @@ void GameEngine::handleEvents(){
     
     SDL_PollEvent(&event);
     
-        switch (event.key.keysym.sym) {
-            case SDL_QUIT:
-                isRuning = false;
-                break;
-                
-                
-            case SDLK_UP:
-                sprite.increaseY();
-                
-                SDL_UpdateWindowSurface(window);
-                render();
-                break;
-                
-            case SDLK_LEFT:
-               
-                sprite.decreaseX();
-              
-                SDL_UpdateWindowSurface(window);
-                render();
-                break;
-                
-            case SDLK_RIGHT:
-                SDL_RenderClear(renderer);
-
-                sprite.increaseX();
-              
-                SDL_FreeSurface(screen);
-                SDL_UpdateWindowSurface(window);
-                render();
-            default:
-                break;
-        }
-  
+    switch (event.key.keysym.sym) {
+        case SDL_QUIT:
+            isRuning = false;
+            break;
+            
         
+        case SDLK_LEFT:
+            sprite.decreaseX();
+            SDL_UpdateWindowSurface(window);
+            render();
+            break;
+            
+        case SDLK_RIGHT:
+            sprite.increaseX();
+            SDL_FreeSurface(screen);
+            SDL_UpdateWindowSurface(window);
+            render();
+        default:
+            break;
+    }
+    
+    
 }
 
-    void GameEngine::update(){
-        cnt++;
-        destR.h = 32;
-        destR.w = 32;
-        
-    }
+void GameEngine::update(){
+    cnt++;
+}
 
-    void GameEngine::render(){
+void GameEngine::render(){
+    //This is used to redner things, kinda like a refresh after every event than occurs.
+    SDL_RenderClear(renderer);
+    sprite.renCpy(renderer, playerTex);
+    SDL_RenderPresent(renderer);
     
-        //This is used to redner things, kinda like a refresh after every event than occurs.
-        SDL_RenderClear(renderer);
-        sprite.renCpy(renderer, playerTex);
-        //RenderCopy
-        //SDL_RenderCopy(renderer, playerTex, NULL, &destR);
-        //SDL_RenderCopy(renderer, playerTex, NULL, sprite.getRect());
-        SDL_RenderPresent(renderer);
-        
-    }
+}
 
 void GameEngine::clean(){
     SDL_DestroyWindow(window);

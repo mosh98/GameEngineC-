@@ -17,7 +17,7 @@ class PlayerSprite: public Sprite {
     
     
 public:
-    PlayerSprite (Uint32 color, int x, int y, int w=48, int h = 64);
+    PlayerSprite (Uint32 color, int x, int y, int w, int h);
     
     SDL_Texture* set_image(const char filename[] = NULL, SDL_Renderer *ren = nullptr);
     

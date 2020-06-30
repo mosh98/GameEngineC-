@@ -29,14 +29,9 @@ SDL_Texture* PlayerSprite :: set_image(const char filename[], SDL_Renderer *ren)
     
     SDL_Surface *imageSurface = NULL;
     imageSurface = IMG_Load(filename);
-    
     texMex = SDL_CreateTextureFromSurface(ren, imageSurface);
-    
-    
     //Free the surface aswell SDL_FreeSurface()
-    
     update_properties();
-    
     SDL_FreeSurface(imageSurface);
     
     return texMex;
@@ -45,13 +40,11 @@ SDL_Texture* PlayerSprite :: set_image(const char filename[], SDL_Renderer *ren)
 void PlayerSprite:: increaseX(){
     //            For right key
     rect.x += 10;
-    
     std::cout<<"Rect_Increase x: "<<rect.x<<std::endl;
 }
 
 void PlayerSprite::  decreaseX(){
     rect.x -= 10;
-    
     std::cout<<"Rect_decrease x: "<< rect.x<<std::endl;
 }
 
@@ -62,7 +55,6 @@ void PlayerSprite:: increaseY(){
 
 void PlayerSprite:: decreaseY(){
     rect.y += 10;
-    
     std::cout<<rect.y<<std::endl;
 }
 
@@ -72,8 +64,9 @@ void PlayerSprite::update_properties(){
     set_position(rect.x,rect.y);
 }
 
+//Make sure to remove it, it's redundant or might be useful
 void PlayerSprite::set_position(int x, int y){
-    rect.x = x - origin_x;
-    rect.y = y - origin_y;
+    rect.x = x;
+    rect.y = y;
 }
 
