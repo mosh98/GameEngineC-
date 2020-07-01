@@ -17,11 +17,7 @@ PlayerSprite sprite(NULL,400,500,48,48);
 GameEngine::GameEngine(){}
 
 GameEngine::~GameEngine(){
-    SDL_DestroyRenderer(renderer);
-    SDL_DestroyWindow(window);
-    IMG_Quit();
-    SDL_Quit();
-    
+    clean();
 }
 
 
@@ -53,12 +49,13 @@ void GameEngine::init(const char *title, int xpos, int ypos, int width, int heig
         
         sprite.renCpy(renderer, playerTex);
         
-        SDL_RenderClear(renderer);
+        
         
         /* Up until now everything was drawn behind the scenes.
          This will show the new contents of the window. */
         
         //clearing stuff
+        SDL_RenderClear(renderer);
         SDL_RenderPresent(renderer);
         SDL_UpdateWindowSurface(window);
         isRuning = true;
@@ -73,12 +70,15 @@ void GameEngine::handleEvents(){
     
     SDL_PollEvent(&event);
     
-    switch (event.key.keysym.sym) {
-        case SDL_QUIT:
+    
+        if(SDL_QUIT == event.type){
+            //SDL_FlushEvent(&event);
             isRuning = false;
-            break;
-            
-        
+        }
+    
+    //event.key.keysym.sym
+    switch (event.key.keysym.sym) {
+
         case SDLK_LEFT:
             sprite.decreaseX();
             SDL_UpdateWindowSurface(window);
@@ -113,8 +113,6 @@ void GameEngine::clean(){
     SDL_DestroyWindow(window);
     SDL_DestroyRenderer(renderer);
     IMG_Quit();
-    
-    
     SDL_Quit();
     std::cout << "SDL CLEANED and DESTROYED!...." << std::endl;
 }
