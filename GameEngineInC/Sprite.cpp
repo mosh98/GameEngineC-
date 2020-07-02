@@ -14,8 +14,8 @@ Sprite::Sprite( Uint32 color, int x, int y, int w, int h ) {
     
     
     image = SDL_CreateRGBSurface(0, w, h, 32, 0, 0, 0, 0);
-    SDL_FillRect(image, NULL, color);
-    rect = image -> clip_rect;
+//    SDL_FillRect(image, NULL, color);
+//    rect = image -> clip_rect;
     
     rect.h = w;
     rect.w = h;
@@ -29,7 +29,6 @@ void Sprite::setImage(SDL_Surface *imageParam){
 }
 
 void Sprite::update(){
-    
 }
 
 SDL_Rect Sprite:: getRect(){
@@ -42,12 +41,13 @@ SDL_Surface* Sprite:: get_image() const {
 }
 
 void Sprite::draw(SDL_Surface *dest){
-    SDL_BlitSurface(image, NULL, dest, &rect);
+    //SDL_BlitSurface(image, NULL, dest, &rect);
 }
 
 
 //this dun work
 Sprite &Sprite::operator=(Sprite &rhs){
+    
 //    if(this == &rhs){
 //        return *this;
 //    }
@@ -57,6 +57,7 @@ Sprite &Sprite::operator=(Sprite &rhs){
 //
 //    this->rect.x = rhs.origin_x;
 //    this->rect.y = rhs.origin_y;
+    
     return *this;
 }
 

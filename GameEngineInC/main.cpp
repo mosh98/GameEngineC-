@@ -23,7 +23,7 @@ int main(int argc, const char * argv[]) {
     gameEngine->init("MOSH_Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, false);
     
     while(gameEngine -> running()){
-        //   kjdjkdjkabskadsbkjasbdjkad
+        //
      
         if(gameEngine->running() == false){
             break;
@@ -32,7 +32,6 @@ int main(int argc, const char * argv[]) {
         gameEngine->update();
         gameEngine->render();
         
-    
     }
 
     gameEngine->clean();

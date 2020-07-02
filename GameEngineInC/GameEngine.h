@@ -33,6 +33,7 @@ public:
     void update();
     void render();
     void clean();
+   
     
     void add(Sprite*);
     void remove(Sprite*);
@@ -48,6 +49,7 @@ private:
     //TriangleSprite *sprite(NULL,0,0);
     PlayerSprite *Controllersprite;
     //vector for sprites
+    
     
 };
 

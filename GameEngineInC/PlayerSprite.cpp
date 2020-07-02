@@ -39,13 +39,23 @@ SDL_Texture* PlayerSprite :: set_image(const char filename[], SDL_Renderer *ren)
 
 void PlayerSprite:: increaseX(){
     //            For right key
-    rect.x += 10;
-    std::cout<<"Rect_Increase x: "<<rect.x<<std::endl;
+    if(rect.x < 750){
+        rect.x += 35;
+           std::cout<<"Rect_Increase x: "<<rect.x<<std::endl;
+    }else{
+        std::cout<<"x cord LOCKED! "<< rect.x<<std::endl;
+    }
+   
 }
 
 void PlayerSprite::  decreaseX(){
-    rect.x -= 10;
-    std::cout<<"Rect_decrease x: "<< rect.x<<std::endl;
+    if(rect.x > -20){
+        rect.x -= 35;
+        std::cout<<"Rect_decrease x: "<< rect.x<<std::endl;
+    }else{
+        std::cout<<"x cord LOCKED! "<< rect.x<<std::endl;
+    }
+    
 }
 
 void PlayerSprite:: increaseY(){
@@ -61,12 +71,8 @@ void PlayerSprite:: decreaseY(){
 void PlayerSprite::update_properties(){
     origin_x =0;
     origin_y=0;
-    set_position(rect.x,rect.y);
+    
 }
 
-//Make sure to remove it, it's redundant or might be useful
-void PlayerSprite::set_position(int x, int y){
-    rect.x = x;
-    rect.y = y;
-}
+
 

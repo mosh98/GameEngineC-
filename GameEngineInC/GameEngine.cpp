@@ -10,6 +10,7 @@
 
 
 SDL_Texture *playerTex;
+char *homeDir = getenv("PATH");
 
 SDL_Rect srcR, destR;
 PlayerSprite sprite(NULL,400,500,48,48);
@@ -44,8 +45,15 @@ void GameEngine::init(const char *title, int xpos, int ypos, int width, int heig
         
         
         screen = SDL_GetWindowSurface(window);//This "canvas" is where we gonna append our bmp picture to!
+        //Users/moslehmahamud/Documents/GameEngineC-CloneFromGit/triangle-clipart-triangle-shape-1-original.png
         
-        playerTex = sprite.set_image("/Users/moslehmahamud/Documents/GameEngineInC/GameEngineInC/triangle-clipart-triangle-shape-1-original.png", renderer);
+        
+       
+        std::cout<<homeDir<<std::endl;
+        
+        playerTex = sprite.set_image("/Users/moslehmahamud/Documents/GameEngineC-CloneFromGit/triangle-clipart-triangle-shape-1-original.png", renderer);
+        
+        //playerTex = sprite.set_image(imageLink, renderer);
         
         sprite.renCpy(renderer, playerTex);
         

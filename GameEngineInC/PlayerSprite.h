@@ -28,7 +28,7 @@ public:
     void decreaseY();
     
     void update_properties();
-    void set_position(int x , int y);
+    
 };
 
 #endif /* TriangleSprite_h*/
