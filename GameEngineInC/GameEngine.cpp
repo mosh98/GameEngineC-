@@ -13,7 +13,7 @@ SDL_Texture *playerTex;
 char *homeDir = getenv("PATH");
 
 SDL_Rect srcR, destR;
-PlayerSprite sprite(NULL,400,500,48,48);
+PlayerSprite sprite(NULL,400,500,48,48,"/Users/moslehmahamud/Documents/GameEngineC-CloneFromGit/triangle-clipart-triangle-shape-1-original.png");
 
 GameEngine::GameEngine(){}
 
@@ -50,8 +50,9 @@ void GameEngine::init(const char *title, int xpos, int ypos, int width, int heig
         
        
         std::cout<<homeDir<<std::endl;
+        std::string sss = sprite.getPath();
         
-        playerTex = sprite.set_image("/Users/moslehmahamud/Documents/GameEngineC-CloneFromGit/triangle-clipart-triangle-shape-1-original.png", renderer);
+        playerTex = sprite.set_image(sss.c_str(), renderer);
         
         //playerTex = sprite.set_image(imageLink, renderer);
         

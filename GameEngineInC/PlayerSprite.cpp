@@ -12,8 +12,11 @@
 
 
 
-PlayerSprite::PlayerSprite(Uint32 color, int x, int y, int w, int h): Sprite(color, x, y, w, h){
+PlayerSprite::PlayerSprite(Uint32 color, int x, int y, int w, int h, std::string pathz): Sprite(color, x, y, w, h){
     
+  
+   //assigning to global var
+    path += pathz;
     update_properties();
 }
 
@@ -21,6 +24,9 @@ PlayerSprite::PlayerSprite(Uint32 color, int x, int y, int w, int h): Sprite(col
 SDL_Texture* PlayerSprite :: set_image(const char filename[], SDL_Renderer *ren){
     
     SDL_Texture *texMex = NULL;
+    
+    
+ 
     
     if( ! (IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG)){
         std::cout << "Could not initalzie SDL image : " << IMG_GetError() << std::endl;
@@ -49,18 +55,25 @@ void PlayerSprite:: increaseX(){
 }
 
 void PlayerSprite::  decreaseX(){
+    
     if(rect.x > -20){
+        
         rect.x -= 35;
+        
         std::cout<<"Rect_decrease x: "<< rect.x<<std::endl;
+    
     }else{
         std::cout<<"x cord LOCKED! "<< rect.x<<std::endl;
     }
     
+    
 }
 
 void PlayerSprite:: increaseY(){
+    
     rect.y -= 10;
     std::cout<<"Rect_increase y: "<<rect.y<<std::endl;
+    
 }
 
 void PlayerSprite:: decreaseY(){
@@ -73,6 +86,13 @@ void PlayerSprite::update_properties(){
     origin_y=0;
     
 }
+
+std::string PlayerSprite::getPath(){
+    return path;
+}
+
+
+
 
 
 
