@@ -9,7 +9,9 @@
 #ifndef Bullet_h
 #define Bullet_h
 
-#include "Sprite.h"
+
+#include "PlayerSprite.h"
+
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <iostream>
@@ -18,10 +20,15 @@
 
 class Bullet : public Sprite{
     
-    Bullet(int x, int y, int w, int h, std::string pathz);
+public:
+    Bullet(int w, int h, std::string pathz);
     ~Bullet();
     
-    void bulletLoop(int startPosX);
+    void bulletLoop(int startPosX, SDL_Renderer* sl);
+    
+    //remove the texture from the parametres
+     SDL_Texture* set_image(const char filename[] = NULL, SDL_Renderer *ren = nullptr);
+    
     
 private:
     const int VERTICAL_HEIGHT = 600;

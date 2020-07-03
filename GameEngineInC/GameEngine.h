@@ -30,7 +30,7 @@ public:
     //void remove();
     
     void handleEvents();
-    void update();
+    void koot();
     void render();
     void clean();
    

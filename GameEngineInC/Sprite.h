@@ -9,6 +9,8 @@
 
 #include <stdio.h>
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
+
 
 class Sprite{
     
@@ -18,7 +20,8 @@ public:
     Sprite(int x, int y, int w, int h);
     ~Sprite();
     
-        
+//    SDL_Texture* set_image_tex(const char filename[] = NULL, SDL_Renderer *ren = nullptr);
+    
     void setImage(SDL_Surface *imageParam);
     
     void update();//can be overriden
@@ -30,16 +33,20 @@ public:
     
     Sprite& operator=(Sprite &rhs);
     
-    void renCpy(SDL_Renderer* ren, SDL_Texture* tex);
+  
     
+    void renCpy(SDL_Renderer* ren, SDL_Texture* tex);
+    SDL_Renderer* getMyRen();
+    SDL_Texture* getMyTex();
     
 protected:
     SDL_Surface *image;
     SDL_Rect rect;
+    //std:: string path;
     
 //    Becarefull you might leak from here
-    SDL_Renderer *saveMyRen;
-    SDL_Texture *saveMyTex;
+    SDL_Renderer *saveMyRen = NULL;
+    SDL_Texture *saveMyTex = NULL ;
     
     int origin_x;
     int origin_y;

@@ -11,6 +11,7 @@
 #include <SDL2/SDL_image.h>
 
 
+ Bullet bullet(10,10,"/Users/moslehmahamud/Documents/GameEngineC-CloneFromGit/bullet.png");
 
 PlayerSprite::PlayerSprite(int x, int y, int w, int h, std::string pathz): Sprite(x, y, w, h){
     
@@ -20,26 +21,26 @@ PlayerSprite::PlayerSprite(int x, int y, int w, int h, std::string pathz): Sprit
     update_properties();
 }
 
-//void set_image(const char filename[] = NULL);
+////void set_image(const char filename[] = NULL);
 SDL_Texture* PlayerSprite :: set_image(const char filename[], SDL_Renderer *ren){
-    
+
     SDL_Texture *texMex = NULL;
-    
-    
- 
-    
+
     if( ! (IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG)){
         std::cout << "Could not initalzie SDL image : " << IMG_GetError() << std::endl;
     }
-    
-    
+
+
     SDL_Surface *imageSurface = NULL;
     imageSurface = IMG_Load(filename);
     texMex = SDL_CreateTextureFromSurface(ren, imageSurface);
     //Free the surface aswell SDL_FreeSurface()
+    saveMyRen = ren;
+    saveMyTex = texMex;
+    
     update_properties();
     SDL_FreeSurface(imageSurface);
-    
+
     return texMex;
 }
 
@@ -77,9 +78,7 @@ void PlayerSprite:: decreaseY(){
 }
 
 void PlayerSprite::update_properties(){
-    origin_x =0;
-    origin_y=0;
-    
+
 }
 
 std::string PlayerSprite::getPath(){
@@ -88,6 +87,8 @@ std::string PlayerSprite::getPath(){
 
 void PlayerSprite::shoot(){
     
+    bullet.set_image("/Users/moslehmahamud/Documents/GameEngineC-CloneFromGit/bullet.png",saveMyRen);
+    bullet.bulletLoop(this->rect.x, saveMyRen);
 }
 
 

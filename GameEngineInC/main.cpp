@@ -29,7 +29,7 @@ int main(int argc, const char * argv[]) {
             break;
         }
         gameEngine->handleEvents();
-        gameEngine->update();
+        //gameEngine->update();
         gameEngine->render();
         
     }

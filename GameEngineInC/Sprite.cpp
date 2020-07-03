@@ -70,8 +70,35 @@ Sprite &Sprite::operator=(Sprite &rhs){
 }
 
 
+//SDL_Texture* Sprite:: set_image_tex(const char filename[], SDL_Renderer *ren ){
+//
+//       SDL_Texture *texMex = NULL;
+//
+//
+//       if( ! (IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG)){
+//           std::cout << "Could not initalzie SDL image : " << IMG_GetError() << std::endl;
+//       }
+//
+//
+//       SDL_Surface *imageSurface = NULL;
+//       imageSurface = IMG_Load(filename);
+//       texMex = SDL_CreateTextureFromSurface(ren, imageSurface);
+//       //Free the surface aswell SDL_FreeSurface()
+//
+//       SDL_FreeSurface(imageSurface);
+//
+//       return texMex;
+//}
+
+SDL_Renderer* Sprite::getMyRen(){
+    return saveMyRen;
+}
+SDL_Texture* Sprite::getMyTex(){
+    return saveMyTex;
+}
+
 void Sprite:: renCpy(SDL_Renderer* ren, SDL_Texture* tex){
-    saveMyRen = ren;
-    saveMyTex = tex;
+//    saveMyRen = ren;
+//    saveMyTex = tex;
     SDL_RenderCopy(ren, tex, NULL, &rect);
 }

@@ -10,6 +10,7 @@
 
 
 SDL_Texture *playerTex;
+SDL_Texture *bulletTex;
 
 char *homeDir = getenv("PATH");
 
@@ -17,6 +18,7 @@ char *homeDir = getenv("PATH");
 SDL_Rect srcR, destR;
 //"/Users/moslehmahamud/Documents/GameEngineC-CloneFromGit/triangle-clipart-triangle-shape-1-original.png"
 PlayerSprite sprite(400,500,48,48,"/Users/moslehmahamud/Documents/GameEngineC-CloneFromGit/triangle-clipart-triangle-shape-1-original.png");
+ Bullet bs(24,24,"/Users/moslehmahamud/Documents/GameEngineC-CloneFromGit/bullet.png");
 
 GameEngine::GameEngine(){}
 
@@ -56,6 +58,7 @@ void GameEngine::init(const char *title, int xpos, int ypos, int width, int heig
         std::string sss = sprite.getPath();
         
         playerTex = sprite.set_image(sss.c_str(), renderer);
+        
         
         //playerTex = sprite.set_image(imageLink, renderer);
         
@@ -102,6 +105,16 @@ void GameEngine::handleEvents(){
             SDL_FreeSurface(screen);
             SDL_UpdateWindowSurface(window);
             render();
+            break;
+        
+        case SDLK_SPACE:
+            //sprite.shoot();
+            
+            koot();
+            SDL_FreeSurface(screen);
+            SDL_UpdateWindowSurface(window);
+            render();
+            
         default:
             break;
     }
@@ -109,14 +122,18 @@ void GameEngine::handleEvents(){
     
 }
 
-void GameEngine::update(){
+void GameEngine::koot(){
     cnt++;
+   
+    bulletTex = bs.set_image("/Users/moslehmahamud/Documents/GameEngineC-CloneFromGit/bullet.png", renderer);
+    bs.bulletLoop(sprite.getRect().x, renderer);
 }
 
 void GameEngine::render(){
     //This is used to redner things, kinda like a refresh after every event than occurs.
     SDL_RenderClear(renderer);
     sprite.renCpy(renderer, playerTex);
+    //bs.renCpy(renderer, bulletTex);
     SDL_RenderPresent(renderer);
     
 }
