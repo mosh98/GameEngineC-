@@ -8,7 +8,7 @@
 
 #include "EnemySprite.h"
 
-EnemySprite::EnemySprite(Uint32 color, int x, int y, int w, int h):Sprite(color, x, y, w, h){
+EnemySprite::EnemySprite(int x, int y, int w, int h):Sprite(x, y, w, h){
     
 }
 

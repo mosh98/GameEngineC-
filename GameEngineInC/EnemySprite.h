@@ -17,7 +17,7 @@
 
 class EnemySprite: public Sprite{
   
-    EnemySprite (Uint32 color, int x, int y, int w, int h);
+    EnemySprite (int x, int y, int w, int h);
      
      SDL_Texture* set_image(const char filename[] = NULL, SDL_Renderer *ren = nullptr);
      

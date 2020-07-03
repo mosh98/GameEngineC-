@@ -15,6 +15,7 @@
 		40A74F0424A627D600B96E9F /* libSDL2-2.0.0.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 40A74F0224A627D600B96E9F /* libSDL2-2.0.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		40C14A1D249F6423005B9954 /* Sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 40C14A1B249F6423005B9954 /* Sprite.cpp */; };
 		40C14A1F249F6EC2005B9954 /* libSDL2_image-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 40C14A1E249F6EC2005B9954 /* libSDL2_image-2.0.0.dylib */; };
+		40CFCA3324ADFCE700F758AB /* Bullet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 40CFCA3124ADFCE700F758AB /* Bullet.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -54,6 +55,8 @@
 		40C14A1B249F6423005B9954 /* Sprite.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Sprite.cpp; sourceTree = "<group>"; };
 		40C14A1C249F6423005B9954 /* Sprite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Sprite.h; sourceTree = "<group>"; };
 		40C14A1E249F6EC2005B9954 /* libSDL2_image-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2_image-2.0.0.dylib"; path = "../../../../usr/local/Cellar/sdl2_image/2.0.5/lib/libSDL2_image-2.0.0.dylib"; sourceTree = "<group>"; };
+		40CFCA3124ADFCE700F758AB /* Bullet.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Bullet.cpp; sourceTree = "<group>"; };
+		40CFCA3224ADFCE700F758AB /* Bullet.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Bullet.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +93,8 @@
 			isa = PBXGroup;
 			children = (
 				401368FC249CBCC500A406D6 /* main.cpp */,
+				40CFCA3124ADFCE700F758AB /* Bullet.cpp */,
+				40CFCA3224ADFCE700F758AB /* Bullet.h */,
 				403D325F24AB380A00B194E4 /* EnemySprite.cpp */,
 				403D326024AB380A00B194E4 /* EnemySprite.h */,
 				40136908249CCF4F00A406D6 /* GameEngine.cpp */,
@@ -171,6 +176,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				401B0D1424A35BB800FEB26A /* PlayerSprite.cpp in Sources */,
+				40CFCA3324ADFCE700F758AB /* Bullet.cpp in Sources */,
 				401368FD249CBCC500A406D6 /* main.cpp in Sources */,
 				4013690A249CCF4F00A406D6 /* GameEngine.cpp in Sources */,
 				40C14A1D249F6423005B9954 /* Sprite.cpp in Sources */,
@@ -294,6 +300,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "";
 				HEADER_SEARCH_PATHS = /usr/local/include;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -309,6 +316,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "";
 				HEADER_SEARCH_PATHS = /usr/local/include;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

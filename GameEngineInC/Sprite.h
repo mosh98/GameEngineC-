@@ -13,10 +13,11 @@
 class Sprite{
     
 public:
-    
+     
     //Uint32 color, int x, int y, int w, int h
-    Sprite(Uint32 color, int x, int y, int w, int h);
-        
+    Sprite(int x, int y, int w, int h);
+    ~Sprite();
+    
         
     void setImage(SDL_Surface *imageParam);
     
@@ -35,6 +36,10 @@ public:
 protected:
     SDL_Surface *image;
     SDL_Rect rect;
+    
+//    Becarefull you might leak from here
+    SDL_Renderer *saveMyRen;
+    SDL_Texture *saveMyTex;
     
     int origin_x;
     int origin_y;

@@ -10,7 +10,7 @@
 
 
 
-Sprite::Sprite( Uint32 color, int x, int y, int w, int h ) {
+Sprite::Sprite(int x, int y, int w, int h ) {
     
     
     image = SDL_CreateRGBSurface(0, w, h, 32, 0, 0, 0, 0);
@@ -23,6 +23,14 @@ Sprite::Sprite( Uint32 color, int x, int y, int w, int h ) {
     rect.y = y;
     
 }
+
+Sprite::~Sprite(){
+    SDL_DestroyRenderer(saveMyRen);
+    IMG_Quit();
+    SDL_Quit();
+    std::cout<<"SDL memory freed from Sprite class"<<std::endl;
+}
+
 
 void Sprite::setImage(SDL_Surface *imageParam){
     image= imageParam;
@@ -63,5 +71,7 @@ Sprite &Sprite::operator=(Sprite &rhs){
 
 
 void Sprite:: renCpy(SDL_Renderer* ren, SDL_Texture* tex){
+    saveMyRen = ren;
+    saveMyTex = tex;
     SDL_RenderCopy(ren, tex, NULL, &rect);
 }

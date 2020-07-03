@@ -12,7 +12,7 @@
 
 
 
-PlayerSprite::PlayerSprite(Uint32 color, int x, int y, int w, int h, std::string pathz): Sprite(color, x, y, w, h){
+PlayerSprite::PlayerSprite(int x, int y, int w, int h, std::string pathz): Sprite(x, y, w, h){
     
   
    //assigning to global var
@@ -57,16 +57,11 @@ void PlayerSprite:: increaseX(){
 void PlayerSprite::  decreaseX(){
     
     if(rect.x > -20){
-        
         rect.x -= 35;
-        
         std::cout<<"Rect_decrease x: "<< rect.x<<std::endl;
-    
     }else{
         std::cout<<"x cord LOCKED! "<< rect.x<<std::endl;
     }
-    
-    
 }
 
 void PlayerSprite:: increaseY(){
@@ -91,6 +86,9 @@ std::string PlayerSprite::getPath(){
     return path;
 }
 
+void PlayerSprite::shoot(){
+    
+}
 
 
 
