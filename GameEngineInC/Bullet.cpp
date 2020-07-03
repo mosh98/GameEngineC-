@@ -50,6 +50,7 @@ void Bullet::bulletLoop(int startPosX, SDL_Renderer* sl){
     
     rect.x = startPosX+22;
     for(int i = 0; i < VERTICAL_HEIGHT; i+=100){
+       
         rect.y = i;
         
         renCpy(sl, texMex);
@@ -57,6 +58,11 @@ void Bullet::bulletLoop(int startPosX, SDL_Renderer* sl){
         SDL_RenderPresent(sl);
         
         std::cout<< i << std::endl;
+        
+        if(i == 500){
+            rect.y = 0;
+            break;
+        }
     }
     
     std::cout << "SDL render clear intialized " << std::endl;
