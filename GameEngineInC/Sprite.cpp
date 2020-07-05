@@ -28,7 +28,7 @@ Sprite::~Sprite(){
     SDL_DestroyRenderer(saveMyRen);
     IMG_Quit();
     SDL_Quit();
-    std::cout<<"SDL memory freed from Sprite class"<<std::endl;
+    std::cout<<"MEMORY CLEAN: SDL memory freed from Sprite class"<<std::endl;
 }
 
 

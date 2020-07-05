@@ -29,9 +29,11 @@ public:
     //remove the texture from the parametres
      SDL_Texture* set_image(const char filename[] = NULL, SDL_Renderer *ren = nullptr);
     
+    bool checkCollision(SDL_Rect a, SDL_Rect b);
     
 private:
     const int VERTICAL_HEIGHT = 600;
+    SDL_Texture *texMex = NULL;
 
     
     

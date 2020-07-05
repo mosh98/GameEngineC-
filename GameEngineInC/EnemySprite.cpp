@@ -14,7 +14,7 @@ EnemySprite::EnemySprite(int x, int y, int w, int h):Sprite(x, y, w, h){
 
 SDL_Texture* EnemySprite:: set_image(const char filename[], SDL_Renderer *ren){
     
-    SDL_Texture *texMex = NULL;
+    
        
        if( ! (IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG)){
            std::cout << "Could not initalzie SDL image : " << IMG_GetError() << std::endl;

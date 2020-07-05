@@ -11,6 +11,7 @@
 
 SDL_Texture *playerTex;
 SDL_Texture *bulletTex;
+SDL_Texture *EnemyTex;
 
 char *homeDir = getenv("PATH");
 
@@ -18,12 +19,15 @@ char *homeDir = getenv("PATH");
 SDL_Rect srcR, destR;
 //"/Users/moslehmahamud/Documents/GameEngineC-CloneFromGit/triangle-clipart-triangle-shape-1-original.png"
 PlayerSprite sprite(400,500,48,48,"/Users/moslehmahamud/Documents/GameEngineC-CloneFromGit/triangle-clipart-triangle-shape-1-original.png");
- Bullet bs(24,24,"/Users/moslehmahamud/Documents/GameEngineC-CloneFromGit/bullet.png");
+ Bullet bs(20,20,"/Users/moslehmahamud/Documents/GameEngineC-CloneFromGit/bullet.png");
 
 GameEngine::GameEngine(){}
 
 GameEngine::~GameEngine(){
     clean();
+    window = NULL;
+    renderer = NULL;
+    screen = NULL;
 }
 
 
@@ -64,6 +68,7 @@ void GameEngine::init(const char *title, int xpos, int ypos, int width, int heig
         
         sprite.renCpy(renderer, playerTex);
         
+        //put enemy Sprite and shit
         
         
         /* Up until now everything was drawn behind the scenes.
@@ -110,7 +115,7 @@ void GameEngine::handleEvents(){
         case SDLK_SPACE:
             //sprite.shoot();
             
-            koot();
+            shoot();
             SDL_FreeSurface(screen);
             SDL_UpdateWindowSurface(window);
             render();
@@ -122,7 +127,12 @@ void GameEngine::handleEvents(){
     
 }
 
-void GameEngine::koot(){
+void GameEngine:: addEnemy(){
+    
+    
+}
+
+void GameEngine::shoot(){
     cnt++;
    
     bulletTex = bs.set_image("/Users/moslehmahamud/Documents/GameEngineC-CloneFromGit/bullet.png", renderer);
@@ -141,9 +151,12 @@ void GameEngine::render(){
 void GameEngine::clean(){
     SDL_DestroyWindow(window);
     SDL_DestroyRenderer(renderer);
+    SDL_DestroyTexture(playerTex);
+    SDL_DestroyTexture(bulletTex);
     IMG_Quit();
     SDL_Quit();
-    std::cout << "SDL CLEANED and DESTROYED!...." << std::endl;
+    
+    std::cout << "MEMORY CLEAN: SDL CLEANED and DESTROYED!...." << std::endl;
 }
 
 bool GameEngine::running(){

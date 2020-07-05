@@ -9,6 +9,7 @@
 #include "Bullet.h"
 
 
+
 //Constructor
 Bullet:: Bullet(int w, int h,std::string pathz)
 : Sprite(0,0,w,h)
@@ -20,8 +21,11 @@ Bullet:: Bullet(int w, int h,std::string pathz)
 //Destructor
 Bullet::~Bullet(){
     //free surfaces and other memory bound items
+    SDL_DestroyTexture(texMex);
+    std::cout << "MEMORY CLEAN: SDL texture destroyed clear intialized " << std::endl;
+    texMex = NULL;
 }
-SDL_Texture *texMex = NULL;
+
 
 //remove the texture from the parametres
 SDL_Texture* Bullet :: set_image(const char filename[], SDL_Renderer *ren){
@@ -45,28 +49,83 @@ SDL_Texture* Bullet :: set_image(const char filename[], SDL_Renderer *ren){
     return texMex;
 }
 
+bool Bullet:: checkCollision( SDL_Rect a, SDL_Rect b )
+{
+    //The sides of the rectangles
+    int leftA, leftB;
+    int rightA, rightB;
+    int topA, topB;
+    int bottomA, bottomB;
+
+    //Calculate the sides of rect A
+    leftA = a.x;
+    rightA = a.x + a.w;
+    topA = a.y;
+    bottomA = a.y + a.h;
+
+    //Calculate the sides of rect B
+    leftB = b.x;
+    rightB = b.x + b.w;
+    topB = b.y;
+    bottomB = b.y + b.h;
+
+    //If any of the sides from A are outside of B
+    if( bottomA <= topB )
+    {
+        return false;
+    }
+
+    if( topA >= bottomB )
+    {
+        return false;
+    }
+
+    if( rightA <= leftB )
+    {
+        return false;
+    }
+
+    if( leftA >= rightB )
+    {
+        return false;
+    }
+
+    //If none of the sides from A are outside B
+    return true;
+}
+
 void Bullet::bulletLoop(int startPosX, SDL_Renderer* sl){
     //while bla bla bla
     
-    rect.x = startPosX+22;
-    for(int i = 0; i < VERTICAL_HEIGHT; i+=100){
-       
-        rect.y = i;
-        
-        renCpy(sl, texMex);
-        
-        SDL_RenderPresent(sl);
-        
-        std::cout<< i << std::endl;
-        
-        if(i == 500){
-            rect.y = 0;
-            break;
-        }
-    }
+    rect.x = startPosX+16;
     
-    std::cout << "SDL render clear intialized " << std::endl;
+        
+        for(int i = 0; i < VERTICAL_HEIGHT; i+=100){
+           
+            rect.y = i;
+            
+            renCpy(sl, texMex);
+            
+            SDL_RenderPresent(sl);
+            
+            std::cout<< i << std::endl;
+            
+            if(i == 500){
+                
+                rect.y = 0;
+                break;
+            }
+            
+        }
+    
+    
+    SDL_DestroyTexture(texMex);
     SDL_RenderClear(sl);
     
+    std::cout << "MEMORY CLEAN: SDL destroy texture  " << std::endl;
+    std::cout << "MEMORY CLEAN: SDL render clear  " << std::endl;
+    
 }
+
+
 

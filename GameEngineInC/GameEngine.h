@@ -30,7 +30,7 @@ public:
     //void remove();
     
     void handleEvents();
-    void koot();
+    void shoot();
     void render();
     void clean();
    
@@ -38,6 +38,8 @@ public:
     void add(Sprite*);
     void remove(Sprite*);
     bool running();
+    void addEnemy();
+    
     
     
 private:
@@ -47,8 +49,7 @@ private:
     SDL_Renderer *renderer;
     SDL_Surface *screen;
     //TriangleSprite *sprite(NULL,0,0);
-    PlayerSprite *Controllersprite;
-    //vector for sprites
+    //vector for enemy_sprites
     
     
 };
