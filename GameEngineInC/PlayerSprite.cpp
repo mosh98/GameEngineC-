@@ -47,7 +47,7 @@ SDL_Texture* PlayerSprite :: set_image(const char filename[], SDL_Renderer *ren)
 void PlayerSprite:: increaseX(){
     //            For right key
     if(rect.x < 750){
-        rect.x += 35;
+        rect.x += 25;
            std::cout<<"Rect_Increase x: "<<rect.x<<std::endl;
     }else{
         std::cout<<"x cord LOCKED! "<< rect.x<<std::endl;
@@ -58,7 +58,7 @@ void PlayerSprite:: increaseX(){
 void PlayerSprite::  decreaseX(){
     
     if(rect.x > -20){
-        rect.x -= 35;
+        rect.x -= 25;
         std::cout<<"Rect_decrease x: "<< rect.x<<std::endl;
     }else{
         std::cout<<"x cord LOCKED! "<< rect.x<<std::endl;

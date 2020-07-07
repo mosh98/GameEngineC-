@@ -14,7 +14,10 @@
 #include <iostream>
 #include "Sprite.h"
 #include "PlayerSprite.h"
+#include "EnemySprite.h"
 #include <SDL2/SDL_image.h>
+#include <vector>
+#include <map>
 
 
 class GameEngine{
@@ -38,7 +41,11 @@ public:
     void add(Sprite*);
     void remove(Sprite*);
     bool running();
-    void addEnemy();
+    void addEnemy(int howManyEnemyYouNeed);
+
+    protected:
+    void renderAllEnemy();
+    
     
     
     
@@ -50,6 +57,8 @@ private:
     SDL_Surface *screen;
     //TriangleSprite *sprite(NULL,0,0);
     //vector for enemy_sprites
+    std::vector<EnemySprite*> vec;
+    std::map<EnemySprite*, SDL_Texture* > map;
     
     
 };

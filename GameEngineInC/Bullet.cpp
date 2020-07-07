@@ -24,6 +24,8 @@ Bullet::~Bullet(){
     SDL_DestroyTexture(texMex);
     std::cout << "MEMORY CLEAN: SDL texture destroyed clear intialized " << std::endl;
     texMex = NULL;
+    
+    IMG_Quit();
 }
 
 

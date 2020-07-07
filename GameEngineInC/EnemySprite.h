@@ -22,6 +22,7 @@ public:
      
      SDL_Texture* set_image(const char filename[] = NULL, SDL_Renderer *ren = nullptr);
      
+    void summonEnemy(SDL_Renderer* rend);
      
 private:
     SDL_Texture *texMex = NULL;

@@ -30,3 +30,7 @@ SDL_Texture* EnemySprite:: set_image(const char filename[], SDL_Renderer *ren){
        
        return texMex;
 }
+
+void EnemySprite::summonEnemy(SDL_Renderer* rend){
+    renCpy(rend, texMex);
+}
