@@ -59,7 +59,6 @@ void GameEngine::init(const char *title, int xpos, int ypos, int width, int heig
         screen = SDL_GetWindowSurface(window);//This "canvas" is where we gonna append our bmp picture to!
         //Users/moslehmahamud/Documents/GameEngineC-CloneFromGit/triangle-clipart-triangle-shape-1-original.png
         
-        
        
         std::cout<<homeDir<<std::endl;
         std::string sss = sprite.getPath();
@@ -72,7 +71,7 @@ void GameEngine::init(const char *title, int xpos, int ypos, int width, int heig
         sprite.renCpy(renderer, playerTex);
         
         //put enemy Sprite and shit
-        addEnemy(2);
+        addEnemy(5);
         
         /* Up until now everything was drawn behind the scenes.
          This will show the new contents of the window. */
@@ -130,21 +129,34 @@ void GameEngine::handleEvents(){
     
 }
 
+//possibly also have the imageLink png in the parametres
 void GameEngine:: addEnemy(int howManyEnemyYouNeed ){
     
 
         enemyTex = tmpEnemy.set_image("/Users/moslehmahamud/Documents/GameEngineC-CloneFromGit/enemy.png",renderer);
         
-    //enemyObj
-    //enemyTex
+    
+    int counter = howManyEnemyYouNeed;
     
     //Loop
-        //make with varying attributes
+          //make with varying attributes
+    while(counter == 0){
+        //enemyObj
+          EnemySprite tmp(200,200,40,40);
+          //enemyTex
+          SDL_Texture* tmpTex = tmp.set_image("/Users/moslehmahamud/Documents/GameEngineC-CloneFromGit/enemy.png",renderer);
+          
         // mymap.insert ( std::pair<char,int>('a',100) );
+        map.insert( std::pair<EnemySprite*, SDL_Texture*>(&tmp, tmpTex));
         
+        counter--;
+        
+    }
+    
+    
+    
+    
         //clear memory
-    
-    
         render();
         
     //set the default val.
@@ -152,14 +164,15 @@ void GameEngine:: addEnemy(int howManyEnemyYouNeed ){
     //yAxis = 450;
 }
 
+void GameEngine::freeEnemies(){
+    //free textures from the arraylist
+}
 
 
-//namespace fs = std::__fs::filesystem;
 
 void GameEngine::shoot(){
     cnt++;
    // /Users/moslehmahamud/Documents/GameEngineC-CloneFromGit/bullet.png
-    
     bulletTex = bs.set_image("/Users/moslehmahamud/Documents/GameEngineC-CloneFromGit/bullet.png", renderer);
     bs.bulletLoop(sprite.getRect().x, renderer);
 }
@@ -174,22 +187,25 @@ void GameEngine::render(){
     //bs.renCpy(renderer, bulletTex);
     tmpEnemy.renCpy(renderer, enemyTex);
     SDL_RenderPresent(renderer);
-    
 }
 
 void GameEngine::renderAllEnemy(){
         
     //Loop thorugh hashMap
+    
+    
     //and RenderCpy and shit
 }
 
 void GameEngine::clean(){
+    
     SDL_DestroyWindow(window);
     SDL_DestroyRenderer(renderer);
     SDL_DestroyTexture(playerTex);
     SDL_DestroyTexture(bulletTex);
-    IMG_Quit();
+    freeEnemies();
     SDL_Quit();
+    
     
     std::cout << "SDL CLEANED and DESTROYED!...." << std::endl;
 }
