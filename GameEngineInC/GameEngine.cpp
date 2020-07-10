@@ -23,6 +23,12 @@ PlayerSprite sprite(400,500,48,48,"/Users/moslehmahamud/Documents/GameEngineC-Cl
  Bullet bs(20,20,"/Users/moslehmahamud/Documents/GameEngineC-CloneFromGit/bullet.png");
 
 EnemySprite tmpEnemy(100,100,40,40);
+EnemySprite tmpEnemy2(100,100,40,40);
+EnemySprite tmpEnemy3(100,100,40,40);
+EnemySprite tmpEnemy4(100,100,40,40);
+EnemySprite tmpEnemy5(100,100,40,40);
+
+
 
 GameEngine::GameEngine(){}
 
@@ -129,33 +135,54 @@ void GameEngine::handleEvents(){
     
 }
 
+
+//std::cout << "Size of x : " << x << std::endl;
+  //     std::cout << "Size of y : " << y << std::endl;
+       
+
+//TODO: enemy Sprites with random x and y
+
 //possibly also have the imageLink png in the parametres
 void GameEngine:: addEnemy(int howManyEnemyYouNeed ){
     
 
-        enemyTex = tmpEnemy.set_image("/Users/moslehmahamud/Documents/GameEngineC-CloneFromGit/enemy.png",renderer);
+       // enemyTex = tmpEnemy.set_image("/Users/moslehmahamud/Documents/GameEngineC-CloneFromGit/enemy.png",renderer);
         
+    SDL_Texture* tmpTEX = tmpEnemy.set_image("/Users/moslehmahamud/Documents/GameEngineC-CloneFromGit/enemy.png",renderer);
+    map.insert( std::pair<EnemySprite*, SDL_Texture*>( &tmpEnemy, tmpTEX ) );
     
-    int counter = howManyEnemyYouNeed;
     
+    
+    int counter = 0;
+
     //Loop
-          //make with varying attributes
-    while(counter == 0){
-        //enemyObj
-          EnemySprite tmp(200,200,40,40);
-          //enemyTex
-          SDL_Texture* tmpTex = tmp.set_image("/Users/moslehmahamud/Documents/GameEngineC-CloneFromGit/enemy.png",renderer);
-          
-        // mymap.insert ( std::pair<char,int>('a',100) );
-        map.insert( std::pair<EnemySprite*, SDL_Texture*>(&tmp, tmpTex));
+         
+    while(counter < 5) {
+
+        // int x = (rand() % 100) + 1;
+        //int y = (rand() % 100) + 1;
         
-        counter--;
+        int x = 400;
+        int y = 600;
+
+
+        //enemyObj
+          EnemySprite* tmp = new EnemySprite(x,y,40,40); //variying x and y attributes
+          //enemyTex
+          SDL_Texture* tmpTex = tmp->set_image("/Users/moslehmahamud/Documents/GameEngineC-CloneFromGit/enemy.png",renderer);
+        
+        map.insert( std::pair<EnemySprite*, SDL_Texture*>(tmp, tmpTex));
+        counter++;
         
     }
     
+    counter= 0;
     
+    //reset counter
     
-    
+    std::cout << "Size of enemy map: " << map.size() << std::endl;
+    renderAllEnemy();
+   
         //clear memory
         render();
         
@@ -191,10 +218,20 @@ void GameEngine::render(){
 
 void GameEngine::renderAllEnemy(){
         
-    //Loop thorugh hashMap
+    int counter = 0;
+    //loop through hashmaps and lay sprites
+       std::map <EnemySprite*, SDL_Texture*>:: iterator it;
+      
+       for(it = map.begin(); it != map.end(); it++){
+           counter++;
+           std::cout << "counter:  " << counter << std::endl;
+            //and RenderCpy and shit
+           SDL_Texture* texz = it->second;
+           it->first->renCpy(renderer, texz);
+       }
+       
     
-    
-    //and RenderCpy and shit
+   
 }
 
 void GameEngine::clean(){
