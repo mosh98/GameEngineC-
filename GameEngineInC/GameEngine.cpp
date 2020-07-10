@@ -150,11 +150,11 @@ void GameEngine:: addEnemy(int howManyEnemyYouNeed ) {
     
     int counter = 0;
 
-    int x = 100;
+    int x = 25;
     int y = 100;
     
     //Loop
-    while(counter < howManyEnemyYouNeed) {
+    while( counter < howManyEnemyYouNeed) {
 
     
         std::cout << counter <<std::endl;
@@ -167,9 +167,10 @@ void GameEngine:: addEnemy(int howManyEnemyYouNeed ) {
     
         map.insert( std::pair<EnemySprite*, SDL_Texture*>( zzz , sjhb ) );
         
-        //zzz->renCpy( renderer,  sjhb );
+    
     
         counter++;
+        
         if(x > 600){
             x = 100;
             y += 100;
@@ -178,6 +179,8 @@ void GameEngine:: addEnemy(int howManyEnemyYouNeed ) {
             x += 75;
         }
         
+        if(counter > howManyEnemyYouNeed)
+            break;
         
         //render();
     }
@@ -229,14 +232,13 @@ void GameEngine::render(){
 
 void GameEngine::renderAllEnemy(){
         
-    int counter = 0;
+    
 
     //loop through hashmaps and lay sprites
        std::map <EnemySprite*, SDL_Texture*>:: iterator it;
 
        for(it = map.begin(); it != map.end(); it++){
-           counter++;
-           std::cout << "counter:  " << counter << std::endl;
+           
             //and RenderCpy and shit
            it->first->renCpy(renderer, it->second);
 
