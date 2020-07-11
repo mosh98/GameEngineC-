@@ -32,5 +32,5 @@ SDL_Texture* EnemySprite:: set_image(const char filename[], SDL_Renderer *ren){
 }
 
 void EnemySprite::summonEnemy(SDL_Renderer* rend){
-    renCpy(rend, texMex);
+    draw(rend, texMex);
 }

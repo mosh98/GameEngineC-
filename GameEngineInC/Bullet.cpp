@@ -14,7 +14,8 @@
 Bullet:: Bullet(int w, int h,std::string pathz)
 : Sprite(0,0,w,h)
 {
-    //path = pathz;
+    path = pathz;
+    
 }
 
 
@@ -22,32 +23,25 @@ Bullet:: Bullet(int w, int h,std::string pathz)
 Bullet::~Bullet(){
     //free surfaces and other memory bound items
     SDL_DestroyTexture(texMex);
-    std::cout << "MEMORY CLEAN: SDL texture destroyed clear intialized " << std::endl;
     texMex = NULL;
-    
     IMG_Quit();
+     std::cout << "MEMORY CLEAN: SDL texture destroyed clear intialized BULLET" << std::endl;
 }
 
 
 //remove the texture from the parametres
 SDL_Texture* Bullet :: set_image(const char filename[], SDL_Renderer *ren){
 
-    
-
     if( ! (IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG)){
         std::cout << "Could not initalzie SDL image : " << IMG_GetError() << std::endl;
     }
-
-
     SDL_Surface *imageSurface = NULL;
     imageSurface = IMG_Load(filename);
     texMex = SDL_CreateTextureFromSurface(ren, imageSurface);
-    //Free the surface aswell SDL_FreeSurface()
     saveMyRen = ren;
     SDL_FreeSurface(imageSurface);
-
+    imageSurface = NULL;
     saveMyTex = texMex;
-    
     return texMex;
 }
 
@@ -96,6 +90,7 @@ bool Bullet:: checkCollision( SDL_Rect a, SDL_Rect b )
     return true;
 }
 
+
 void Bullet::bulletLoop(int startPosX, SDL_Renderer* sl){
     //while bla bla bla
     
@@ -105,8 +100,8 @@ void Bullet::bulletLoop(int startPosX, SDL_Renderer* sl){
         for(int i = 0; i < VERTICAL_HEIGHT; i+=100){
            
             rect.y = i;
-            
-            renCpy(sl, texMex);
+
+            draw(sl, texMex);
             
             SDL_RenderPresent(sl);
             
@@ -124,8 +119,8 @@ void Bullet::bulletLoop(int startPosX, SDL_Renderer* sl){
     SDL_DestroyTexture(texMex);
     SDL_RenderClear(sl);
     
-    std::cout << "MEMORY CLEAN: SDL destroy texture  " << std::endl;
-    std::cout << "MEMORY CLEAN: SDL render clear  " << std::endl;
+    std::cout << "MEMORY CLEAN: SDL destroy texture BULLET " << std::endl;
+    std::cout << "MEMORY CLEAN: SDL render clear  BULLET" << std::endl;
     
 }
 

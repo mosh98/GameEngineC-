@@ -10,6 +10,8 @@
 #include <stdio.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
+#include <string>
+using namespace std;
 
 
 class Sprite{
@@ -24,9 +26,8 @@ public:
     
     void setImage(SDL_Surface *imageParam);
     
-    void update();//can be overriden
+  
     
-    void draw(SDL_Surface *dest);
     SDL_Surface* get_image() const;
     
     SDL_Rect getRect();
@@ -35,22 +36,19 @@ public:
     
   
     
-    void renCpy(SDL_Renderer* ren, SDL_Texture* tex);
+    void draw(SDL_Renderer* ren, SDL_Texture* tex);
     SDL_Renderer* getMyRen();
     SDL_Texture* getMyTex();
     
 protected:
     SDL_Surface *image;
     SDL_Rect rect;
-    //std:: string path;
+    string path;
     
-//    Becarefull you might leak from here
+//TODO: (FIXED)  Becarefull you might leak from here
     SDL_Renderer *saveMyRen = NULL;
     SDL_Texture *saveMyTex = NULL ;
-    
-    int origin_x;
-    int origin_y;
-    
+
     
 };
 
