@@ -31,6 +31,8 @@ public:
     
     bool checkCollision(SDL_Rect a, SDL_Rect b);
     
+    void shoot(PlayerSprite* ps = NULL, SDL_Renderer* ren = NULL);
+    
 private:
     const int VERTICAL_HEIGHT = 600;
     SDL_Texture *texMex = NULL;

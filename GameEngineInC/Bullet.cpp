@@ -14,13 +14,14 @@
 Bullet:: Bullet(int w, int h,std::string pathz)
 : Sprite(0,0,w,h)
 {
-    path = pathz;
+    path += pathz;
     
 }
 
 
 //Destructor
 Bullet::~Bullet(){
+    
     //free surfaces and other memory bound items
     SDL_DestroyTexture(texMex);
     texMex = NULL;
@@ -42,8 +43,11 @@ SDL_Texture* Bullet :: set_image(const char filename[], SDL_Renderer *ren){
     SDL_FreeSurface(imageSurface);
     imageSurface = NULL;
     saveMyTex = texMex;
+    
     return texMex;
 }
+
+
 
 bool Bullet:: checkCollision( SDL_Rect a, SDL_Rect b )
 {
@@ -122,6 +126,11 @@ void Bullet::bulletLoop(int startPosX, SDL_Renderer* sl){
     std::cout << "MEMORY CLEAN: SDL destroy texture BULLET " << std::endl;
     std::cout << "MEMORY CLEAN: SDL render clear  BULLET" << std::endl;
     
+}
+
+void Bullet::shoot(PlayerSprite* ps, SDL_Renderer* ren){
+    
+    bulletLoop(ps->getRect().x,ren);
 }
 
 

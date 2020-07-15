@@ -13,7 +13,7 @@
 Sprite::Sprite(int x, int y, int w, int h ) {
     
     
-    image = SDL_CreateRGBSurface(0, w, h, 32, 0, 0, 0, 0);
+    //image = SDL_CreateRGBSurface(0, w, h, 32, 0, 0, 0, 0);
 
     rect.h = w;
     rect.w = h;
@@ -29,21 +29,12 @@ Sprite::~Sprite(){
     
     SDL_DestroyTexture(saveMyTex);
     saveMyTex = NULL;
-    SDL_FreeSurface(image);
-    image = NULL;
-    
+   
     IMG_Quit();
     SDL_Quit();
     
     std::cout<<"MEMORY CLEAN: SDL memory freed from Sprite class"<<std::endl;
 }
-
-
-void Sprite::setImage(SDL_Surface *imageParam){
-    image= imageParam;
-}
-
-
 
 SDL_Rect Sprite:: getRect(){
     return rect;
@@ -52,7 +43,8 @@ SDL_Rect Sprite:: getRect(){
 
 //    getter for image becuase it is a private variable
 SDL_Surface* Sprite:: get_image() const {
-    return image;
+    //return image;
+     return NULL;
 }
 
 
@@ -75,25 +67,25 @@ Sprite &Sprite::operator=(Sprite &rhs){
 }
 
 
-//SDL_Texture* Sprite:: set_image_tex(const char filename[], SDL_Renderer *ren ){
-//
-//       SDL_Texture *texMex = NULL;
-//
-//
-//       if( ! (IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG)){
-//           std::cout << "Could not initalzie SDL image : " << IMG_GetError() << std::endl;
-//       }
-//
-//
-//       SDL_Surface *imageSurface = NULL;
-//       imageSurface = IMG_Load(filename);
-//       texMex = SDL_CreateTextureFromSurface(ren, imageSurface);
-//       //Free the surface aswell SDL_FreeSurface()
-//
-//       SDL_FreeSurface(imageSurface);
-//
-//       return texMex;
-//}
+SDL_Texture* Sprite:: set_image_tex(const char filename[], SDL_Renderer *ren ){
+
+       SDL_Texture *texMex = NULL;
+
+
+       if( ! (IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG)){
+           std::cout << "Could not initalzie SDL image : " << IMG_GetError() << std::endl;
+       }
+
+
+       SDL_Surface *imageSurface = NULL;
+       imageSurface = IMG_Load(filename);
+       texMex = SDL_CreateTextureFromSurface(ren, imageSurface);
+       //Free the surface aswell SDL_FreeSurface()
+
+       SDL_FreeSurface(imageSurface);
+
+       return texMex;
+}
 
 SDL_Renderer* Sprite::getMyRen(){
     return saveMyRen;

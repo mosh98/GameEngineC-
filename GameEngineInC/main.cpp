@@ -19,7 +19,7 @@ int main(int argc, const char * argv[]) {
     
 
     
- 
+    int FPS = 25;
     //Declare
     gameEngine = new GameEngine();
     
@@ -27,6 +27,7 @@ int main(int argc, const char * argv[]) {
     
     while(gameEngine -> running()){
         //
+        Uint32 start = SDL_GetTicks();
      
         if(gameEngine->running() == false){
             break;
@@ -34,6 +35,9 @@ int main(int argc, const char * argv[]) {
         gameEngine->handleEvents();
         //gameEngine->update();
         gameEngine->render();
+        
+       if(1000/FPS > SDL_GetTicks() - start)
+            SDL_Delay(1000/FPS);
         
     }
 

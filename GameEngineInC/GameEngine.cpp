@@ -10,19 +10,17 @@
 
 #include <iostream>
 
-SDL_Texture *playerTex;
-SDL_Texture *bulletTex;
-
-char *homeDir = getenv("PATH");
 
 
-//SDL_Rect srcR, destR;
+PlayerSprite* sprite = new PlayerSprite(400,500,48,48,"/Users/moslehmahamud/Documents/GameEngineC-CloneFromGit/triangle-clipart-triangle-shape-1-original.png");
 
-PlayerSprite sprite(400,500,48,48,"/Users/moslehmahamud/Documents/GameEngineC-CloneFromGit/triangle-clipart-triangle-shape-1-original.png");
  Bullet bs(20,20,"/Users/moslehmahamud/Documents/GameEngineC-CloneFromGit/bullet.png");
 
 
-GameEngine::GameEngine(){}
+GameEngine::GameEngine( )
+{
+    
+}
 
 GameEngine::~GameEngine(){
     clean();
@@ -59,17 +57,13 @@ void GameEngine::init(const char *title, int xpos, int ypos, int width, int heig
         screen = SDL_GetWindowSurface(window);//This "canvas" is where we gonna append our bmp picture to!
        
         
-       
-        std::cout<<homeDir<<std::endl;
-        std::string sss = sprite.getPath();
+        std::string sss = sprite->getPath();
         
-        playerTex = sprite.set_image(sss.c_str(), renderer);
+        //playerTex = sprite.set_image(sss.c_str(), renderer);
+        playerTex = sprite->set_image_tex(sss.c_str(),renderer);
         
-        
-        //playerTex = sprite.set_image(imageLink, renderer);
-        
-        sprite.draw(renderer, playerTex);
-        
+        sprite->draw(renderer, playerTex);
+    
         //put enemy Sprite and shit
         addEnemy(20);
         renderAllEnemy();
@@ -106,20 +100,19 @@ void GameEngine::handleEvents(){
     switch (event.key.keysym.sym) {
 
         case SDLK_LEFT:
-            sprite.decreaseX();
+            sprite->decreaseX();
             SDL_UpdateWindowSurface(window);
             render();
             break;
             
         case SDLK_RIGHT:
-            sprite.increaseX();
+            sprite->increaseX();
             SDL_FreeSurface(screen);
             SDL_UpdateWindowSurface(window);
             render();
             break;
         
         case SDLK_SPACE:
-            //sprite.shoot();
             
             shoot();
             SDL_FreeSurface(screen);
@@ -155,15 +148,18 @@ void GameEngine:: addEnemy(int howManyEnemyYouNeed ) {
     
         std::cout << counter <<std::endl;
     
-        //enemyObj
-          EnemySprite* zzz = new EnemySprite( x,y,40,40 ) ; //variying x and y attributes
-         
-        //enemyTex
-        SDL_Texture* sjhb = zzz->set_image( "/Users/moslehmahamud/Documents/GameEngineC-CloneFromGit/enemy.png", renderer );
-    
-        map.insert( std::pair<EnemySprite*, SDL_Texture*>( zzz , sjhb ) );
         
+        //Enemy sprite and texutre gets deleted in freeEnemies();
+        
+        //enemyObj
+          EnemySprite* enemySpritez = new EnemySprite( x,y,40,40 ) ; //variying x and y attributes
+         
+        //"/Users/moslehmahamud/Documents/GameEngineC-CloneFromGit/enemy.png"
+        //enemyTex
+        SDL_Texture* enemytextureTmp = enemySpritez->set_image_tex( "/Users/moslehmahamud/Documents/GameEngineC-CloneFromGit/enemy.png", renderer );
     
+        map.insert( std::pair<EnemySprite*, SDL_Texture*>( enemySpritez , enemytextureTmp ) );
+        
     
         counter++;
         
@@ -205,8 +201,16 @@ void GameEngine::freeEnemies(){
 void GameEngine::shoot(){
     cnt++;
    // /Users/moslehmahamud/Documents/GameEngineC-CloneFromGit/bullet.png
+    
     bulletTex = bs.set_image("/Users/moslehmahamud/Documents/GameEngineC-CloneFromGit/bullet.png", renderer);
-    bs.bulletLoop(sprite.getRect().x, renderer);
+    // working
+    
+    
+    //bulletTex = bs.set_image_tex("/Users/moslehmahamud/Documents/GameEngineC-CloneFromGit/bullet.png", renderer);
+
+    bs.shoot(sprite,renderer);
+    //bs.bulletLoop(sprite->getRect().x, renderer);
+    
 }
 
 
@@ -215,15 +219,13 @@ void GameEngine::render(){
     //This is used to redner things, kinda like a refresh after every event occurs.
     SDL_UpdateWindowSurface(window);
     SDL_RenderClear(renderer);
-    sprite.draw(renderer, playerTex);
+    sprite->draw(renderer, playerTex);
     renderAllEnemy();
     SDL_RenderPresent(renderer);
 }
 
-void GameEngine::renderAllEnemy(){
+void GameEngine::renderAllEnemy() {
         
-    
-
     //loop through hashmaps and lay sprites
        std::map <EnemySprite*, SDL_Texture*>:: iterator it;
 
@@ -244,7 +246,7 @@ void GameEngine::clean(){
     freeEnemies();
     SDL_Quit();
     
-    
+
     std::cout << "SDL CLEANED and DESTROYED!...." << std::endl;
 }
 

@@ -21,7 +21,7 @@ class PlayerSprite: public Sprite {
 public:
     PlayerSprite (int x, int y, int w, int h,std::string pathz);
     
-    SDL_Texture* set_image(const char filename[] = NULL, SDL_Renderer *ren = nullptr);
+    //SDL_Texture* set_image(const char filename[] = NULL, SDL_Renderer *ren = nullptr);
     
     
     void increaseX(); //right button

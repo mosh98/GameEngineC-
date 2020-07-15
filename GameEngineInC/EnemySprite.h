@@ -20,8 +20,6 @@ class EnemySprite: public Sprite{
 public:
     EnemySprite (int x, int y, int w, int h);
      
-     SDL_Texture* set_image(const char filename[] = NULL, SDL_Renderer *ren = nullptr);
-     
     void summonEnemy(SDL_Renderer* rend);
      
 private:

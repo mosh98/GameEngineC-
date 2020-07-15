@@ -30,19 +30,22 @@ public:
 
     //intialize
     void init(const char*title, int xpos, int ypos, int width, int height, bool fullscreen);
-  
     void handleEvents();
-    void shoot();
     void render();
     void clean();
+     bool running();
+   
+    //Add Features
+    void addPlayerSprite(Sprite*);
+    void addEnemy( int howManyEnemyYouNeed);
+    void addBulletImage();
+    
    
     
-    void add(Sprite*);
-    void remove(Sprite*);
-    bool running();
-    void addEnemy( int howManyEnemyYouNeed );
 
     protected:
+    void shoot();
+    void remove(Sprite*); // found no use of this
     void renderAllEnemy();
     void freeEnemies();
     
@@ -57,8 +60,11 @@ private:
     SDL_Renderer *renderer;
     SDL_Surface *screen;
     
-    //vector for enemy_sprites
-    std::vector<EnemySprite*> vec;
+    SDL_Texture *playerTex;
+    SDL_Texture *bulletTex;
+
+    
+    //map for enemy_sprites
     std::map< EnemySprite*, SDL_Texture* > map;
     
 };

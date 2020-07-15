@@ -24,16 +24,12 @@ public:
     
 //    SDL_Texture* set_image_tex(const char filename[] = NULL, SDL_Renderer *ren = nullptr);
     
-    void setImage(SDL_Surface *imageParam);
-    
-  
-    
     SDL_Surface* get_image() const;
     
     SDL_Rect getRect();
     
     Sprite& operator=(Sprite &rhs);
-    
+    SDL_Texture* set_image_tex(const char filename[] = NULL, SDL_Renderer *ren = NULL);
   
     
     void draw(SDL_Renderer* ren, SDL_Texture* tex);
@@ -41,7 +37,7 @@ public:
     SDL_Texture* getMyTex();
     
 protected:
-    SDL_Surface *image;
+   // SDL_Surface *image;
     SDL_Rect rect;
     string path;
     
