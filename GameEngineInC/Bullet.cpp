@@ -128,9 +128,9 @@ void Bullet::bulletLoop(int startPosX, SDL_Renderer* sl){
     
 }
 
-void Bullet::shoot(PlayerSprite* ps, SDL_Renderer* ren){
-    
-    bulletLoop(ps->getRect().x,ren);
+void Bullet::shoot(int posX, SDL_Renderer* ren){
+
+    bulletLoop(posX,ren);
 }
 
 

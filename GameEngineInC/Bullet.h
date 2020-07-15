@@ -10,6 +10,7 @@
 #define Bullet_h
 
 
+
 #include "PlayerSprite.h"
 
 #include <SDL2/SDL.h>
@@ -31,7 +32,7 @@ public:
     
     bool checkCollision(SDL_Rect a, SDL_Rect b);
     
-    void shoot(PlayerSprite* ps = NULL, SDL_Renderer* ren = NULL);
+    void shoot(int posX, SDL_Renderer* ren = NULL);
     
 private:
     const int VERTICAL_HEIGHT = 600;

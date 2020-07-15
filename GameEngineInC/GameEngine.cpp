@@ -12,7 +12,7 @@
 
 
 
-PlayerSprite* sprite = new PlayerSprite(400,500,48,48,"/Users/moslehmahamud/Documents/GameEngineC-CloneFromGit/triangle-clipart-triangle-shape-1-original.png");
+PlayerSprite sprite(400,500,48,48,"/Users/moslehmahamud/Documents/GameEngineC-CloneFromGit/triangle-clipart-triangle-shape-1-original.png");
 
  Bullet bs(20,20,"/Users/moslehmahamud/Documents/GameEngineC-CloneFromGit/bullet.png");
 
@@ -57,12 +57,12 @@ void GameEngine::init(const char *title, int xpos, int ypos, int width, int heig
         screen = SDL_GetWindowSurface(window);//This "canvas" is where we gonna append our bmp picture to!
        
         
-        std::string sss = sprite->getPath();
+        std::string sss = sprite.getPath();
         
         //playerTex = sprite.set_image(sss.c_str(), renderer);
-        playerTex = sprite->set_image_tex(sss.c_str(),renderer);
+        playerTex = sprite.set_image_tex(sss.c_str(),renderer);
         
-        sprite->draw(renderer, playerTex);
+        sprite.draw(renderer, playerTex);
     
         //put enemy Sprite and shit
         addEnemy(20);
@@ -100,13 +100,13 @@ void GameEngine::handleEvents(){
     switch (event.key.keysym.sym) {
 
         case SDLK_LEFT:
-            sprite->decreaseX();
+            sprite.decreaseX();
             SDL_UpdateWindowSurface(window);
             render();
             break;
             
         case SDLK_RIGHT:
-            sprite->increaseX();
+            sprite.increaseX();
             SDL_FreeSurface(screen);
             SDL_UpdateWindowSurface(window);
             render();
@@ -204,12 +204,8 @@ void GameEngine::shoot(){
     
     bulletTex = bs.set_image("/Users/moslehmahamud/Documents/GameEngineC-CloneFromGit/bullet.png", renderer);
     // working
-    
-    
-    //bulletTex = bs.set_image_tex("/Users/moslehmahamud/Documents/GameEngineC-CloneFromGit/bullet.png", renderer);
-
-    bs.shoot(sprite,renderer);
-    //bs.bulletLoop(sprite->getRect().x, renderer);
+   bs.shoot(sprite.getRect().x,renderer);
+   
     
 }
 
@@ -219,7 +215,7 @@ void GameEngine::render(){
     //This is used to redner things, kinda like a refresh after every event occurs.
     SDL_UpdateWindowSurface(window);
     SDL_RenderClear(renderer);
-    sprite->draw(renderer, playerTex);
+    sprite.draw(renderer, playerTex);
     renderAllEnemy();
     SDL_RenderPresent(renderer);
 }
