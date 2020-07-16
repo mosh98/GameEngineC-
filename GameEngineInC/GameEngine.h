@@ -13,12 +13,13 @@
 #include <SDL2/SDL.h>
 #include <iostream>
 #include "Sprite.h"
-#include "PlayerSprite.h"
-#include "EnemySprite.h"
+
 #include <SDL2/SDL_image.h>
 #include <map>
 #include <stdlib.h>
 #include "Bullet.h"
+#include "PlayerSprite.h"
+#include "EnemySprite.h"
 
 
 class GameEngine{
@@ -58,8 +59,10 @@ public:
 private:
     
     int cnt;
-    int enemyCnt;
     bool isRuning;
+    bool flag = false;
+    std::string enemyPath;
+    
     SDL_Window *window;
     SDL_Renderer *renderer;
     SDL_Surface *screen;

@@ -26,6 +26,7 @@ GameEngine::~GameEngine(){
 }
 
 
+
 //INITIALIZE
 void GameEngine::init(const char *title, int xpos, int ypos, int width, int height, bool fullscreen)
 {
@@ -51,14 +52,10 @@ void GameEngine::init(const char *title, int xpos, int ypos, int width, int heig
         
         screen = SDL_GetWindowSurface(window);//This "canvas" is where we gonna append our bmp picture to!
        
-        playerTex = sprite->set_image_tex("/Users/moslehmahamud/Documents/GameEngineC-CloneFromGit/triangle-clipart-triangle-shape-1-original.png",renderer);
-        
-        sprite->draw(renderer, playerTex);
+
     
-        //sprite->draw(renderer, playerTex) <---- USE AFTER IMPLEMENTED method
-        
-        //put enemy Sprite and shit
-        addEnemy(20);
+        //put enemy Sprite
+        //addEnemy(20);
         renderAllEnemy();
         
         /* Up until now everything was drawn behind the scenes.
@@ -117,6 +114,30 @@ void GameEngine::handleEvents(){
     
 }
 
+//"/Users/moslehmahamud/Documents/GameEngineC-CloneFromGit/triangle-clipart-triangle-shape-1-original.png"
+void GameEngine:: addPlayerSprite(int width, int height, std::string pathToImage){
+    
+    flag = true;
+    
+    if( ! ( width <= 10 && height <= 10 ) ){
+          sprite->setWidthAndHeight(width, height);
+    }
+   
+    //set the texture
+    playerTex = sprite->set_image_tex( pathToImage.c_str(), renderer );
+    
+      sprite->draw(renderer, playerTex);
+  
+}
+
+void GameEngine:: setEnemyAttributes(int width, int height, std::string pathToImage, int enemy){
+    
+    enemyPath = pathToImage;
+    addEnemy(enemy);
+    
+}
+
+
 
 //std::cout << "Size of x : " << x << std::endl;
   //     std::cout << "Size of y : " << y << std::endl;
@@ -147,7 +168,7 @@ void GameEngine:: addEnemy( int howManyEnemyYouNeed ) {
          
         //"/Users/moslehmahamud/Documents/GameEngineC-CloneFromGit/enemy.png"
         //enemyTex
-        SDL_Texture* enemytextureTmp = enemySpritez->set_image_tex( "/Users/moslehmahamud/Documents/GameEngineC-CloneFromGit/enemy.png", renderer );
+        SDL_Texture* enemytextureTmp = enemySpritez->set_image_tex( enemyPath.c_str(), renderer );
     
         map.insert( std::pair<EnemySprite*, SDL_Texture*>( enemySpritez , enemytextureTmp ) );
         

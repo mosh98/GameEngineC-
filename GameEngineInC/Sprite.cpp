@@ -49,6 +49,10 @@ SDL_Surface* Sprite:: get_image() const {
 
 
 
+void Sprite::setWidthAndHeight(int width, int height){
+    rect.w = width;
+    rect.h = height;
+}
 
 //this dun work
 Sprite &Sprite::operator=(Sprite &rhs){

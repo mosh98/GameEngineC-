@@ -32,7 +32,7 @@ public:
     Sprite& operator=(Sprite &rhs);
     SDL_Texture* set_image_tex(const char filename[] = NULL, SDL_Renderer *ren = NULL);
   
-    
+    void setWidthAndHeight(int width, int height);
     void draw(SDL_Renderer* ren, SDL_Texture* tex);
     SDL_Renderer* getMyRen();
     SDL_Texture* getMyTex();
