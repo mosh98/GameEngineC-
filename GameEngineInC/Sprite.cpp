@@ -22,7 +22,7 @@ Sprite::Sprite(int x, int y, int w, int h ) {
     
 }
 
-Sprite::~Sprite(){
+ Sprite::~Sprite(){
     
     SDL_DestroyRenderer(saveMyRen);
     saveMyRen = NULL;

@@ -22,6 +22,7 @@ Bullet:: Bullet(int w, int h,std::string pathz)
 //Destructor
 Bullet::~Bullet(){
     
+    std::cout << " :BULLET" << std::endl;
     //free surfaces and other memory bound items
     SDL_DestroyTexture(texMex);
     texMex = NULL;

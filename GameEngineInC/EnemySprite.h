@@ -19,7 +19,8 @@ class EnemySprite: public Sprite{
   
 public:
     EnemySprite (int x, int y, int w, int h);
-     
+  
+    
     void summonEnemy(SDL_Renderer* rend);
      
 private:

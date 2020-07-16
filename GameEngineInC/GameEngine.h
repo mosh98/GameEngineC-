@@ -16,9 +16,9 @@
 #include "PlayerSprite.h"
 #include "EnemySprite.h"
 #include <SDL2/SDL_image.h>
-#include <vector>
 #include <map>
 #include <stdlib.h>
+#include "Bullet.h"
 
 
 class GameEngine{
@@ -34,11 +34,14 @@ public:
     void render();
     void clean();
      bool running();
+    
+    
    
     //Add Features
-    void addPlayerSprite(Sprite*);
+    void addPlayerSprite(int width, int height, std::string pathToImage);
+    void setEnemyAttributes(int width, int height, std::string pathToImage, int enemy);
     void addEnemy( int howManyEnemyYouNeed);
-    void addBulletImage();
+    void addBulletImage(std::string pathToImage);
     
    
     
@@ -55,10 +58,14 @@ public:
 private:
     
     int cnt;
+    int enemyCnt;
     bool isRuning;
     SDL_Window *window;
     SDL_Renderer *renderer;
     SDL_Surface *screen;
+    PlayerSprite* sprite = new PlayerSprite(400,500,48,48);
+    Bullet* bs = new Bullet(20,20,"/Users/moslehmahamud/Documents/GameEngineC-CloneFromGit/bullet.png");
+    
     
     SDL_Texture *playerTex;
     SDL_Texture *bulletTex;

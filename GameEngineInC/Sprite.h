@@ -16,14 +16,15 @@ using namespace std;
 
 class Sprite{
     
-public:
+protected:
      
     //Uint32 color, int x, int y, int w, int h
     Sprite(int x, int y, int w, int h);
-    ~Sprite();
+   virtual ~Sprite();
     
 //    SDL_Texture* set_image_tex(const char filename[] = NULL, SDL_Renderer *ren = nullptr);
     
+public:
     SDL_Surface* get_image() const;
     
     SDL_Rect getRect();
@@ -36,7 +37,7 @@ public:
     SDL_Renderer* getMyRen();
     SDL_Texture* getMyTex();
     
-protected:
+//protected:
    // SDL_Surface *image;
     SDL_Rect rect;
     string path;

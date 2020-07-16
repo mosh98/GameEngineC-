@@ -43,5 +43,7 @@ int main(int argc, const char * argv[]) {
 
     gameEngine->clean();
     
+    delete gameEngine;
+    
     return 0;
 }

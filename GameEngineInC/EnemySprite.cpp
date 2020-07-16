@@ -11,6 +11,9 @@
 EnemySprite::EnemySprite(int x, int y, int w, int h):Sprite(x, y, w, h){
 }
 
+
+
+
 void EnemySprite::summonEnemy(SDL_Renderer* rend){
     draw(rend, texMex);
 }

@@ -7,19 +7,24 @@
 //
 
 #include "PlayerSprite.h"
+#include "Bullet.h"
 #include <iostream>
 #include <SDL2/SDL_image.h>
 
 
  Bullet bullet(10,10,"/Users/moslehmahamud/Documents/GameEngineC-CloneFromGit/bullet.png");
 
-PlayerSprite::PlayerSprite(int x, int y, int w, int h, std::string pathz): Sprite(x, y, w, h){
+
+PlayerSprite::PlayerSprite(int x, int y, int w, int h): Sprite(x, y, w, h){
+    
     
   
    //assigning to global var
-    path += pathz;
+    //path += pathz;
     update_properties();
 }
+
+
 
 //////void set_image(const char filename[] = NULL);
 
@@ -66,11 +71,11 @@ void PlayerSprite::update_properties(){
 std::string PlayerSprite::getPath(){
     return path;
 }
-
-void PlayerSprite::shoot(){
-    bullet.set_image_tex("/Users/moslehmahamud/Documents/GameEngineC-CloneFromGit/bullet.png",saveMyRen);
-    bullet.bulletLoop(this->rect.x, saveMyRen);
-}
+//
+//void PlayerSprite::shoot(){
+//    bullet.set_image_tex("/Users/moslehmahamud/Documents/GameEngineC-CloneFromGit/bullet.png",saveMyRen);
+//    bullet.bulletLoop(this->rect.x, saveMyRen);
+//}
 
 
 

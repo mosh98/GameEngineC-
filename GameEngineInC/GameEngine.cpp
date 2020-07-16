@@ -7,14 +7,7 @@
 //
 
 #include "GameEngine.h"
-
 #include <iostream>
-
-
-
-PlayerSprite sprite(400,500,48,48,"/Users/moslehmahamud/Documents/GameEngineC-CloneFromGit/triangle-clipart-triangle-shape-1-original.png");
-
- Bullet bs(20,20,"/Users/moslehmahamud/Documents/GameEngineC-CloneFromGit/bullet.png");
 
 
 GameEngine::GameEngine( )
@@ -27,7 +20,9 @@ GameEngine::~GameEngine(){
     window = NULL;
     renderer = NULL;
     screen = NULL;
-    
+    delete sprite;
+    delete bs;
+    std::cout<<"GameEngine destructor called "<< std::endl;
 }
 
 
@@ -56,14 +51,12 @@ void GameEngine::init(const char *title, int xpos, int ypos, int width, int heig
         
         screen = SDL_GetWindowSurface(window);//This "canvas" is where we gonna append our bmp picture to!
        
+        playerTex = sprite->set_image_tex("/Users/moslehmahamud/Documents/GameEngineC-CloneFromGit/triangle-clipart-triangle-shape-1-original.png",renderer);
         
-        std::string sss = sprite.getPath();
-        
-        //playerTex = sprite.set_image(sss.c_str(), renderer);
-        playerTex = sprite.set_image_tex(sss.c_str(),renderer);
-        
-        sprite.draw(renderer, playerTex);
+        sprite->draw(renderer, playerTex);
     
+        //sprite->draw(renderer, playerTex) <---- USE AFTER IMPLEMENTED method
+        
         //put enemy Sprite and shit
         addEnemy(20);
         renderAllEnemy();
@@ -77,15 +70,14 @@ void GameEngine::init(const char *title, int xpos, int ypos, int width, int heig
         SDL_UpdateWindowSurface(window);
         isRuning = true;
     }
-    
     else {
-    
         isRuning = false;
     
     }
 }
 
 void GameEngine::handleEvents(){
+    
     SDL_Event event;
     
     SDL_PollEvent(&event);
@@ -97,23 +89,22 @@ void GameEngine::handleEvents(){
         }
     
     //event.key.keysym.sym
-    switch (event.key.keysym.sym) {
+    switch ( event.key.keysym.sym ) {
 
         case SDLK_LEFT:
-            sprite.decreaseX();
+            sprite->decreaseX();
             SDL_UpdateWindowSurface(window);
             render();
             break;
             
         case SDLK_RIGHT:
-            sprite.increaseX();
+            sprite->increaseX();
             SDL_FreeSurface(screen);
             SDL_UpdateWindowSurface(window);
             render();
             break;
         
         case SDLK_SPACE:
-            
             shoot();
             SDL_FreeSurface(screen);
             SDL_UpdateWindowSurface(window);
@@ -134,7 +125,7 @@ void GameEngine::handleEvents(){
 //TODO: enemy Sprites with random x and y
 
 //possibly also have the imageLink png in the parametres
-void GameEngine:: addEnemy(int howManyEnemyYouNeed ) {
+void GameEngine:: addEnemy( int howManyEnemyYouNeed ) {
     
     
     int counter = 0;
@@ -202,9 +193,9 @@ void GameEngine::shoot(){
     cnt++;
    // /Users/moslehmahamud/Documents/GameEngineC-CloneFromGit/bullet.png
     
-    bulletTex = bs.set_image("/Users/moslehmahamud/Documents/GameEngineC-CloneFromGit/bullet.png", renderer);
+    bulletTex = bs->set_image("/Users/moslehmahamud/Documents/GameEngineC-CloneFromGit/bullet.png", renderer);
     // working
-   bs.shoot(sprite.getRect().x,renderer);
+   bs->shoot(sprite->getRect().x,renderer);
    
     
 }
@@ -215,7 +206,7 @@ void GameEngine::render(){
     //This is used to redner things, kinda like a refresh after every event occurs.
     SDL_UpdateWindowSurface(window);
     SDL_RenderClear(renderer);
-    sprite.draw(renderer, playerTex);
+    sprite->draw(renderer, playerTex);
     renderAllEnemy();
     SDL_RenderPresent(renderer);
 }
@@ -242,7 +233,6 @@ void GameEngine::clean(){
     freeEnemies();
     SDL_Quit();
     
-
     std::cout << "SDL CLEANED and DESTROYED!...." << std::endl;
 }
 
