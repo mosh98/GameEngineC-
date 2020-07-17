@@ -208,13 +208,19 @@ void GameEngine::freeEnemies(){
     
 }
 
+void GameEngine:: addBulletImage(std::string pathToImage){
+    bulletPath += pathToImage;
+    // bulletTex = bs->set_image( bulletPath.c_str(),  renderer);
+}
+
 
 
 void GameEngine::shoot(){
     cnt++;
    // /Users/moslehmahamud/Documents/GameEngineC-CloneFromGit/bullet.png
     
-    bulletTex = bs->set_image("/Users/moslehmahamud/Documents/GameEngineC-CloneFromGit/bullet.png", renderer);
+    bulletTex = bs->set_image(bulletPath.c_str(), renderer);
+    
     // working
    bs->shoot(sprite->getRect().x,renderer);
    

@@ -28,11 +28,10 @@ public:
     void increaseY();
     void decreaseY();
     std::string getPath();
-    //void shoot();
+    
     
     
 
-    void update_properties();
 
 private:
     std::string path;

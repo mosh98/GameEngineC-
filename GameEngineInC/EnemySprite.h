@@ -19,7 +19,7 @@ class EnemySprite: public Sprite{
   
 public:
     EnemySprite (int x, int y, int w, int h);
-  
+    virtual ~EnemySprite();
     
     void summonEnemy(SDL_Renderer* rend);
      

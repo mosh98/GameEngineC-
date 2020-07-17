@@ -40,7 +40,8 @@ public:
    
     //Add Features
     void addPlayerSprite(int width, int height, std::string pathToImage);
-    void setEnemyAttributes(int width, int height, std::string pathToImage, int enemy);
+    void setEnemyAttributes(int width, int height, std::string pathToImage, int enemy); //TODO: width and height for enemy logic
+    
     void addEnemy( int howManyEnemyYouNeed);
     void addBulletImage(std::string pathToImage);
     
@@ -62,6 +63,7 @@ private:
     bool isRuning;
     bool flag = false;
     std::string enemyPath;
+    std::string bulletPath;
     
     SDL_Window *window;
     SDL_Renderer *renderer;

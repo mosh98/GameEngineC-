@@ -7,27 +7,20 @@
 //
 
 #include "PlayerSprite.h"
-#include "Bullet.h"
+
 #include <iostream>
 #include <SDL2/SDL_image.h>
 
 
- Bullet bullet(10,10,"/Users/moslehmahamud/Documents/GameEngineC-CloneFromGit/bullet.png");
+
 
 
 PlayerSprite::PlayerSprite(int x, int y, int w, int h): Sprite(x, y, w, h){
     
-    
-  
-   //assigning to global var
-    //path += pathz;
-    update_properties();
+
 }
 
-
-
 //////void set_image(const char filename[] = NULL);
-
 
 void PlayerSprite:: increaseX(){
     //            For right key
@@ -64,18 +57,12 @@ void PlayerSprite:: decreaseY(){
     std::cout<<rect.y<<std::endl;
 }
 
-void PlayerSprite::update_properties(){
 
-}
 
 std::string PlayerSprite::getPath(){
     return path;
 }
-//
-//void PlayerSprite::shoot(){
-//    bullet.set_image_tex("/Users/moslehmahamud/Documents/GameEngineC-CloneFromGit/bullet.png",saveMyRen);
-//    bullet.bulletLoop(this->rect.x, saveMyRen);
-//}
+
 
 
 
