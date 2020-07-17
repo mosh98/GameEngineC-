@@ -19,7 +19,7 @@ class EnemySprite: public Sprite {
   
 public:
     EnemySprite (int x, int y, int w, int h);
-    ~EnemySprite() override = default;
+    ~EnemySprite() override;
     
     void summonEnemy(SDL_Renderer* rend);
      
