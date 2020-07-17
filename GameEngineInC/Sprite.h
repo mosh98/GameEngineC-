@@ -20,7 +20,7 @@ protected:
      
     //Uint32 color, int x, int y, int w, int h
     Sprite(int x, int y, int w, int h);
-   virtual ~Sprite();
+    virtual ~Sprite();
     
 //    SDL_Texture* set_image_tex(const char filename[] = NULL, SDL_Renderer *ren = nullptr);
     

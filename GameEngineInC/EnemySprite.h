@@ -15,11 +15,11 @@
 
 #include <stdio.h>
 
-class EnemySprite: public Sprite{
+class EnemySprite: public Sprite {
   
 public:
     EnemySprite (int x, int y, int w, int h);
-    virtual ~EnemySprite();
+    ~EnemySprite() override = default;
     
     void summonEnemy(SDL_Renderer* rend);
      

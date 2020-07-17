@@ -13,6 +13,7 @@
 
 #include <stdio.h>
 #include <string>
+#include <iostream>
 
 
 class PlayerSprite: public Sprite {
@@ -21,7 +22,8 @@ class PlayerSprite: public Sprite {
 public:
     PlayerSprite (int x, int y, int w, int h);
     
-  ~PlayerSprite() override = default;
+  ~PlayerSprite() override;
+ //   ~PlayerSprite();
     
     void increaseX(); //right button
     void decreaseX();//left button

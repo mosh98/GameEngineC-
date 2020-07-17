@@ -7,14 +7,19 @@
 //
 
 #include "EnemySprite.h"
+#include <iostream>
 
 EnemySprite::EnemySprite(int x, int y, int w, int h):Sprite(x, y, w, h){
 }
 
-EnemySprite:: ~EnemySprite(){
-    
-}
 
+//    EnemySprite:: ~EnemySprite(){
+//    std::cout<<"DELETING PLAYER SPRITE "<<std::endl;
+//    }
+
+//EnemySprite::~EnemySprite(){
+//    
+//}
 
 
 void EnemySprite::summonEnemy(SDL_Renderer* rend){

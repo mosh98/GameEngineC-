@@ -20,6 +20,10 @@ PlayerSprite::PlayerSprite(int x, int y, int w, int h): Sprite(x, y, w, h){
 
 }
 
+PlayerSprite:: ~PlayerSprite(){
+     std::cout<<"DELETING PLAYER SPRITE "<<std::endl;
+}
+
 //////void set_image(const char filename[] = NULL);
 
 void PlayerSprite:: increaseX(){
