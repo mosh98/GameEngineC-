@@ -61,6 +61,8 @@ void GameEngine::init(const char *title, int xpos, int ypos, int width, int heig
     if(fullscreen){
         flag = SDL_WINDOW_FULLSCREEN;
     }
+    _width = width;
+    _height = height;
     
     if( SDL_Init(SDL_INIT_EVERYTHING) == 0 ) {
         

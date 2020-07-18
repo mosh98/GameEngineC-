@@ -14,8 +14,7 @@
 Bullet:: Bullet(int w, int h,std::string pathz)
 : Sprite(0,0,w,h)
 {
-    path += pathz;
-    
+   
 }
 
 
@@ -40,10 +39,10 @@ SDL_Texture* Bullet :: set_image(const char filename[], SDL_Renderer *ren){
     SDL_Surface *imageSurface = NULL;
     imageSurface = IMG_Load(filename);
     texMex = SDL_CreateTextureFromSurface(ren, imageSurface);
-    saveMyRen = ren;
+   // saveMyRen = ren;
     SDL_FreeSurface(imageSurface);
     imageSurface = NULL;
-    saveMyTex = texMex;
+    //saveMyTex = texMex;
     
     return texMex;
 }
@@ -99,31 +98,34 @@ bool Bullet:: checkCollision( SDL_Rect a, SDL_Rect b )
 void Bullet::bulletLoop(int startPosX, SDL_Renderer* sl){
     //while bla bla bla
     
-    rect.x = startPosX+16;
-    
-        
+    //rect.x = startPosX+16;
+    setPosX(startPosX+16);
+
+
         for(int i = 0; i < VERTICAL_HEIGHT; i+=100){
-           
-            rect.y = i;
+
+            //rect.y = i;
+            setPosY(i);
 
             draw(sl, texMex);
-            
+
             SDL_RenderPresent(sl);
-            
+
             std::cout<< i << std::endl;
-            
+
             if(i == 500){
-                
-                rect.y = 0;
+
+                //rect.y = 0;
+                setPosY(0);
                 break;
             }
-            
+
         }
-    
-    
+
+
     SDL_DestroyTexture(texMex);
     SDL_RenderClear(sl);
-    
+
     std::cout << "MEMORY CLEAN: SDL destroy texture BULLET " << std::endl;
     std::cout << "MEMORY CLEAN: SDL render clear  BULLET" << std::endl;
     

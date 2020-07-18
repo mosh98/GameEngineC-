@@ -62,6 +62,8 @@ public:
 private:
     
     int cnt;
+    int _width;
+    int _height;
     bool isRuning;
     bool flag = false;
     std::string enemyPath;

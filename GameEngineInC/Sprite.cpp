@@ -86,3 +86,18 @@ void Sprite:: draw(SDL_Renderer* ren, SDL_Texture* tex){
     saveMyTex = tex;
     SDL_RenderCopy(ren, tex, NULL, &rect);
 }
+
+int Sprite:: getPosX(){
+    return rect.x;
+}
+
+void Sprite:: setPosX(int x){
+    rect.x = x;
+}
+
+void Sprite::setPath(std::string pth){
+    path = pth;
+}
+void Sprite:: setPosY(int y){
+    rect.y = y;
+}
