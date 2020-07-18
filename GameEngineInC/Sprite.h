@@ -17,34 +17,29 @@ using namespace std;
 class Sprite{
     
 protected:
-     
-    //Uint32 color, int x, int y, int w, int h
+    //int x, int y, int w, int h
     Sprite(int x, int y, int w, int h);
     virtual ~Sprite();
     
-//    SDL_Texture* set_image_tex(const char filename[] = NULL, SDL_Renderer *ren = nullptr);
+
     
 public:
     SDL_Surface* get_image() const;
-    
     SDL_Rect getRect();
-    
-    Sprite& operator=(Sprite &rhs);
     SDL_Texture* set_image_tex(const char filename[] = NULL, SDL_Renderer *ren = NULL);
-  
     void setWidthAndHeight(int width, int height);
     void draw(SDL_Renderer* ren, SDL_Texture* tex);
     SDL_Renderer* getMyRen();
     SDL_Texture* getMyTex();
     
-//protected:
-   // SDL_Surface *image;
+protected:
     SDL_Rect rect;
     string path;
-    
-//TODO: (FIXED)  Becarefull you might leak from here
-    SDL_Renderer *saveMyRen = NULL;
+    SDL_Renderer *saveMyRen = NULL; //TODO: (FIXED)  Becarefull you might leak from here
     SDL_Texture *saveMyTex = NULL ;
+    Sprite(const Sprite& rhs) = delete;
+    const Sprite& operator=(const Sprite& rhs) = delete;
+    
 
     
 };

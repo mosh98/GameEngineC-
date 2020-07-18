@@ -34,7 +34,8 @@ public:
     void handleEvents();
     void render();
     void clean();
-     bool running();
+    bool running();
+    void initialize_Loop(GameEngine *gameEngine);
     
     
    
@@ -44,6 +45,7 @@ public:
     
     void addEnemy( int howManyEnemyYouNeed);
     void addBulletImage(std::string pathToImage);
+    
     
    
     
@@ -68,7 +70,7 @@ private:
     SDL_Window *window;
     SDL_Renderer *renderer;
     SDL_Surface *screen;
-    PlayerSprite* sprite = new PlayerSprite(400,500,48,48);
+    PlayerSprite* playerSprite = new PlayerSprite(400,500,48,48);
     Bullet* bs = new Bullet(20,20,"/Users/moslehmahamud/Documents/GameEngineC-CloneFromGit/bullet.png");
     
     

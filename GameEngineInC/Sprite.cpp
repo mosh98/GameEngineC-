@@ -47,28 +47,11 @@ SDL_Surface* Sprite:: get_image() const {
      return NULL;
 }
 
-
-
 void Sprite::setWidthAndHeight(int width, int height){
     rect.w = width;
     rect.h = height;
 }
 
-//this dun work
-Sprite &Sprite::operator=(Sprite &rhs){
-    
-//    if(this == &rhs){
-//        return *this;
-//    }
-//
-//    this->rect = rhs.rect;
-//    this->image = rhs.image;
-//
-//    this->rect.x = rhs.origin_x;
-//    this->rect.y = rhs.origin_y;
-    
-    return *this;
-}
 
 
 SDL_Texture* Sprite:: set_image_tex(const char filename[], SDL_Renderer *ren ){

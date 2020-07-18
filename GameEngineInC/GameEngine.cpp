@@ -17,15 +17,41 @@ GameEngine::GameEngine( )
 
 GameEngine::~GameEngine(){
     clean();
+    delete playerSprite;
+    delete bs;
     window = NULL;
     renderer = NULL;
     screen = NULL;
-    delete sprite;
-    delete bs;
+    
     std::cout<<"GameEngine destructor called "<< std::endl;
 }
 
 
+void GameEngine::initialize_Loop(GameEngine *gameEngine){
+    
+    int FPS = 25;
+    
+    while(gameEngine -> running()){
+          
+
+          Uint32 start = SDL_GetTicks();
+       
+          if(gameEngine->running() == false){
+              break;
+          }
+          gameEngine->handleEvents();
+          //gameEngine->update();
+          gameEngine->render();
+          
+         if(1000/FPS > SDL_GetTicks() - start)
+              SDL_Delay(1000/FPS);
+          
+      }
+
+      gameEngine->clean();
+      
+      delete gameEngine;
+}
 
 //INITIALIZE
 void GameEngine::init(const char *title, int xpos, int ypos, int width, int height, bool fullscreen)
@@ -89,13 +115,13 @@ void GameEngine::handleEvents(){
     switch ( event.key.keysym.sym ) {
 
         case SDLK_LEFT:
-            sprite->decreaseX();
+            playerSprite->decreaseX();
             SDL_UpdateWindowSurface(window);
             render();
             break;
             
         case SDLK_RIGHT:
-            sprite->increaseX();
+            playerSprite->increaseX();
             SDL_FreeSurface(screen);
             SDL_UpdateWindowSurface(window);
             render();
@@ -120,13 +146,13 @@ void GameEngine:: addPlayerSprite(int width, int height, std::string pathToImage
     flag = true;
     
     if( ! ( width <= 10 && height <= 10 ) ){
-          sprite->setWidthAndHeight(width, height);
+          playerSprite->setWidthAndHeight(width, height);
     }
    
     //set the texture
-    playerTex = sprite->set_image_tex( pathToImage.c_str(), renderer );
+    playerTex = playerSprite->set_image_tex( pathToImage.c_str(), renderer );
     
-      sprite->draw(renderer, playerTex);
+      playerSprite->draw(renderer, playerTex);
   
 }
 
@@ -222,7 +248,7 @@ void GameEngine::shoot(){
     bulletTex = bs->set_image(bulletPath.c_str(), renderer);
     
     // working
-   bs->shoot(sprite->getRect().x,renderer);
+   bs->shoot(playerSprite->getRect().x,renderer);
    
     
 }
@@ -233,7 +259,7 @@ void GameEngine::render(){
     //This is used to redner things, kinda like a refresh after every event occurs.
     SDL_UpdateWindowSurface(window);
     SDL_RenderClear(renderer);
-    sprite->draw(renderer, playerTex);
+    playerSprite->draw(renderer, playerTex);
     renderAllEnemy();
     SDL_RenderPresent(renderer);
 }
@@ -253,6 +279,7 @@ void GameEngine::renderAllEnemy() {
 
 void GameEngine::clean(){
     
+   
     SDL_DestroyWindow(window);
     SDL_DestroyRenderer(renderer);
     SDL_DestroyTexture(playerTex);
