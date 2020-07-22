@@ -226,9 +226,9 @@ void GameEngine::moveEnemies(){
             if(it->first->getPosX() <= -20){
                 moveLeftFlag = false;
             }
-             it->first->setPosX(it->first->getPosX()-2);
+             it->first->setPosX(it->first->getPosX()-50);
         }else{
-            it->first->setPosX(it->first->getPosX()+2);
+            it->first->setPosX(it->first->getPosX()+50);
         }
         
         
@@ -262,9 +262,33 @@ void GameEngine::shoot(){
     bulletTex = bs->set_image(bulletPath.c_str(), renderer);
     
     // working
-   bs->shoot(playerSprite->getRect().x,renderer);
+   bs->shoot(playerSprite->getRect()->x,renderer);
+    
+    chekCollision(bs);
    
     SDL_DestroyTexture(bulletTex);
+}
+
+void GameEngine::chekCollision(Bullet* b){
+      std::map <EnemySprite*, SDL_Texture*>:: iterator it;
+    
+    for(it = map.begin(); it != map.end(); it++){
+        
+//        if( b->checkCollision(&b->getRect(), &it->first->getRect()) == true) {
+//            map.erase(it->first);
+//
+//        }
+//DONT WORK
+        
+//        if( SDL_HasIntersection(b->getRect(), it->first->getRect() ) == true ) {
+//                   map.erase(it->first);
+//
+//               }
+//
+       }
+    
+    renderAllEnemy();
+  
 }
 
 

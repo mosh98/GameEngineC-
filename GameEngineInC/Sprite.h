@@ -25,7 +25,7 @@ protected:
     
 public:
     SDL_Surface* get_image() const;
-    SDL_Rect getRect();
+    SDL_Rect* getRect();
     SDL_Texture* set_image_tex(const char filename[] = NULL, SDL_Renderer *ren = NULL);
     void setWidthAndHeight(int width, int height);
     void draw(SDL_Renderer* ren, SDL_Texture* tex);

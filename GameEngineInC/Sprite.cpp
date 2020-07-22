@@ -36,8 +36,8 @@ Sprite::Sprite(int x, int y, int w, int h ) {
     std::cout<<"MEMORY CLEAN: SDL memory freed from Sprite class"<<std::endl;
 }
 
-SDL_Rect Sprite:: getRect(){
-    return rect;
+SDL_Rect* Sprite:: getRect(){
+    return &rect;
 }
 
 
