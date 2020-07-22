@@ -36,14 +36,10 @@ void GameEngine::initialize_Loop(GameEngine *gameEngine){
     
     while(gameEngine -> running()){
           
-
-          
-       
           if(gameEngine->running() == false){
               break;
           }
          
-          
         gameEngine->handleEvents();
 
         gameEngine->render();
@@ -51,11 +47,7 @@ void GameEngine::initialize_Loop(GameEngine *gameEngine){
          if(1000/FPS > SDL_GetTicks() - start)
               SDL_Delay(1000/FPS);
                 moveEnemies();
-        
-          
       }
-
- 
 }
 
 //INITIALIZE
@@ -108,17 +100,11 @@ void GameEngine::handleEvents(){
     
     SDL_Event event;
     
-    // moveEnemies(); <---- this works
-    
     SDL_PollEvent(&event);
     
-    
         if(SDL_QUIT == event.type){
-            //SDL_FlushEvent(&event);
             isRuning = false;
         }
-    
-    //event.key.keysym.sym
     switch ( event.key.keysym.sym ) {
 
         case SDLK_LEFT:
@@ -240,9 +226,9 @@ void GameEngine::moveEnemies(){
             if(it->first->getPosX() <= -20){
                 moveLeftFlag = false;
             }
-             it->first->setPosX(it->first->getPosX()-1);
+             it->first->setPosX(it->first->getPosX()-2);
         }else{
-            it->first->setPosX(it->first->getPosX()+1);
+            it->first->setPosX(it->first->getPosX()+2);
         }
         
         
@@ -273,14 +259,12 @@ void GameEngine:: addBulletImage(std::string pathToImage){
 
 void GameEngine::shoot(){
     cnt++;
-   // /Users/moslehmahamud/Documents/GameEngineC-CloneFromGit/bullet.png
-    
     bulletTex = bs->set_image(bulletPath.c_str(), renderer);
     
     // working
    bs->shoot(playerSprite->getRect().x,renderer);
    
-    
+    SDL_DestroyTexture(bulletTex);
 }
 
 
