@@ -10,6 +10,7 @@
 #include <iostream>
 
 
+
 GameEngine::GameEngine( )
 {
     
@@ -31,26 +32,30 @@ void GameEngine::initialize_Loop(GameEngine *gameEngine){
     
     int FPS = 25;
     
+    Uint32 start = SDL_GetTicks(); // should be moved to .h class
+    
     while(gameEngine -> running()){
           
 
-          Uint32 start = SDL_GetTicks();
+          
        
           if(gameEngine->running() == false){
               break;
           }
-          gameEngine->handleEvents();
-          //gameEngine->update();
-          gameEngine->render();
+         
+          
+        gameEngine->handleEvents();
+
+        gameEngine->render();
           
          if(1000/FPS > SDL_GetTicks() - start)
               SDL_Delay(1000/FPS);
+                moveEnemies();
+        
           
       }
 
-      gameEngine->clean();
-      
-      delete gameEngine;
+ 
 }
 
 //INITIALIZE
@@ -81,10 +86,8 @@ void GameEngine::init(const char *title, int xpos, int ypos, int width, int heig
         screen = SDL_GetWindowSurface(window);//This "canvas" is where we gonna append our bmp picture to!
        
 
-    
-        //put enemy Sprite
-        //addEnemy(20);
         renderAllEnemy();
+      
         
         /* Up until now everything was drawn behind the scenes.
          This will show the new contents of the window. */
@@ -104,6 +107,8 @@ void GameEngine::init(const char *title, int xpos, int ypos, int width, int heig
 void GameEngine::handleEvents(){
     
     SDL_Event event;
+    
+    // moveEnemies(); <---- this works
     
     SDL_PollEvent(&event);
     
@@ -192,7 +197,7 @@ void GameEngine:: addEnemy( int howManyEnemyYouNeed ) {
         //Enemy sprite and texutre gets deleted in freeEnemies();
         
         //enemyObj
-          EnemySprite* enemySpritez = new EnemySprite( x,y,40,40 ) ; //variying x and y attributes
+          EnemySprite* enemySpritez = new EnemySprite( x,y,20,20 ) ; //variying x and y attributes
          
         //"/Users/moslehmahamud/Documents/GameEngineC-CloneFromGit/enemy.png"
         //enemyTex
@@ -203,23 +208,46 @@ void GameEngine:: addEnemy( int howManyEnemyYouNeed ) {
     
         counter++;
         
-        if(x > 670){
+        //if(x > 670){
+        if(counter == (howManyEnemyYouNeed/2) ){
             x = 25;
-            y += 100;
+            y += 35;
             
         } else {
-            x += 75;
+            //x += 75;
+            x += 20;
         }
         
         if(counter > howManyEnemyYouNeed)
             break;
         
-        //render();
-        
         
     }
     std::cout << "Size of enemy map: " << map.size() << std::endl;
     
+}
+
+void GameEngine::moveEnemies(){
+    std::map <EnemySprite*, SDL_Texture*>:: iterator it;
+    
+    //free textures from the map
+    for(it = map.begin(); it != map.end(); it++){
+        
+        if(it->first->getPosX() >= 750){
+            moveLeftFlag = true;
+        }
+        if(moveLeftFlag == true){
+            if(it->first->getPosX() <= -20){
+                moveLeftFlag = false;
+            }
+             it->first->setPosX(it->first->getPosX()-1);
+        }else{
+            it->first->setPosX(it->first->getPosX()+1);
+        }
+        
+        
+        it->first->draw(renderer, it->second);
+    }
 }
 
 void GameEngine::freeEnemies(){

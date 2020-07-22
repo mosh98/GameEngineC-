@@ -18,32 +18,16 @@ GameEngine *gameEngine = nullptr;
 int main(int argc, const char * argv[]) {
     
 
-    int FPS = 25;
+    //int FPS = 25;
     //Declare
+   
     gameEngine = new GameEngine();
     
     gameEngine->init("MOSH_Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, false);
     gameEngine-> setEnemyAttributes(0, 0, "/Users/moslehmahamud/Documents/GameEngineC-CloneFromGit/enemy.png", 20);
     gameEngine-> addPlayerSprite(48,48, "/Users/moslehmahamud/Documents/GameEngineC-CloneFromGit/triangle-clipart-triangle-shape-1-original.png");
     gameEngine-> addBulletImage("/Users/moslehmahamud/Documents/GameEngineC-CloneFromGit/bullet.png");
-    //gameEngine-> initialize_Loop(gameEngine);
-    
-    while(gameEngine -> running()){
-
-        Uint32 start = SDL_GetTicks();
-
-        if(gameEngine->running() == false){
-            break;
-        }
-        gameEngine->handleEvents();
-        gameEngine->render();
-
-       if(1000/FPS > SDL_GetTicks() - start)
-            SDL_Delay(1000/FPS);
-
-    }
-
-   // gameEngine->clean();
+    gameEngine-> initialize_Loop(gameEngine);
     
     delete gameEngine;
     

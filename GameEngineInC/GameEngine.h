@@ -48,13 +48,14 @@ public:
     
     
    
-    
+    void moveEnemies(); //should be moved back to protected
 
     protected:
     void shoot();
     void remove(Sprite*); // found no use of this
     void renderAllEnemy();
     void freeEnemies();
+    
     
     
     
@@ -66,6 +67,7 @@ private:
     int _height;
     bool isRuning;
     bool flag = false;
+    bool moveLeftFlag = false;
     std::string enemyPath;
     std::string bulletPath;
     
