@@ -6,36 +6,48 @@
 
 Make a GameEngine Object
 0. 
-```GameEngine *gameEngine =  new GameEngine();
+```
+GameEngine *gameEngine =  new GameEngine();
+
 ```
 
 1. Initialize
-```gameEngine->init("Name Of your Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WIDTH, HEIGHT, false);    
+```
+gameEngine->init("Name Of your Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WIDTH, HEIGHT, false);    
+
 ```
     
 2.  setEnemyAttributes
 ```
 gameEngine-> setEnemyAttributes(0, 0, "Path to your enemy picture.png", HowManyEnemiesPutItHere);
+
 ```
 
 
 3. addPlayerSprite
-```gameEngine-> addPlayerSprite(WIDTH,HEIGHT, "Path to your player picture.png");
+```
+gameEngine-> addPlayerSprite(WIDTH,HEIGHT, "Path to your player picture.png");
+
 ```
 4. addBulletImage
 
 ```gameEngine-> addBulletImage("Path to your enemy picture.png");
 ```
 5. initialize_Loop
-```gameEngine-> initialize_Loop(gameEngine); //Pass in the Game Engine object your created earlier
+```
+gameEngine-> initialize_Loop(gameEngine); //Pass in the Game Engine object your created earlier
+
 ```
 6. 
-```delete gameEngine;
+```
+delete gameEngine;
+
 ```
 
 It should look something like this
 
-```GameEngine *gameEngine = nullptr;
+```
+GameEngine *gameEngine = nullptr;
 
 int main(int argc, const char * argv[]) {
        
@@ -52,3 +64,5 @@ int main(int argc, const char * argv[]) {
     return 0;
 }
 ```
+
+![alt text](https://github.com/mosh98/GameEngineC-/blob/master/demo.png)
