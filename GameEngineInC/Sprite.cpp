@@ -40,6 +40,9 @@ SDL_Rect* Sprite:: getRect(){
     return &rect;
 }
 
+SDL_Rect Sprite::getRectobj(){
+    return rect;
+}
 
 //    getter for image becuase it is a private variable
 SDL_Surface* Sprite:: get_image() const {
