@@ -102,7 +102,7 @@ void Bullet::bulletLoop(int startPosX, SDL_Renderer* sl){
     setPosX(startPosX+16);
 
 
-        for(int i = 0; i < VERTICAL_HEIGHT; i+=100){
+        for(int i =400 ; i > -10 ; i-=20){
 
             //rect.y = i;
             setPosY(i);

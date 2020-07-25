@@ -41,12 +41,12 @@ void GameEngine::initialize_Loop(GameEngine *gameEngine){
           }
          
         gameEngine->handleEvents();
-
+        gameEngine->chekCollision();
         gameEngine->render();
           
          if(1000/FPS > SDL_GetTicks() - start)
               SDL_Delay(1000/FPS);
-               // moveEnemies();
+                moveEnemies();
       }
 }
 
@@ -79,7 +79,7 @@ void GameEngine::init(const char *title, int xpos, int ypos, int width, int heig
        
 
         renderAllEnemy();
-      
+        
         
         /* Up until now everything was drawn behind the scenes.
          This will show the new contents of the window. */
@@ -213,21 +213,44 @@ void GameEngine:: addEnemy( int howManyEnemyYouNeed ) {
     
 }
 
+//void GameEngine::moveEnemies(){
+//    std::map <EnemySprite*, SDL_Texture*>:: iterator it;
+//
+//    //free textures from the map
+//
+//    moveLeftFlag = true;
+//
+//    if(moveLeftFlag == true){
+//        for(it = map.begin(); it != map.end(); it++){
+//
+//
+//               it->first->draw(renderer, it->second);
+//           }
+//    }
+//
+//}
+
 void GameEngine::moveEnemies(){
     std::map <EnemySprite*, SDL_Texture*>:: iterator it;
     
     //free textures from the map
-    
-    moveLeftFlag = true;
-    
-    if(moveLeftFlag == true){
-        for(it = map.begin(); it != map.end(); it++){
-
-               
-               it->first->draw(renderer, it->second);
-           }
+    for(it = map.begin(); it != map.end(); it++){
+        
+        if(it->first->getPosX() >= 750){
+            moveLeftFlag = true;
+        }
+        if(moveLeftFlag == true){
+            if(it->first->getPosX() <= -20){
+                moveLeftFlag = false;
+            }
+             it->first->setPosX(it->first->getPosX()-50);
+        }else{
+            it->first->setPosX(it->first->getPosX()+50);
+        }
+        
+        
+        it->first->draw(renderer, it->second);
     }
-   
 }
 
 
@@ -269,44 +292,51 @@ void GameEngine:: addBulletImage(std::string pathToImage){
 void GameEngine::shoot(){
     cnt++;
     bulletTex = bs->set_image(bulletPath.c_str(), renderer);
-    
     // working
     bs->shoot(playerSprite->getRect()->x,renderer);
-    
-    chekCollision(bs);
+   // chekCollision(bs);
     renderAllEnemy();
-    
+
     SDL_DestroyTexture(bulletTex);
 }
 
-void GameEngine::chekCollision(Bullet* b){
+
+//void GameEngine::shoot(){
+//
+//    Bullet b();
+//
+//}
+
+void GameEngine::chekCollision(){
       std::map <EnemySprite*, SDL_Texture*>:: iterator it;
     
     
     
     for(it = map.begin(); it != map.end(); it++){
 
+        if(it->first == NULL){
+             std::cout << "IT is null" << std::endl;
+        }
+          
+        
         if( bs->checkCollision(bs->getRectobj(), it->first->getRectobj()) ) {
+            
             map.erase(it->first);
             std::cout << "collided" << std::endl;
             
         }else{
-
             std::cout << "not collided" << std::endl;
-
         }
         
         SDL_Rect* bull(bs->getRect());
+        
 //DONT WORK
         //SDL_Rect* enemy(it->first->getRect());
         //if( SDL_HasIntersection(bull, it->first->getRect() ) == false ) {
-
             //it->second
                   // map.erase(it->first);
           //  std::cout << "collided" << std::endl;
     //}
-        
-        
     renderAllEnemy();
  }
 }

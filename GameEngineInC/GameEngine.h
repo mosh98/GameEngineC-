@@ -55,7 +55,7 @@ public:
     void remove(Sprite*); // found no use of this
     void renderAllEnemy();
     void freeEnemies();
-    void chekCollision(Bullet* b);
+    void chekCollision();
     
     
     
