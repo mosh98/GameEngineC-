@@ -20,6 +20,7 @@
 #include "Bullet.h"
 #include "PlayerSprite.h"
 #include "EnemySprite.h"
+#include <vector>
 
 
 class GameEngine{
@@ -35,7 +36,7 @@ public:
     void render();
     void clean();
     bool running();
-    void initialize_Loop(GameEngine *gameEngine);
+    void initialize_Loop( GameEngine *gameEngine );
     
     
    
@@ -55,8 +56,8 @@ public:
     void remove(Sprite*); // found no use of this
     void renderAllEnemy();
     void freeEnemies();
-    void chekCollision();
-    
+    void chekCollision(Bullet *b);
+    void freeBullet();
     
     
     
@@ -85,6 +86,10 @@ private:
     
     //map for enemy_sprites
     std::map< EnemySprite*, SDL_Texture* > map;
+    
+    std::vector< EnemySprite* > vecOfEnemy;
+    
+    std::vector< Bullet* > vec;
     
 };
 

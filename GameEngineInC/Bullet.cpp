@@ -39,11 +39,8 @@ SDL_Texture* Bullet :: set_image(const char filename[], SDL_Renderer *ren){
     SDL_Surface *imageSurface = NULL;
     imageSurface = IMG_Load(filename);
     texMex = SDL_CreateTextureFromSurface(ren, imageSurface);
-   // saveMyRen = ren;
     SDL_FreeSurface(imageSurface);
     imageSurface = NULL;
-    //saveMyTex = texMex;
-    
     return texMex;
 }
 

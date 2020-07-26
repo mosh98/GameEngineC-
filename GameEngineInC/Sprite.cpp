@@ -70,6 +70,7 @@ SDL_Texture* Sprite:: set_image_tex(const char filename[], SDL_Renderer *ren ){
        SDL_Surface *imageSurface = NULL;
        imageSurface = IMG_Load(filename);
        texMex = SDL_CreateTextureFromSurface(ren, imageSurface);
+        saveMyTex = SDL_CreateTextureFromSurface(ren, imageSurface);
        //Free the surface aswell SDL_FreeSurface()
 
        SDL_FreeSurface(imageSurface);
