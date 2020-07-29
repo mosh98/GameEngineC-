@@ -10,15 +10,12 @@
 
 
 
-Sprite::Sprite(int x, int y, int w, int h ) {
+Sprite::Sprite(int x, int y, int w, int h ):rect{x,y,w,h}{
     
-    
-    //image = SDL_CreateRGBSurface(0, w, h, 32, 0, 0, 0, 0);
-
-    rect.h = w;
-    rect.w = h;
-    rect.x = x;
-    rect.y = y;
+//    rect.h = h;
+//    rect.w = w;
+//    rect.x = x;
+//    rect.y = y;
     
 }
 
@@ -36,11 +33,12 @@ Sprite::Sprite(int x, int y, int w, int h ) {
     std::cout<<"MEMORY CLEAN: SDL memory freed from Sprite class"<<std::endl;
 }
 
-SDL_Rect* Sprite:: getRect(){
+SDL_Rect* Sprite:: getRect()  {
+
     return &rect;
 }
 
-SDL_Rect Sprite::getRectobj(){
+SDL_Rect Sprite::getRectobj() const {
     return rect;
 }
 
@@ -72,9 +70,7 @@ SDL_Texture* Sprite:: set_image_tex(const char filename[], SDL_Renderer *ren ){
        texMex = SDL_CreateTextureFromSurface(ren, imageSurface);
         saveMyTex = SDL_CreateTextureFromSurface(ren, imageSurface);
        //Free the surface aswell SDL_FreeSurface()
-
        SDL_FreeSurface(imageSurface);
-
        return texMex;
 }
 
@@ -88,6 +84,7 @@ SDL_Texture* Sprite::getMyTex(){
 void Sprite:: draw(SDL_Renderer* ren, SDL_Texture* tex){
     saveMyRen = ren;
     saveMyTex = tex;
+   // SDL_RenderFillRect(ren, &rect);
     SDL_RenderCopy(ren, tex, NULL, &rect);
 }
 

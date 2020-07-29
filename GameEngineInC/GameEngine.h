@@ -82,14 +82,15 @@ private:
     
     SDL_Texture *playerTex;
     SDL_Texture *bulletTex;
+    //EnemySprite* ese ()
 
     
     //map for enemy_sprites
     std::map< EnemySprite*, SDL_Texture* > map;
     
-    std::vector< EnemySprite* > vecOfEnemy;
+    std::vector< EnemySprite* > vecOfEnemy; //enemy obj
     
-    std::vector< Bullet* > vec;
+    std::vector< Bullet* > vec; //Bullet obj
     
 };
 

@@ -16,6 +16,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <iostream>
+#include "EnemySprite.h"
 
 #include <stdio.h>
 
@@ -25,14 +26,15 @@ public:
     Bullet(int w, int h, std::string pathz);
     ~Bullet();
     
-    void bulletLoop(int startPosX, SDL_Renderer* sl);
+    void bulletLoop(int startPosX, SDL_Renderer* sl,EnemySprite* en = NULL);
     
     //remove the texture from the parametres
      SDL_Texture* set_image(const char filename[] = NULL, SDL_Renderer *ren = nullptr);
     
     bool checkCollision(SDL_Rect a, SDL_Rect b);
+    bool chekkCollision(Bullet* bz,EnemySprite * e);
     
-    void shoot(int posX, SDL_Renderer* ren = NULL);
+    void shoot(int posX, SDL_Renderer* ren = NULL, EnemySprite* en = NULL);
     
 private:
     const int VERTICAL_HEIGHT = 600;

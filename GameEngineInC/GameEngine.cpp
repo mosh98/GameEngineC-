@@ -10,6 +10,7 @@
 #include <iostream>
 
 
+ EnemySprite* ese = new EnemySprite( 100,100,40,40 );
 
 GameEngine::GameEngine( )
 {
@@ -285,7 +286,6 @@ void GameEngine::freeBullet(){
     
     vec.clear();
 
-    
 }
 
 void GameEngine:: addBulletImage(std::string pathToImage){
@@ -318,40 +318,68 @@ void GameEngine::shoot(){
    Bullet* b = new Bullet(20,20,"/Users/moslehmahamud/Documents/GameEngineC-CloneFromGit/bullet.png");
     b->set_image(bulletPath.c_str(),renderer);
     
-    b->shoot(playerSprite->getRect()->x,renderer);
+    b->shoot(playerSprite->getRect()->x,renderer, ese); //passing the enemy
 
     vec.push_back(b);
     
     chekCollision(b);
     
-    
-    //delete b; Bullet is not being deleted :/
  
 }
 
-void GameEngine::chekCollision(Bullet *b){
+void GameEngine::chekCollision(Bullet *b) {
     
+  
+    for(Bullet *bz: vec) {
+
     
-    for(Bullet *bz: vec){
-     
-        for(EnemySprite* ez: vecOfEnemy){
+      const SDL_Rect &bulletPointer = bz->getRectobj();
+      const SDL_Rect* rectBullet = &bulletPointer;
+      
+      
+       const SDL_Rect &enem = ese->getRectobj();
+      const SDL_Rect* enemyRect = &enem;
         
-            std::cout<<"Has intersection " << SDL_HasIntersection(bz->getRect(), ez->getRect())  << std::endl;
-            if( SDL_HasIntersection(bz->getRect(), ez->getRect()) ){
-          //  if(bz->checkCollision( bz->getRectobj(), ez->getRectobj() ) ){
-                
-                //Tanken är att man ska ta bort enemy från vectorn
-                // Testar om det går att komma inte på den här if satsen
-                std::cout<< "COLLIDED"<< std::endl;
-            
-            }
         
-        }
-           
+        std::cout<< "HAS intersection : " << SDL_HasIntersection(rectBullet, enemyRect) << std::endl;
+    
+        if( SDL_HasIntersection(rectBullet, enemyRect) == SDL_TRUE ){
+          std::cout<< "COLLIDED"<< std::endl;
+      }
+    
     }
+    
+//    for(Bullet *bz: vec){
+//
+//        for(EnemySprite* ez: vecOfEnemy){
+//
+//            std::cout<<"Has intersection " << bz->checkCollision( bz->getRectobj(), ez->getRectobj() )  << std::endl;
+//
+//            std::cout<< SDL_HasIntersection(bz->getRect(), ez->getRect()) << std::endl;
+//
+//
+//            if(bz->getRect() == nullptr || bz->getRect() == NULL){
+//                std::cout<< "NULL ptr"<< std::endl;
+//            }
+//
+//            if(ez->getRect() == nullptr || ez->getRect() == NULL ){
+//                    std::cout<< "NULL ptr"<< std::endl;
+//            }
+//
+//            if( SDL_HasIntersection(bz->getRect(), ez->getRect()) == SDL_TRUE ){
+//
+//            //if(bz->checkCollision( bz->getRectobj(), ez->getRectobj() )  ){
+//
+//                //Tanken är att man ska ta bort enemy från vectorn
+//                // Testar om det går att komma inte på den här if satsen
+//                std::cout<< "COLLIDED"<< std::endl;
+//
+//            }
+//
+//        }
+//    }
    
     renderAllEnemy();
-    
 }
     
 
@@ -367,6 +395,8 @@ void GameEngine::render(){
 }
 
 void GameEngine::renderAllEnemy() {
+    ese->set_image_tex(enemyPath.c_str(), renderer );
+    ese->draw(renderer, ese->getMyTex());
         
     //loop through hashmaps and lay sprites
 //       std::map <EnemySprite*, SDL_Texture*>:: iterator it;
@@ -377,13 +407,13 @@ void GameEngine::renderAllEnemy() {
 //           it->first->draw(renderer, it->second);
 //
 //       }
-    
-    std::vector<EnemySprite*>:: iterator it;
 
-    for(it = vecOfEnemy.begin(); it != vecOfEnemy.end(); ++it){
-        SDL_Texture *tx = (*it)->getMyTex();
-        (*it)->draw(renderer, tx);
-    }
+//    std::vector<EnemySprite*>:: iterator it;
+//
+//    for(it = vecOfEnemy.begin(); it != vecOfEnemy.end(); ++it){
+//        SDL_Texture *tx = (*it)->getMyTex();
+//        (*it)->draw(renderer, tx);
+//    }
 }
 
 void GameEngine::clean(){
