@@ -20,3 +20,11 @@ EnemySprite:: ~EnemySprite(){
 void EnemySprite::summonEnemy(SDL_Renderer* rend){
     draw(rend, texMex);
 }
+
+bool EnemySprite::isDamaged(){
+    return damagedFlag;
+}
+
+void EnemySprite::setDamaged(bool dmg){
+    damagedFlag = dmg;
+}

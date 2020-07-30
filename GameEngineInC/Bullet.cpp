@@ -92,10 +92,8 @@ bool Bullet:: checkCollision( SDL_Rect a, SDL_Rect b )
 }
 
 
-void Bullet::bulletLoop(int startPosX, SDL_Renderer* sl, EnemySprite* en){
-    //while bla bla bla
+void Bullet::bulletLoop(int startPosX, SDL_Renderer* sl, EnemySprite* en, const std::vector<EnemySprite*> &vec){
     
-    //rect.x = startPosX+16;
     setPosX(startPosX+16);
 
 
@@ -105,54 +103,57 @@ void Bullet::bulletLoop(int startPosX, SDL_Renderer* sl, EnemySprite* en){
 
             draw(sl, texMex);
             
-            chekkCollision(this, en);
+            chekkCollision(this, en,vec);
+            
+            if(en->isDamaged() == true){
+                break;
+            }
             
             SDL_RenderPresent(sl);
 
             std::cout<< i << std::endl;
 
             if(i == 500){
-
-                //rect.y = 0;
                 setPosY(0);
                 break;
             }
-
-               //SDL_RenderClear(sl);
-            
+               SDL_RenderClear(sl);
         }
     
-   // SDL_RenderClear(sl);
-   // SDL_DestroyTexture(texMex);
- 
-
     std::cout << "MEMORY CLEAN: SDL destroy texture BULLET " << std::endl;
     std::cout << "MEMORY CLEAN: SDL render clear  BULLET" << std::endl;
     
 }
 
-void Bullet::shoot(int posX, SDL_Renderer* ren, EnemySprite* en){
-
-    bulletLoop(posX,ren,en);
+void Bullet::shoot(int posX, SDL_Renderer* ren, EnemySprite* en, const std::vector<EnemySprite*> &vec ){
+    
+    bulletLoop(posX,ren,en,vec);
 }
 
-bool Bullet::chekkCollision(Bullet* bz, EnemySprite * e){
+bool Bullet::chekkCollision( Bullet* bz, EnemySprite * e , const std::vector<EnemySprite*> &vec) {
     
     const SDL_Rect &bulletPointer = bz->getRectobj();
     const SDL_Rect* rectBullet = &bulletPointer;
     
-          const SDL_Rect &enem = e->getRectobj();
-         const SDL_Rect* enemyRect = &enem;
     
-    
-    if( SDL_HasIntersection(rectBullet, enemyRect) == SDL_TRUE )
-    {
-         
-        std::cout<< "COLLIDED"<< std::endl;
+    for(EnemySprite* enemyInVec: vec){
+      
+        const SDL_Rect &enem = enemyInVec->getRectobj();
+        const SDL_Rect* enemyRect = &enem;
+        
+        
+        if( SDL_HasIntersection ( rectBullet, enemyRect ) == SDL_TRUE ) {
+        
+            e->setDamaged(true);
+            std::cout<< "COLLIDED"<< std::endl;
+        
+        } else {
+        
+            std::cout<< "Did not collide"<< std::endl;
+        
+        }
     }
-    else {
-        std::cout<< "Did not collide"<< std::endl;
-    }
+
     
     return false;
 }

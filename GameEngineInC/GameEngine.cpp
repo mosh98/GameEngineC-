@@ -175,7 +175,7 @@ void GameEngine:: addEnemy( int howManyEnemyYouNeed ) {
         //Enemy sprite and texutre gets deleted in freeEnemies();
         
         //enemyObj
-          EnemySprite* enemySpritez = new EnemySprite( x,y,20,20 ) ; //variying x and y attributes
+          EnemySprite* enemySpritez = new EnemySprite( x,y,30,30 ) ; //variying x and y attributes
          
         //"/Users/moslehmahamud/Documents/GameEngineC-CloneFromGit/enemy.png"
         //enemyTex
@@ -315,71 +315,32 @@ void GameEngine:: addBulletImage(std::string pathToImage){
 void GameEngine::shoot(){
 
 
-   Bullet* b = new Bullet(20,20,"/Users/moslehmahamud/Documents/GameEngineC-CloneFromGit/bullet.png");
+    Bullet* b = new Bullet(20,20,"/Users/moslehmahamud/Documents/GameEngineC-CloneFromGit/bullet.png");
+    
     b->set_image(bulletPath.c_str(),renderer);
     
-    b->shoot(playerSprite->getRect()->x,renderer, ese); //passing the enemy
+    b->shoot(playerSprite->getRect()->x,renderer, ese, vecOfEnemy); //passing the enemy
 
-    vec.push_back(b);
+    
+    //vec.push_back(b);
     
     chekCollision(b);
     
- 
 }
 
 void GameEngine::chekCollision(Bullet *b) {
-    
-  
-    for(Bullet *bz: vec) {
+        
+    for(EnemySprite* ez: vecOfEnemy) {
 
-    
-      const SDL_Rect &bulletPointer = bz->getRectobj();
-      const SDL_Rect* rectBullet = &bulletPointer;
-      
-      
-       const SDL_Rect &enem = ese->getRectobj();
-      const SDL_Rect* enemyRect = &enem;
-        
-        
-        std::cout<< "HAS intersection : " << SDL_HasIntersection(rectBullet, enemyRect) << std::endl;
-    
-        if( SDL_HasIntersection(rectBullet, enemyRect) == SDL_TRUE ){
-          std::cout<< "COLLIDED"<< std::endl;
-      }
-    
+            if(ez->isDamaged() == true){
+                //vecOfEnemy.erase(ez);
+                
+            }
+            
     }
     
-//    for(Bullet *bz: vec){
-//
-//        for(EnemySprite* ez: vecOfEnemy){
-//
-//            std::cout<<"Has intersection " << bz->checkCollision( bz->getRectobj(), ez->getRectobj() )  << std::endl;
-//
-//            std::cout<< SDL_HasIntersection(bz->getRect(), ez->getRect()) << std::endl;
-//
-//
-//            if(bz->getRect() == nullptr || bz->getRect() == NULL){
-//                std::cout<< "NULL ptr"<< std::endl;
-//            }
-//
-//            if(ez->getRect() == nullptr || ez->getRect() == NULL ){
-//                    std::cout<< "NULL ptr"<< std::endl;
-//            }
-//
-//            if( SDL_HasIntersection(bz->getRect(), ez->getRect()) == SDL_TRUE ){
-//
-//            //if(bz->checkCollision( bz->getRectobj(), ez->getRectobj() )  ){
-//
-//                //Tanken är att man ska ta bort enemy från vectorn
-//                // Testar om det går att komma inte på den här if satsen
-//                std::cout<< "COLLIDED"<< std::endl;
-//
-//            }
-//
-//        }
-//    }
-   
     renderAllEnemy();
+
 }
     
 
@@ -388,15 +349,17 @@ void GameEngine::render(){
     //This is used to redner things, kinda like a refresh after every event occurs.
     SDL_UpdateWindowSurface(window);
     SDL_RenderClear(renderer);
+    
     playerSprite->draw(renderer, playerTex);
     renderAllEnemy();
+    
     SDL_RenderPresent(renderer);
     
 }
 
 void GameEngine::renderAllEnemy() {
-    ese->set_image_tex(enemyPath.c_str(), renderer );
-    ese->draw(renderer, ese->getMyTex());
+  //  ese->set_image_tex(enemyPath.c_str(), renderer );
+   // ese->draw(renderer, ese->getMyTex());
         
     //loop through hashmaps and lay sprites
 //       std::map <EnemySprite*, SDL_Texture*>:: iterator it;
@@ -408,17 +371,15 @@ void GameEngine::renderAllEnemy() {
 //
 //       }
 
-//    std::vector<EnemySprite*>:: iterator it;
-//
-//    for(it = vecOfEnemy.begin(); it != vecOfEnemy.end(); ++it){
-//        SDL_Texture *tx = (*it)->getMyTex();
-//        (*it)->draw(renderer, tx);
-//    }
+    std::vector<EnemySprite*>:: iterator it;
+
+    for(it = vecOfEnemy.begin(); it != vecOfEnemy.end(); ++it){
+        SDL_Texture *tx = (*it)->getMyTex();
+        (*it)->draw(renderer, tx);
+    }
 }
 
 void GameEngine::clean(){
-    
-   
     SDL_DestroyWindow(window);
     SDL_DestroyRenderer(renderer);
     SDL_DestroyTexture(playerTex);
