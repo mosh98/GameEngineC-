@@ -106,7 +106,8 @@ void Bullet::bulletLoop(int startPosX, SDL_Renderer* sl, EnemySprite* en, const 
             chekkCollision(this, en,vec);
             
             if(en->isDamaged() == true){
-                break;
+               // break;
+                
             }
             
             SDL_RenderPresent(sl);
@@ -144,7 +145,8 @@ bool Bullet::chekkCollision( Bullet* bz, EnemySprite * e , const std::vector<Ene
         
         if( SDL_HasIntersection ( rectBullet, enemyRect ) == SDL_TRUE ) {
         
-            e->setDamaged(true);
+            enemyInVec->setDamaged(true);
+            
             std::cout<< "COLLIDED"<< std::endl;
         
         } else {

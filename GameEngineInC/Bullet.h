@@ -36,7 +36,7 @@ public:
     bool chekkCollision(Bullet* bz,EnemySprite * e, const std::vector<EnemySprite*> &vec = vector<EnemySprite*>());
     
     void shoot( int posX, SDL_Renderer* ren = NULL, EnemySprite* en = NULL, const std::vector<EnemySprite*> &vec = vector<EnemySprite*>() );
-    
+     
 private:
     const int VERTICAL_HEIGHT = 600;
     SDL_Texture *texMex = NULL;

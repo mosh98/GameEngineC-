@@ -24,6 +24,7 @@ public:
     void summonEnemy(SDL_Renderer* rend);
     bool isDamaged();
     void setDamaged(bool dmg);
+
 private:
     SDL_Texture *texMex = NULL;
     bool damagedFlag = false;

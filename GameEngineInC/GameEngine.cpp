@@ -302,30 +302,28 @@ void GameEngine:: addBulletImage(std::string pathToImage){
 //    //Bullet b(20,20,"/Users/moslehmahamud/Documents/GameEngineC-CloneFromGit/bullet.png");
 //    bs->set_image(bulletPath.c_str(),renderer);
 //
-//    bs->shoot(playerSprite->getRect()->x,renderer);
+//    bs->shoot(playerSprite->getRect()->x,renderer,ese,vecOfEnemy);
 //
 //    chekCollision(bs);
 //
-//    renderAllEnemy(); <-- you kinda don't need this
+//    renderAllEnemy();
 //
 //    SDL_DestroyTexture(bulletTex);
 //}
 
-
+//
 void GameEngine::shoot(){
 
 
     Bullet* b = new Bullet(20,20,"/Users/moslehmahamud/Documents/GameEngineC-CloneFromGit/bullet.png");
-    
+
     b->set_image(bulletPath.c_str(),renderer);
-    
+
     b->shoot(playerSprite->getRect()->x,renderer, ese, vecOfEnemy); //passing the enemy
 
     
-    //vec.push_back(b);
-    
-    chekCollision(b);
-    
+    renderAllEnemy();
+
 }
 
 void GameEngine::chekCollision(Bullet *b) {
@@ -375,7 +373,11 @@ void GameEngine::renderAllEnemy() {
 
     for(it = vecOfEnemy.begin(); it != vecOfEnemy.end(); ++it){
         SDL_Texture *tx = (*it)->getMyTex();
-        (*it)->draw(renderer, tx);
+        if((*it)->isDamaged() == false){
+           //std::cout <<
+            (*it)->draw(renderer, tx);
+        }
+      
     }
 }
 
