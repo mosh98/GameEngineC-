@@ -10,14 +10,18 @@
 
 
 
-Sprite::Sprite(int x, int y, int w, int h ):rect{x,y,w,h}{
-    
-//    rect.h = h;
-//    rect.w = w;
-//    rect.x = x;
-//    rect.y = y;
-    
+//Sprite::Sprite(int x, int y, int w, int h ): rect{x,y,w,h}{
+//
+//}
+Sprite::Sprite(int x, int y, int w, int h ){
+        rect.h = h;
+        rect.w = w;
+        rect.x = x;
+        rect.y = y;
+        
 }
+
+
 
  Sprite::~Sprite(){
     
