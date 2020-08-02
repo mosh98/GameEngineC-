@@ -56,7 +56,6 @@ public:
     void remove(Sprite*); // found no use of this
     void renderAllEnemy();
     void freeEnemies();
-    void chekCollision(Bullet *b);
     void freeBullet();
     
     
@@ -77,8 +76,8 @@ private:
     SDL_Renderer *renderer;
     SDL_Surface *screen;
     PlayerSprite* playerSprite = new PlayerSprite(400,500,48,48);
-    Bullet* bs = new Bullet(20,20,"/Users/moslehmahamud/Documents/GameEngineC-CloneFromGit/bullet.png");
-    
+    //Bullet* bs = new Bullet(20,20,"/Users/moslehmahamud/Documents/GameEngineC-CloneFromGit/bullet.png");
+    Bullet* b = new Bullet(20,20,bulletPath.c_str());
     
     SDL_Texture *playerTex;
     SDL_Texture *bulletTex;

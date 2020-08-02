@@ -10,7 +10,7 @@
 #include <iostream>
 
 
- EnemySprite* ese = new EnemySprite( 100,100,40,40 );
+ 
 
 GameEngine::GameEngine( )
 {
@@ -20,8 +20,9 @@ GameEngine::GameEngine( )
 GameEngine::~GameEngine(){
     clean();
     freeBullet();
+    freeEnemies();
     delete playerSprite;
-    delete bs;
+    delete b;
     window = NULL;
     renderer = NULL;
     screen = NULL;
@@ -37,18 +38,17 @@ void GameEngine::initialize_Loop(GameEngine *gameEngine){
     Uint32 start = SDL_GetTicks(); // should be moved to .h class
     
     while(gameEngine -> running()){
-          
-          if(gameEngine->running() == false){
+        
+        if(gameEngine->running() == false){
               break;
           }
-         
+        
         gameEngine->handleEvents();
-       // gameEngine->chekCollision(NULL);
         gameEngine->render();
           
          if(1000/FPS > SDL_GetTicks() - start)
               SDL_Delay(1000/FPS);
-               // moveEnemies();
+                moveEnemies();
       }
 }
 
@@ -171,9 +171,6 @@ void GameEngine:: addEnemy( int howManyEnemyYouNeed ) {
     
         std::cout << counter <<std::endl;
     
-        
-        //Enemy sprite and texutre gets deleted in freeEnemies();
-        
         //enemyObj
           EnemySprite* enemySpritez = new EnemySprite( x,y,30,30 ) ; //variying x and y attributes
          
@@ -223,18 +220,18 @@ void GameEngine:: addEnemy( int howManyEnemyYouNeed ) {
 //}
 
 void GameEngine::moveEnemies(){
-    
-    std::map <EnemySprite*, SDL_Texture*>:: iterator it;
-    
 
-    
+    std::map <EnemySprite*, SDL_Texture*>:: iterator it;
+
+
+
     //free textures from the map
     for(it = map.begin(); it != map.end(); it++){
-        
+
         if(it->first->getPosX() >= 750){
             moveLeftFlag = true;
         }
-        
+
         if(moveLeftFlag == true){
             if(it->first->getPosX() <= -20){
                 moveLeftFlag = false;
@@ -243,103 +240,49 @@ void GameEngine::moveEnemies(){
         }else{
             it->first->setPosX(it->first->getPosX()+5);
         }
-        
+
         it->first->draw(renderer, it->second);
-    
+
     }
 }
 
 
         
-//        if(it->first->getPosX() >= 750){
-//            moveLeftFlag = true;
-//        }
-//        if(moveLeftFlag == true){
-//            if(it->first->getPosX() <= -20){
-//                moveLeftFlag = false;
-//            }
-//             it->first->setPosX(it->first->getPosX()-2);
-//        }else{
-//            it->first->setPosX(it->first->getPosX()+2);
-//        }
-//
-//
 void GameEngine::freeEnemies(){
     
-    std::map <EnemySprite*, SDL_Texture*>:: iterator it;
-    
-    //free textures from the map
-    for(it = map.begin(); it != map.end(); it++){
-        delete it->first;
-        SDL_DestroyTexture(it->second);
-
+    for(EnemySprite* enemy: vecOfEnemy){
+        delete enemy;
     }
-    map.clear(); //map deallocated ;)
+    vecOfEnemy.clear();
+    std::cout<<"Vec of enemy:"<< vecOfEnemy.size() << std::endl;
     
 }
 
 void GameEngine::freeBullet(){
-   
+    
     for(Bullet* bz: vec){
         delete bz;
     }
-    
     vec.clear();
-
+    
 }
 
 void GameEngine:: addBulletImage(std::string pathToImage){
+    
     bulletPath += pathToImage;
-    // bulletTex = bs->set_image( bulletPath.c_str(),  renderer);
+    
 }
 
 
-
-//void GameEngine::shoot(){
-//    cnt++;
-//    bulletTex = bs->set_image(bulletPath.c_str(), renderer);
-//
-//    //Bullet b(20,20,"/Users/moslehmahamud/Documents/GameEngineC-CloneFromGit/bullet.png");
-//    bs->set_image(bulletPath.c_str(),renderer);
-//
-//    bs->shoot(playerSprite->getRect()->x,renderer,ese,vecOfEnemy);
-//
-//    chekCollision(bs);
-//
-//    renderAllEnemy();
-//
-//    SDL_DestroyTexture(bulletTex);
-//}
-
-//
 void GameEngine::shoot(){
-
-
-    Bullet* b = new Bullet(20,20,"/Users/moslehmahamud/Documents/GameEngineC-CloneFromGit/bullet.png");
-
+    
     b->set_image(bulletPath.c_str(),renderer);
-
-    b->shoot(playerSprite->getRect()->x,renderer, ese, vecOfEnemy); //passing the enemy
-
-    
+    b->shoot(playerSprite->getRect()->x,renderer, vecOfEnemy); //passing the enemy
     renderAllEnemy();
-
 }
 
-void GameEngine::chekCollision(Bullet *b) {
-        
-    for(EnemySprite* ez: vecOfEnemy) {
 
-            if(ez->isDamaged() == true){
-                //vecOfEnemy.erase(ez);
-                
-            }
-            
-    }
-    
-    renderAllEnemy();
 
-}
     
 
 void GameEngine::render(){
@@ -356,19 +299,7 @@ void GameEngine::render(){
 }
 
 void GameEngine::renderAllEnemy() {
-  //  ese->set_image_tex(enemyPath.c_str(), renderer );
-   // ese->draw(renderer, ese->getMyTex());
-        
-    //loop through hashmaps and lay sprites
-//       std::map <EnemySprite*, SDL_Texture*>:: iterator it;
-//
-//       for(it = map.begin(); it != map.end(); it++){
-//
-//            //and RenderCpy and shit
-//           it->first->draw(renderer, it->second);
-//
-//       }
-
+    
     std::vector<EnemySprite*>:: iterator it;
 
     for(it = vecOfEnemy.begin(); it != vecOfEnemy.end(); ++it){
@@ -382,10 +313,10 @@ void GameEngine::renderAllEnemy() {
 }
 
 void GameEngine::clean(){
+    
     SDL_DestroyWindow(window);
     SDL_DestroyRenderer(renderer);
     SDL_DestroyTexture(playerTex);
-//    SDL_DestroyTexture(bulletTex);
     freeEnemies();
     SDL_Quit();
     

@@ -92,7 +92,7 @@ bool Bullet:: checkCollision( SDL_Rect a, SDL_Rect b )
 }
 
 
-void Bullet::bulletLoop(int startPosX, SDL_Renderer* sl, EnemySprite* en, const std::vector<EnemySprite*> &vec){
+void Bullet::bulletLoop(int startPosX, SDL_Renderer* sl, const std::vector<EnemySprite*> &vec){
     
     setPosX(startPosX+16);
 
@@ -103,12 +103,9 @@ void Bullet::bulletLoop(int startPosX, SDL_Renderer* sl, EnemySprite* en, const 
 
             draw(sl, texMex);
             
-            chekkCollision(this, en,vec);
+            chekkCollision(this, vec);
             
-            if(en->isDamaged() == true){
-               // break;
-                
-            }
+           
             
             SDL_RenderPresent(sl);
 
@@ -126,12 +123,12 @@ void Bullet::bulletLoop(int startPosX, SDL_Renderer* sl, EnemySprite* en, const 
     
 }
 
-void Bullet::shoot(int posX, SDL_Renderer* ren, EnemySprite* en, const std::vector<EnemySprite*> &vec ){
+void Bullet::shoot(int posX, SDL_Renderer* ren, const std::vector<EnemySprite*> &vec ){
     
-    bulletLoop(posX,ren,en,vec);
+    bulletLoop(posX,ren,vec);
 }
 
-bool Bullet::chekkCollision( Bullet* bz, EnemySprite * e , const std::vector<EnemySprite*> &vec) {
+bool Bullet::chekkCollision( Bullet* bz, const std::vector<EnemySprite*> &vec) {
     
     const SDL_Rect &bulletPointer = bz->getRectobj();
     const SDL_Rect* rectBullet = &bulletPointer;
