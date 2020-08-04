@@ -22,8 +22,7 @@ class PlayerSprite: public Sprite {
 public:
     PlayerSprite (int x, int y, int w, int h);
     
-  ~PlayerSprite() override;
- //   ~PlayerSprite();
+    ~PlayerSprite() override;
     
     void increaseX(); //right button
     void decreaseX();//left button
@@ -31,12 +30,9 @@ public:
     void decreaseY();
     std::string getPath();
     
-    
-    
 
-
-private:
-    std::string path;
+//private:
+    //std::string path;
     
 };
 

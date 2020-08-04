@@ -17,10 +17,8 @@ using namespace std;
 class Sprite{
     
 protected:
-    //int x, int y, int w, int h
     Sprite(int x, int y, int w, int h);
     virtual ~Sprite();
-    
 
     
 public:
@@ -57,7 +55,6 @@ private:
     const Sprite& operator=(const Sprite& rhs) = delete;
     
 
-    
 };
 
 #endif /* Sprite_hpp */

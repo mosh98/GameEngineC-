@@ -150,7 +150,7 @@ void GameEngine:: addPlayerSprite(int width, int height, std::string pathToImage
   
 }
 
-void GameEngine:: setEnemyAttributes(int width, int height, std::string pathToImage, int enemy){
+void GameEngine::setEnemyAttributes(int width, int height, std::string pathToImage, int enemy){
     
     enemyPath = pathToImage;
     addEnemy(enemy);
@@ -174,8 +174,7 @@ void GameEngine:: addEnemy( int howManyEnemyYouNeed ) {
         //enemyObj
           EnemySprite* enemySpritez = new EnemySprite( x,y,30,30 ) ; //variying x and y attributes
          
-        //"/Users/moslehmahamud/Documents/GameEngineC-CloneFromGit/enemy.png"
-        //enemyTex
+    
         SDL_Texture* enemytextureTmp = enemySpritez->set_image_tex( enemyPath.c_str(), renderer );
     
         map.insert( std::pair<EnemySprite*, SDL_Texture*>( enemySpritez , enemytextureTmp ) );
@@ -183,7 +182,6 @@ void GameEngine:: addEnemy( int howManyEnemyYouNeed ) {
     
         counter++;
         
-        //if(x > 670){
         if(counter == (howManyEnemyYouNeed/2) ){
             x = 25;
             y += 35;
@@ -202,22 +200,6 @@ void GameEngine:: addEnemy( int howManyEnemyYouNeed ) {
     
 }
 
-//void GameEngine::moveEnemies(){
-//    std::map <EnemySprite*, SDL_Texture*>:: iterator it;
-//
-//    //free textures from the map
-//
-//    moveLeftFlag = true;
-//
-//    if(moveLeftFlag == true){
-//        for(it = map.begin(); it != map.end(); it++){
-//
-//
-//               it->first->draw(renderer, it->second);
-//           }
-//    }
-//
-//}
 
 void GameEngine::moveEnemies(){
 
@@ -276,7 +258,7 @@ void GameEngine:: addBulletImage(std::string pathToImage){
 
 void GameEngine::shoot(){
     
-    b->set_image(bulletPath.c_str(),renderer);
+    b->set_image_tex(bulletPath.c_str(),renderer);
     b->shoot(playerSprite->getRect()->x,renderer, vecOfEnemy); //passing the enemy
     renderAllEnemy();
 }

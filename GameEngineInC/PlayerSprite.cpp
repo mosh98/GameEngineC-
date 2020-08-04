@@ -12,9 +12,6 @@
 #include <SDL2/SDL_image.h>
 
 
-
-
-
 PlayerSprite::PlayerSprite(int x, int y, int w, int h): Sprite(x, y, w, h){
     
 
@@ -24,7 +21,6 @@ PlayerSprite:: ~PlayerSprite(){
      std::cout<<"DELETING PLAYER SPRITE "<<std::endl;
 }
 
-//////void set_image(const char filename[] = NULL);
 
 void PlayerSprite:: increaseX(){
     //            For right key
@@ -78,11 +74,6 @@ void PlayerSprite:: decreaseY(){
 //    std::cout<<rect.y<<std::endl;
 }
 
-
-
-std::string PlayerSprite::getPath(){
-    return path;
-}
 
 
 

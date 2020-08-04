@@ -21,7 +21,6 @@ public:
     EnemySprite (int x, int y, int w, int h);
     ~EnemySprite() override;
     
-    void summonEnemy(SDL_Renderer* rend);
     bool isDamaged();
     void setDamaged(bool dmg);
 

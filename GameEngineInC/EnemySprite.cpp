@@ -17,9 +17,6 @@ EnemySprite:: ~EnemySprite(){
     std::cout<< "Enemy Sprite Deleted" << std::endl;
 }
 
-void EnemySprite::summonEnemy(SDL_Renderer* rend){
-    draw(rend, texMex);
-}
 
 bool EnemySprite::isDamaged(){
     return damagedFlag;
