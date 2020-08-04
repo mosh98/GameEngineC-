@@ -48,7 +48,7 @@ void GameEngine::initialize_Loop(GameEngine *gameEngine){
           
          if(1000/FPS > SDL_GetTicks() - start)
               SDL_Delay(1000/FPS);
-                moveEnemies();
+//                moveEnemies();
       }
 }
 
@@ -258,7 +258,7 @@ void GameEngine:: addBulletImage(std::string pathToImage){
 
 void GameEngine::shoot(){
     
-    b->set_image_tex(bulletPath.c_str(),renderer);
+    b->texMex = b->set_image_tex(bulletPath.c_str(),renderer);
     b->shoot(playerSprite->getRect()->x,renderer, vecOfEnemy); //passing the enemy
     renderAllEnemy();
 }

@@ -86,9 +86,7 @@ private:
     
     //map for enemy_sprites
     std::map< EnemySprite*, SDL_Texture* > map;
-    
     std::vector< EnemySprite* > vecOfEnemy; //enemy obj
-    
     std::vector< Bullet* > vec; //Bullet obj
     
 };

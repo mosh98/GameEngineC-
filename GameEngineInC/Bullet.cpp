@@ -29,20 +29,20 @@ Bullet::~Bullet(){
      std::cout << "MEMORY CLEAN: SDL texture destroyed clear intialized BULLET" << std::endl;
 }
 
+
 void Bullet::bulletLoop(int startPosX, SDL_Renderer* sl, const std::vector<EnemySprite*> &vec){
     
     setPosX(startPosX+16);
 
 
-        for(int i = 400 ; i > -10 ; i-=10){
+        for(int i =400 ; i > -10 ; i-=10){
 
             setPosY(i);
 
             draw(sl, texMex);
+            //draw(s1,saveMyTex);
             
             chekkCollision(this, vec);
-            
-           
             
             SDL_RenderPresent(sl);
 
@@ -52,16 +52,46 @@ void Bullet::bulletLoop(int startPosX, SDL_Renderer* sl, const std::vector<Enemy
                 setPosY(0);
                 break;
             }
-            
-            SDL_RenderClear(sl);
-               
+               SDL_RenderClear(sl);
         }
-    
     
     std::cout << "MEMORY CLEAN: SDL destroy texture BULLET " << std::endl;
     std::cout << "MEMORY CLEAN: SDL render clear  BULLET" << std::endl;
     
 }
+//void Bullet::bulletLoop(int startPosX, SDL_Renderer* sl, const std::vector<EnemySprite*> &vec){
+//
+//    setPosX(startPosX+16);
+//
+//
+//        for(int i = 400 ; i > -10 ; i-=10){
+//
+//            setPosY(i);
+//
+//            draw(sl, texMex);
+//
+//            chekkCollision(this, vec);
+//
+//
+//
+//            SDL_RenderPresent(sl);
+//
+//            std::cout<< i << std::endl;
+//
+////            if(i == 500){
+////                setPosY(0);
+////                break;
+////            }
+////
+//            SDL_RenderClear(sl);
+//
+//        }
+//
+//
+//    std::cout << "MEMORY CLEAN: SDL destroy texture BULLET " << std::endl;
+//    std::cout << "MEMORY CLEAN: SDL render clear  BULLET" << std::endl;
+//
+//}
 
 void Bullet::shoot(int posX, SDL_Renderer* ren, const std::vector<EnemySprite*> &vec ){
     

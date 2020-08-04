@@ -28,14 +28,13 @@ public:
     ~Bullet();
     
     void shoot( int posX, SDL_Renderer* ren = NULL,  const std::vector<EnemySprite*> &vec = vector<EnemySprite*>() );
+    
+    SDL_Texture *texMex = NULL;
      
 private:
     const int VERTICAL_HEIGHT = 600;
-    SDL_Texture *texMex = NULL;
-    
     
     void bulletLoop(int startPosX, SDL_Renderer* sl, const std::vector<EnemySprite*> &vec = vector<EnemySprite*>() );
-
     bool chekkCollision(Bullet* bz, const std::vector<EnemySprite*> &vec = vector<EnemySprite*>());
 };
 
