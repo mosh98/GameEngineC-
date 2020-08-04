@@ -76,18 +76,17 @@ private:
     SDL_Renderer *renderer;
     SDL_Surface *screen;
     PlayerSprite* playerSprite = new PlayerSprite(400,500,48,48);
-    //Bullet* bs = new Bullet(20,20,"/Users/moslehmahamud/Documents/GameEngineC-CloneFromGit/bullet.png");
     Bullet* b = new Bullet(20,20,bulletPath.c_str());
     
     SDL_Texture *playerTex;
     SDL_Texture *bulletTex;
-    //EnemySprite* ese ()
+   
 
     
     //map for enemy_sprites
-    std::map< EnemySprite*, SDL_Texture* > map;
+//    std::map< EnemySprite*, SDL_Texture* > map;
     std::vector< EnemySprite* > vecOfEnemy; //enemy obj
-    std::vector< Bullet* > vec; //Bullet obj
+//    std::vector< Bullet* > vec; //Bullet obj
     
 };
 

@@ -19,7 +19,7 @@ GameEngine::GameEngine( )
 
 GameEngine::~GameEngine(){
     clean();
-    freeBullet();
+    //freeBullet();
     freeEnemies();
     delete playerSprite;
     delete b;
@@ -50,6 +50,7 @@ void GameEngine::initialize_Loop(GameEngine *gameEngine){
               SDL_Delay(1000/FPS);
 //                moveEnemies();
       }
+     delete gameEngine;
 }
 
 //INITIALIZE
@@ -177,7 +178,7 @@ void GameEngine:: addEnemy( int howManyEnemyYouNeed ) {
     
         SDL_Texture* enemytextureTmp = enemySpritez->set_image_tex( enemyPath.c_str(), renderer );
     
-        map.insert( std::pair<EnemySprite*, SDL_Texture*>( enemySpritez , enemytextureTmp ) );
+//        map.insert( std::pair<EnemySprite*, SDL_Texture*>( enemySpritez , enemytextureTmp ) );
         vecOfEnemy.push_back(enemySpritez);
     
         counter++;
@@ -196,37 +197,37 @@ void GameEngine:: addEnemy( int howManyEnemyYouNeed ) {
         
         
     }
-    std::cout << "Size of enemy map: " << map.size() << std::endl;
+    
     
 }
 
 
-void GameEngine::moveEnemies(){
-
-    std::map <EnemySprite*, SDL_Texture*>:: iterator it;
-
-
-
-    //free textures from the map
-    for(it = map.begin(); it != map.end(); it++){
-
-        if(it->first->getPosX() >= 750){
-            moveLeftFlag = true;
-        }
-
-        if(moveLeftFlag == true){
-            if(it->first->getPosX() <= -20){
-                moveLeftFlag = false;
-            }
-             it->first->setPosX(it->first->getPosX()-5);
-        }else{
-            it->first->setPosX(it->first->getPosX()+5);
-        }
-
-        it->first->draw(renderer, it->second);
-
-    }
-}
+//void GameEngine::moveEnemies(){
+//
+//    std::map <EnemySprite*, SDL_Texture*>:: iterator it;
+//
+//
+//
+//    //free textures from the map
+//    for(it = map.begin(); it != map.end(); it++){
+//
+//        if(it->first->getPosX() >= 750){
+//            moveLeftFlag = true;
+//        }
+//
+//        if(moveLeftFlag == true){
+//            if(it->first->getPosX() <= -20){
+//                moveLeftFlag = false;
+//            }
+//             it->first->setPosX(it->first->getPosX()-5);
+//        }else{
+//            it->first->setPosX(it->first->getPosX()+5);
+//        }
+//
+//        it->first->draw(renderer, it->second);
+//
+//    }
+//}
 
 
         
@@ -240,14 +241,14 @@ void GameEngine::freeEnemies(){
     
 }
 
-void GameEngine::freeBullet(){
-    
-    for(Bullet* bz: vec){
-        delete bz;
-    }
-    vec.clear();
-    
-}
+//void GameEngine::freeBullet(){
+//
+//    for(Bullet* bz: vec){
+//        delete bz;
+//    }
+//    vec.clear();
+//
+//}
 
 void GameEngine:: addBulletImage(std::string pathToImage){
     
@@ -259,7 +260,7 @@ void GameEngine:: addBulletImage(std::string pathToImage){
 void GameEngine::shoot(){
     
     b->texMex = b->set_image_tex(bulletPath.c_str(),renderer);
-    b->shoot(playerSprite->getRect()->x,renderer, vecOfEnemy); //passing the enemy
+    b->shoot(playerSprite->getRect()->x,renderer, vecOfEnemy);
     renderAllEnemy();
 }
 
