@@ -28,6 +28,7 @@ public:
     SDL_Rect getRectobj() const;
     
     SDL_Texture* set_image_tex(const char filename[] = NULL, SDL_Renderer *ren = NULL);
+    
     void setWidthAndHeight(int width, int height);
     void draw(SDL_Renderer* ren, SDL_Texture* tex);
     
@@ -46,7 +47,7 @@ public:
     void setPath(std::string pth);
     
     
-private:
+protected:
     SDL_Rect rect;
     string path;
     SDL_Renderer *saveMyRen = NULL; //TODO: (FIXED)  Becarefull you might leak from here

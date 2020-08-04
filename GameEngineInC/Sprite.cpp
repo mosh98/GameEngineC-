@@ -14,11 +14,12 @@
 //
 //}
 Sprite::Sprite(int x, int y, int w, int h ){
-        rect.h = h;
-        rect.w = w;
-        rect.x = x;
-        rect.y = y;
         
+    rect.h = h;
+    rect.w = w;
+    rect.x = x;
+    rect.y = y;
+
 }
 
 
@@ -61,21 +62,21 @@ void Sprite::setWidthAndHeight(int width, int height){
 
 SDL_Texture* Sprite:: set_image_tex(const char filename[], SDL_Renderer *ren ){
 
-       SDL_Texture *texMex = NULL;
-
+      // SDL_Texture* texMex = NULL;
 
        if( ! (IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG)){
            std::cout << "Could not initalzie SDL image : " << IMG_GetError() << std::endl;
        }
-
-
+        
        SDL_Surface *imageSurface = NULL;
        imageSurface = IMG_Load(filename);
-       texMex = SDL_CreateTextureFromSurface(ren, imageSurface);
+   
+  
         saveMyTex = SDL_CreateTextureFromSurface(ren, imageSurface);
-       //Free the surface aswell SDL_FreeSurface()
-       SDL_FreeSurface(imageSurface);
-       return texMex;
+    
+        SDL_FreeSurface(imageSurface);
+       
+    return saveMyTex;
 }
 
 SDL_Renderer* Sprite::getMyRen(){
@@ -88,15 +89,16 @@ SDL_Texture* Sprite::getMyTex(){
 void Sprite:: draw(SDL_Renderer* ren, SDL_Texture* tex){
     saveMyRen = ren;
     saveMyTex = tex;
-   // SDL_RenderFillRect(ren, &rect);
     SDL_RenderCopy(ren, tex, NULL, &rect);
 }
 
 int Sprite:: getPosX(){
+    
     return rect.x;
 }
 
 void Sprite:: setPosX(int x){
+    
     rect.x = x;
 }
 
