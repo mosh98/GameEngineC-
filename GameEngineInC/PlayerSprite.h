@@ -26,13 +26,10 @@ public:
     
     void increaseX(); //right button
     void decreaseX();//left button
-    void increaseY();
-    void decreaseY();
+  
     std::string getPath();
     
 
-//private:
-    //std::string path;
     
 };
 

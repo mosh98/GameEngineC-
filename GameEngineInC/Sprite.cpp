@@ -9,17 +9,11 @@
 #include <SDL2/SDL_image.h>
 
 
-
-//Sprite::Sprite(int x, int y, int w, int h ): rect{x,y,w,h}{
-//
-//}
 Sprite::Sprite(int x, int y, int w, int h ){
-        
     rect.h = h;
     rect.w = w;
     rect.x = x;
     rect.y = y;
-
 }
 
 
@@ -49,7 +43,6 @@ SDL_Rect Sprite::getRectobj() const {
 
 //    getter for image becuase it is a private variable
 SDL_Surface* Sprite:: get_image() const {
-    //return image;
      return NULL;
 }
 
@@ -61,8 +54,6 @@ void Sprite::setWidthAndHeight(int width, int height){
 
 
 SDL_Texture* Sprite:: set_image_tex(const char filename[], SDL_Renderer *ren ){
-
-      // SDL_Texture* texMex = NULL;
 
        if( ! (IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG)){
            std::cout << "Could not initalzie SDL image : " << IMG_GetError() << std::endl;
@@ -93,12 +84,10 @@ void Sprite:: draw(SDL_Renderer* ren, SDL_Texture* tex){
 }
 
 int Sprite:: getPosX(){
-    
     return rect.x;
 }
 
 void Sprite:: setPosX(int x){
-    
     rect.x = x;
 }
 

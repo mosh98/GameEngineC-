@@ -27,8 +27,5 @@ int main(int argc, const char * argv[]) {
     
     gameEngine-> initialize_Loop(gameEngine);
     
-    
-   
-    
     return 0;
 }

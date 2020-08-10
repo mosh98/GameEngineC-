@@ -23,7 +23,7 @@
 #include <vector>
 
 
-class GameEngine{
+class GameEngine {
     
 public:
     
@@ -31,38 +31,34 @@ public:
     ~GameEngine();
 
     //intialize
-    void init(const char*title, int xpos, int ypos, int width, int height, bool fullscreen);
-    void handleEvents();
-    void render();
-    void clean();
-    bool running();
+    void init(const char*title, int xpos, int ypos, int width, int height, bool fullscreen); //needs to be pub
+    
     void initialize_Loop( GameEngine *gameEngine );
     
-    
-   
     //Add Features
-    void addPlayerSprite(int width, int height, std::string pathToImage);
+    void addPlayerSprite(int width, int height, std::string pathToImage);//needs to be pub
+    
+    //needs to be pub
     void setEnemyAttributes(int width, int height, std::string pathToImage, int enemy); //TODO: width and height for enemy logic
     
-    void addEnemy( int howManyEnemyYouNeed);
-    void addBulletImage(std::string pathToImage);
     
+    void addBulletImage(std::string pathToImage);//needs to be pub
     
-   
-    void moveEnemies(); //should be moved back to protected
-
     protected:
     void shoot();
     void remove(Sprite*); // found no use of this
     void renderAllEnemy();
     void freeEnemies();
     void freeBullet();
+    void addEnemy( int howManyEnemyYouNeed);
+    void moveEnemies(); //should be moved back to protected
     
-    
-    
+    void handleEvents();
+    void render();
+    void clean();
+    bool running();
     
 private:
-    
     int cnt;
     int _width;
     int _height;
@@ -77,16 +73,11 @@ private:
     SDL_Surface *screen;
     PlayerSprite* playerSprite = new PlayerSprite(400,500,48,48);
     Bullet* b = new Bullet(20,20,bulletPath.c_str());
-    
     SDL_Texture *playerTex;
     SDL_Texture *bulletTex;
    
-
-    
-    //map for enemy_sprites
-//    std::map< EnemySprite*, SDL_Texture* > map;
     std::vector< EnemySprite* > vecOfEnemy; //enemy obj
-//    std::vector< Bullet* > vec; //Bullet obj
+
     
 };
 

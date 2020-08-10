@@ -33,9 +33,9 @@ GameEngine::~GameEngine(){
 
 void GameEngine::initialize_Loop(GameEngine *gameEngine){
     
-    int FPS = 25;
+  //  int FPS = 25;
     
-    Uint32 start = SDL_GetTicks(); // should be moved to .h class
+    //Uint32 start = SDL_GetTicks(); // should be moved to .h class
     
     while(gameEngine -> running()){
         
@@ -45,10 +45,10 @@ void GameEngine::initialize_Loop(GameEngine *gameEngine){
         
         gameEngine->handleEvents();
         gameEngine->render();
-          
-         if(1000/FPS > SDL_GetTicks() - start)
-              SDL_Delay(1000/FPS);
-//                moveEnemies();
+                  
+     //    if(1000/FPS > SDL_GetTicks() - start)
+         //     SDL_Delay(1000/FPS);
+                moveEnemies();
       }
      delete gameEngine;
 }
@@ -78,7 +78,7 @@ void GameEngine::init(const char *title, int xpos, int ypos, int width, int heig
         }
         
         
-        screen = SDL_GetWindowSurface(window);//This "canvas" is where we gonna append our bmp picture to!
+        screen = SDL_GetWindowSurface(window); //This "canvas" is where we gonna append our bmp picture to!
     
         renderAllEnemy();
         
@@ -176,7 +176,7 @@ void GameEngine:: addEnemy( int howManyEnemyYouNeed ) {
           EnemySprite* enemySpritez = new EnemySprite( x,y,30,30 ) ; //variying x and y attributes
          
     
-        SDL_Texture* enemytextureTmp = enemySpritez->set_image_tex( enemyPath.c_str(), renderer );
+    enemySpritez->set_image_tex( enemyPath.c_str(), renderer );
     
 //        map.insert( std::pair<EnemySprite*, SDL_Texture*>( enemySpritez , enemytextureTmp ) );
         vecOfEnemy.push_back(enemySpritez);
@@ -202,32 +202,33 @@ void GameEngine:: addEnemy( int howManyEnemyYouNeed ) {
 }
 
 
-//void GameEngine::moveEnemies(){
-//
-//    std::map <EnemySprite*, SDL_Texture*>:: iterator it;
-//
-//
-//
-//    //free textures from the map
-//    for(it = map.begin(); it != map.end(); it++){
-//
-//        if(it->first->getPosX() >= 750){
-//            moveLeftFlag = true;
-//        }
-//
-//        if(moveLeftFlag == true){
-//            if(it->first->getPosX() <= -20){
-//                moveLeftFlag = false;
-//            }
-//             it->first->setPosX(it->first->getPosX()-5);
-//        }else{
-//            it->first->setPosX(it->first->getPosX()+5);
-//        }
-//
-//        it->first->draw(renderer, it->second);
-//
-//    }
-//}
+void GameEngine::moveEnemies(){
+
+    std::map <EnemySprite*, SDL_Texture*>:: iterator it;
+
+
+
+    //free textures from the map
+    for(EnemySprite* enemy: vecOfEnemy){
+       
+        if(enemy->getPosX() >= 750){
+            moveLeftFlag = true;
+        }
+
+        if(moveLeftFlag == true){
+            if(enemy->getPosX() <= -20){
+                moveLeftFlag = false;
+            }
+             enemy->setPosX(enemy->getPosX()-5);
+        }else{
+            enemy->setPosX(enemy->getPosX()+5);
+        }
+
+        enemy->draw(renderer, enemy->getMyTex());
+    }
+
+    
+}
 
 
         
@@ -241,14 +242,7 @@ void GameEngine::freeEnemies(){
     
 }
 
-//void GameEngine::freeBullet(){
-//
-//    for(Bullet* bz: vec){
-//        delete bz;
-//    }
-//    vec.clear();
-//
-//}
+
 
 void GameEngine:: addBulletImage(std::string pathToImage){
     
@@ -262,6 +256,7 @@ void GameEngine::shoot(){
     b->texMex = b->set_image_tex(bulletPath.c_str(),renderer);
     b->shoot(playerSprite->getRect()->x,renderer, vecOfEnemy);
     renderAllEnemy();
+    
 }
 
 
