@@ -60,8 +60,10 @@ public:
     
 private:
     int cnt;
-    int _width;
-    int _height;
+    int width;
+    int height;
+    int enemyWidth;
+    int enemyHeight;
     bool isRuning;
     bool flag = false;
     bool moveLeftFlag = false;

@@ -19,7 +19,6 @@ GameEngine::GameEngine( )
 
 GameEngine::~GameEngine(){
     clean();
-    //freeBullet();
     freeEnemies();
     delete playerSprite;
     delete b;
@@ -61,8 +60,8 @@ void GameEngine::init(const char *title, int xpos, int ypos, int width, int heig
     if(fullscreen){
         flag = SDL_WINDOW_FULLSCREEN;
     }
-    _width = width;
-    _height = height;
+    this->width = width;
+    this->height = height;
     
     if( SDL_Init(SDL_INIT_EVERYTHING) == 0 ) {
         
@@ -153,6 +152,9 @@ void GameEngine:: addPlayerSprite(int width, int height, std::string pathToImage
 
 void GameEngine::setEnemyAttributes(int width, int height, std::string pathToImage, int enemy){
     
+    this->enemyWidth = width;
+    this->enemyHeight = height;
+    
     enemyPath = pathToImage;
     addEnemy(enemy);
     
@@ -173,7 +175,7 @@ void GameEngine:: addEnemy( int howManyEnemyYouNeed ) {
         std::cout << counter <<std::endl;
     
         //enemyObj
-          EnemySprite* enemySpritez = new EnemySprite( x,y,30,30 ) ; //variying x and y attributes
+          EnemySprite* enemySpritez = new EnemySprite( x,y,enemyWidth,enemyHeight ) ; //variying x and y attributes
          
     
     enemySpritez->set_image_tex( enemyPath.c_str(), renderer );
@@ -206,15 +208,11 @@ void GameEngine::moveEnemies(){
 
     std::map <EnemySprite*, SDL_Texture*>:: iterator it;
 
-
-
     //free textures from the map
     for(EnemySprite* enemy: vecOfEnemy){
-       
         if(enemy->getPosX() >= 750){
             moveLeftFlag = true;
         }
-
         if(moveLeftFlag == true){
             if(enemy->getPosX() <= -20){
                 moveLeftFlag = false;
@@ -223,11 +221,8 @@ void GameEngine::moveEnemies(){
         }else{
             enemy->setPosX(enemy->getPosX()+5);
         }
-
         enemy->draw(renderer, enemy->getMyTex());
     }
-
-    
 }
 
 
