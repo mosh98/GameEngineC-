@@ -56,6 +56,8 @@ protected:
     string path;
     SDL_Renderer *saveMyRen = NULL; //TODO: (FIXED)  Becarefull you might leak from here
     SDL_Texture *saveMyTex = NULL ;
+
+private:
     Sprite(const Sprite& rhs) = delete;
     const Sprite& operator=(const Sprite& rhs) = delete;
     

@@ -209,12 +209,15 @@ void GameEngine:: addEnemy( int howManyEnemyYouNeed ) {
 }
 
 
+//if last enemy in the vector has x 
 void GameEngine::moveEnemies(){
 
     std::map <EnemySprite*, SDL_Texture*>:: iterator it;
 
+    
     //free textures from the map
     for(EnemySprite* enemy: vecOfEnemy){
+        
         if(enemy->getPosX() >= 750){
             moveLeftFlag = true;
         }

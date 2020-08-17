@@ -81,6 +81,8 @@ private:
     Bullet* b = new Bullet(20,20,bulletPath.c_str());
     SDL_Texture *playerTex;
     SDL_Texture *bulletTex;
+    
+    Uint32 startTick = SDL_GetTicks();  // .............
    
     std::vector< EnemySprite* > vecOfEnemy; //enemy obj
 

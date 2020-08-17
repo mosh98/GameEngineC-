@@ -29,7 +29,7 @@ Bullet::~Bullet(){
     SDL_DestroyTexture(texMex);
     texMex = NULL;
     IMG_Quit();
-     std::cout << "MEMORY CLEAN: SDL texture destroyed clear intialized BULLET" << std::endl;
+     std::cout << " BULLET memory FREED " << std::endl;
 }
 
 

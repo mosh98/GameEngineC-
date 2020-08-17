@@ -30,6 +30,7 @@ public:
 private:
     SDL_Texture *texMex = NULL;
     bool damagedFlag = false;
+  
 };
 
 #endif /* EnemySprite_h */
