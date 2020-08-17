@@ -12,8 +12,6 @@
 #ifndef Bullet_h
 #define Bullet_h
 
-
-
 #include "PlayerSprite.h"
 
 #include <SDL2/SDL.h>
@@ -26,13 +24,10 @@
 class Bullet : public Sprite {
     
 public:
-    
     Bullet(int w, int h, std::string pathz);
     ~Bullet();
-    
     void shoot( int posX, SDL_Renderer* ren = NULL,  const std::vector<EnemySprite*> &vec = vector<EnemySprite*>() );
-    
-    SDL_Texture *texMex = NULL;
+    //SDL_Texture *texMex = NULL;
      
 private:
     const int VERTICAL_HEIGHT = 600;

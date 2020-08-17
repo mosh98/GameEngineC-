@@ -256,7 +256,8 @@ void GameEngine:: addBulletImage(std::string pathToImage){
 
 void GameEngine::shoot(){
     
-    b->texMex = b->set_image_tex(bulletPath.c_str(),renderer);
+    //b->texMex =
+    b->set_image_tex(bulletPath.c_str(),renderer);
     b->shoot(playerSprite->getRect()->x,renderer, vecOfEnemy);
     renderAllEnemy();
     

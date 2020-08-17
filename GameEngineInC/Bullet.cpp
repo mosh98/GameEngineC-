@@ -26,8 +26,8 @@ Bullet::~Bullet(){
     
     std::cout << " :BULLET" << std::endl;
     //free surfaces and other memory bound items
-    SDL_DestroyTexture(texMex);
-    texMex = NULL;
+    //SDL_DestroyTexture(texMex);
+    //texMex = NULL;
     IMG_Quit();
      std::cout << " BULLET memory FREED " << std::endl;
 }
@@ -42,8 +42,8 @@ void Bullet::bulletLoop(int startPosX, SDL_Renderer* sl, const std::vector<Enemy
 
             setPosY(i);
 
-            draw(sl, texMex);
-            //draw(s1,saveMyTex);
+            draw(sl, saveMyTex);
+           // draw(s1,saveMyTex);
             
             chekkCollision(this, vec);
             

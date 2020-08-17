@@ -22,7 +22,8 @@ class EnemySprite: public Sprite {
   
 public:
     EnemySprite (int x, int y, int w, int h);
-    ~EnemySprite() override;
+    //~EnemySprite() override;
+    ~EnemySprite();
     
     bool isDamaged();
     void setDamaged(bool dmg);

@@ -25,7 +25,8 @@ class PlayerSprite: public Sprite {
 public:
     PlayerSprite (int x, int y, int w, int h);
     
-    ~PlayerSprite() override;
+    //~PlayerSprite() override;
+    ~PlayerSprite();
     
     void increaseX(); //right button
     void decreaseX();//left button
