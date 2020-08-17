@@ -1,8 +1,12 @@
 //  Sprite.hpp
 //  GameEngineInC
-//  Created by Mosleh Mahamud on 2020-06-21.
+
+//  Created by Mosleh Mahamud (moma1820, -) on 2020-06-19.
+//  Co-Creator Nyamgarig Naranbaatar (nyna2000)
+//  Co-Creator Jimmy Ljungman  (jilj1595)
 //  Copyright © 2020 Mosleh Mahamud. All rights reserved.
 
+// Basnivå1
 
 #ifndef Sprite_h
 #define Sprite_h

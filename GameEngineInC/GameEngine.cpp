@@ -2,9 +2,12 @@
 //  GameEngine.cpp
 //  GameEngineInC
 //
-//  Created by Mosleh Mahamud on 2020-06-19.
+//  Created by Mosleh Mahamud (moma1820, -) on 2020-06-19.
+//  Co-Creator Nyamgarig Naranbaatar (nyna2000)
+//  Co-Creator Jimmy Ljungman  (jilj1595)
 //  Copyright © 2020 Mosleh Mahamud. All rights reserved.
-//
+
+// Basnivå1
 
 #include "GameEngine.h"
 #include <iostream>
@@ -175,7 +178,7 @@ void GameEngine:: addEnemy( int howManyEnemyYouNeed ) {
         std::cout << counter <<std::endl;
     
         //enemyObj
-          EnemySprite* enemySpritez = new EnemySprite( x,y,enemyWidth,enemyHeight ) ; //variying x and y attributes
+          EnemySprite* enemySpritez = new EnemySprite( x,y,enemyWidth,enemyHeight  ) ; //variying x and y attributes
          
     
     enemySpritez->set_image_tex( enemyPath.c_str(), renderer );
@@ -185,14 +188,16 @@ void GameEngine:: addEnemy( int howManyEnemyYouNeed ) {
     
         counter++;
         
-        if(counter == (howManyEnemyYouNeed/2) ){
-            x = 25;
-            y += 35;
-            
-        } else {
-            //x += 75;
-            x += 20;
-        }
+//        if(counter == (howManyEnemyYouNeed/2) ){
+//            x = 25;
+//            y += 35;
+//
+//        } else {
+//            //x += 75;
+//            x += 20;
+//        }
+        
+        x += 20;
         
         if(counter > howManyEnemyYouNeed)
             break;
