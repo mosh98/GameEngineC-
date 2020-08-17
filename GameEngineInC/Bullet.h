@@ -26,14 +26,14 @@ class Bullet : public Sprite {
 public:
     Bullet(int w, int h, std::string pathz);
     ~Bullet();
-    void shoot( int posX, SDL_Renderer* ren = NULL,  const std::vector<EnemySprite*> &vec = vector<EnemySprite*>() );
+    void shoot( int posX, SDL_Renderer* ren,  const std::vector<EnemySprite*> &vec );
     //SDL_Texture *texMex = NULL;
      
 private:
     const int VERTICAL_HEIGHT = 600;
     
-    void bulletLoop(int startPosX, SDL_Renderer* sl, const std::vector<EnemySprite*> &vec = vector<EnemySprite*>() );
-    bool chekkCollision(Bullet* bz, const std::vector<EnemySprite*> &vec = vector<EnemySprite*>());
+    void bulletLoop(int startPosX, SDL_Renderer* sl, const std::vector<EnemySprite*> &vec  );
+    bool chekkCollision(Bullet* bz, const std::vector<EnemySprite*> &vec  );
 };
 
 #endif /* Bullet_hpp */

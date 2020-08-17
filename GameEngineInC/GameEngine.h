@@ -48,7 +48,9 @@ public:
     
     void addBulletImage(std::string pathToImage);//needs to be pub
     
-    protected:
+    //protected:
+    
+    private:
     void shoot();
     void remove(Sprite*); // found no use of this
     void renderAllEnemy();
@@ -62,7 +64,7 @@ public:
     void clean();
     bool running();
     
-private:
+
     int cnt;
     int width;
     int height;
