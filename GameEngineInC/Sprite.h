@@ -27,26 +27,20 @@ protected:
     
 public:
     SDL_Surface* get_image() const;
-    SDL_Rect* getRect();
     
     SDL_Rect getRectobj() const;
-    
     SDL_Texture* set_image_tex(const char filename[] = NULL, SDL_Renderer *ren = NULL);
-    
     void setWidthAndHeight(int width, int height);
     void draw(SDL_Renderer* ren, SDL_Texture* tex);
-    
-    SDL_Renderer* getMyRen();
+    SDL_Renderer* getMyRen() const;
+    SDL_Texture* getMyTex() const;
   
-    SDL_Texture* getMyTex();
-  
-    
     //Cords X
-    int getPosX();
+    int getPosX() const;
     void setPosX(int x);
     // Cords Y
     void setPosY(int y);
-    
+
     //setPath
     void setPath(std::string pth);
     

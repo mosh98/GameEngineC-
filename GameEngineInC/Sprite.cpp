@@ -37,10 +37,7 @@ Sprite::Sprite(int x, int y, int w, int h ){
     std::cout<<"MEMORY CLEAN: SDL memory freed from Sprite class"<<std::endl;
 }
 
-SDL_Rect* Sprite:: getRect()  {
 
-    return &rect;
-}
 
 SDL_Rect Sprite::getRectobj() const {
     return rect;
@@ -75,10 +72,10 @@ SDL_Texture* Sprite:: set_image_tex(const char filename[], SDL_Renderer *ren ){
     return saveMyTex;
 }
 
-SDL_Renderer* Sprite::getMyRen(){
+SDL_Renderer* Sprite::getMyRen() const{
     return saveMyRen;
 }
-SDL_Texture* Sprite::getMyTex(){
+SDL_Texture* Sprite::getMyTex() const{
     return saveMyTex;
 }
 
@@ -88,7 +85,7 @@ void Sprite:: draw(SDL_Renderer* ren, SDL_Texture* tex){
     SDL_RenderCopy(ren, tex, NULL, &rect);
 }
 
-int Sprite:: getPosX(){
+int Sprite:: getPosX() const{
     return rect.x;
 }
 
