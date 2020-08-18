@@ -21,13 +21,14 @@
 class EnemySprite: public Sprite {
   
 public:
-    EnemySprite (int x, int y, int w, int h);
+    
     ~EnemySprite();
    static EnemySprite* create(int x, int y, int w, int h) ;
     bool isDamaged();
     void setDamaged(bool dmg);
 
 private:
+    EnemySprite (int x, int y, int w, int h);
     bool damagedFlag = false;
   
 };

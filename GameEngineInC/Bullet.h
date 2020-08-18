@@ -25,7 +25,6 @@ class Bullet : public Sprite {
     
 public:
     static Bullet* create(int x, int y, std::string path);
-    Bullet(int w, int h, std::string pathz); //make private
     ~Bullet();
     void shoot( int posX, SDL_Renderer* ren,  const std::vector<EnemySprite*> &vec );
     //SDL_Texture *texMex = NULL;
@@ -34,7 +33,7 @@ public:
     
 private:
     const int VERTICAL_HEIGHT = 600;
-    
+    Bullet(int w, int h, std::string pathz); 
     void bulletLoop(int startPosX, SDL_Renderer* sl, const std::vector<EnemySprite*> &vec  );
     bool chekkCollision(Bullet* bz, const std::vector<EnemySprite*> &vec  );
 };

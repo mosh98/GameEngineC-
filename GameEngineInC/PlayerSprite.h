@@ -24,7 +24,7 @@ class PlayerSprite: public Sprite {
     
 public:
     static PlayerSprite* create(int x, int y, int w, int h);
-    PlayerSprite (int x, int y, int w, int h);
+    
     
     
     ~PlayerSprite();
@@ -32,7 +32,8 @@ public:
     void increaseX(); //right button
     void decreaseX();//left button
   
-    
+private:
+    PlayerSprite (int x, int y, int w, int h);
     
 
     

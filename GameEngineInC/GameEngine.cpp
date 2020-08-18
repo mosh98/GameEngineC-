@@ -17,7 +17,8 @@
 
 GameEngine::GameEngine( )
 {
-    
+   playerSprite =  playerSprite->create(400,500,48,48);
+    b = b->create(20,20,bulletPath.c_str());
 }
 
 GameEngine::~GameEngine(){
@@ -178,12 +179,12 @@ void GameEngine:: addEnemy( int howManyEnemyYouNeed ) {
         std::cout << counter <<std::endl;
     
         //enemyObj
-          EnemySprite* enemySpritez = new EnemySprite( x,y,enemyWidth,enemyHeight  ) ; //variying x and y attributes
-         
+          //EnemySprite* enemySpritez = new EnemySprite( x,y,enemyWidth,enemyHeight  ) ; //variying x and y attributes
+        EnemySprite* enemySpritez = nullptr;
+        enemySpritez = enemySpritez->create(x,y, enemyWidth, enemyHeight);
     
     enemySpritez->set_image_tex( enemyPath.c_str(), renderer );
     
-//        map.insert( std::pair<EnemySprite*, SDL_Texture*>( enemySpritez , enemytextureTmp ) );
         vecOfEnemy.push_back(enemySpritez);
     
         counter++;
@@ -212,10 +213,8 @@ void GameEngine:: addEnemy( int howManyEnemyYouNeed ) {
 //if last enemy in the vector has x 
 void GameEngine::moveEnemies(){
 
-    std::map <EnemySprite*, SDL_Texture*>:: iterator it;
+   // std::map <EnemySprite*, SDL_Texture*>:: iterator it;
 
-    
-    //free textures from the map
     for(EnemySprite* enemy: vecOfEnemy){
        
         if(moveLeftFlag == true ){

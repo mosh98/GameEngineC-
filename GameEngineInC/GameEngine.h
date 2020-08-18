@@ -78,8 +78,9 @@ public:
     SDL_Window *window;
     SDL_Renderer *renderer;
     SDL_Surface *screen;
-    PlayerSprite* playerSprite = new PlayerSprite(400,500,48,48);
-    Bullet* b = new Bullet(20,20,bulletPath.c_str());
+    PlayerSprite* playerSprite = NULL;
+    Bullet* b = NULL;
+    
     SDL_Texture *playerTex;
     SDL_Texture *bulletTex;
     
