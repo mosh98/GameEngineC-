@@ -217,21 +217,39 @@ void GameEngine::moveEnemies(){
     
     //free textures from the map
     for(EnemySprite* enemy: vecOfEnemy){
-        
-        if(enemy->getPosX() >= 750){
-            moveLeftFlag = true;
-        }
-        if(moveLeftFlag == true){
-            if(enemy->getPosX() <= -20){
+       
+        if(moveLeftFlag == true ){
+           
+             enemy->setPosX( enemy->getPosX()-5 );
+            if(vecOfEnemy.back()->getPosX() <= 0){
                 moveLeftFlag = false;
             }
-             enemy->setPosX(enemy->getPosX()-5);
         }else{
-            enemy->setPosX(enemy->getPosX()+5);
+            
+           enemy->setPosX( enemy->getPosX()+5 );
+            
+            if(vecOfEnemy.back()->getPosX() >= 750){
+                moveLeftFlag = true;
+            }
+            std::cout << " Increasing X in ENEMY" << std::endl;
         }
+        
         enemy->draw(renderer, enemy->getMyTex());
     }
 }
+
+//if(enemy->getPosX() >= 750){
+//           moveLeftFlag = true;
+//       }
+//       if(moveLeftFlag == true){
+//           if(enemy->getPosX() <= -20){
+//               moveLeftFlag = false;
+//           }
+//            enemy->setPosX(enemy->getPosX()-5);
+//       }else{
+//           enemy->setPosX(enemy->getPosX()+5);
+//       }
+//       enemy->draw(renderer, enemy->getMyTex());
 
 
         

@@ -44,6 +44,7 @@ public:
     //setPath
     void setPath(std::string pth);
     
+    //virtual Sprite* create(int x, int y, int w, int h) = 0;
     
 protected:
     SDL_Rect rect;

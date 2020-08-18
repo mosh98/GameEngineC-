@@ -20,6 +20,10 @@ PlayerSprite::PlayerSprite(int x, int y, int w, int h): Sprite(x, y, w, h){
 
 }
 
+PlayerSprite* PlayerSprite::create(int x, int y, int w, int h){
+    return new PlayerSprite(x,y,w,h);
+}
+
 PlayerSprite:: ~PlayerSprite(){
      std::cout<<"DELETING PLAYER SPRITE "<<std::endl;
 }

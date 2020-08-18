@@ -48,7 +48,6 @@ public:
     
     void addBulletImage(std::string pathToImage);//needs to be pub
     
-    //protected:
     
     private:
     void shoot();

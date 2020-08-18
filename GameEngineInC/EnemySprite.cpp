@@ -28,3 +28,8 @@ bool EnemySprite::isDamaged(){
 void EnemySprite::setDamaged(bool dmg){
     damagedFlag = dmg;
 }
+
+EnemySprite* EnemySprite::create(int x, int y, int w, int h){
+    return new EnemySprite(x, y,  w, h);
+}
+

@@ -23,9 +23,10 @@ class PlayerSprite: public Sprite {
     
     
 public:
+    static PlayerSprite* create(int x, int y, int w, int h);
     PlayerSprite (int x, int y, int w, int h);
     
-    //~PlayerSprite() override;
+    
     ~PlayerSprite();
     
     void increaseX(); //right button

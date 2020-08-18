@@ -32,6 +32,10 @@ Bullet::~Bullet(){
      std::cout << " BULLET memory FREED " << std::endl;
 }
 
+Bullet* Bullet::create(int x, int y, std::string path){
+    return new Bullet(x,y,path);
+}
+
 
 void Bullet::bulletLoop(int startPosX, SDL_Renderer* sl, const std::vector<EnemySprite*> &vec){
     

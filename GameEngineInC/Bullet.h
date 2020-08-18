@@ -24,11 +24,14 @@
 class Bullet : public Sprite {
     
 public:
-    Bullet(int w, int h, std::string pathz);
+    static Bullet* create(int x, int y, std::string path);
+    Bullet(int w, int h, std::string pathz); //make private
     ~Bullet();
     void shoot( int posX, SDL_Renderer* ren,  const std::vector<EnemySprite*> &vec );
     //SDL_Texture *texMex = NULL;
      
+  
+    
 private:
     const int VERTICAL_HEIGHT = 600;
     
