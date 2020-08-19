@@ -17,7 +17,7 @@
 Bullet:: Bullet(int w, int h,std::string pathz)
 : Sprite(0,0,w,h)
 {
-   
+    
 }
 
 
@@ -29,7 +29,7 @@ Bullet::~Bullet(){
     //SDL_DestroyTexture(texMex);
     //texMex = NULL;
     IMG_Quit();
-     std::cout << " BULLET memory FREED " << std::endl;
+    std::cout << " BULLET memory FREED " << std::endl;
 }
 
 Bullet* Bullet::create(int x, int y, std::string path){
@@ -40,23 +40,23 @@ Bullet* Bullet::create(int x, int y, std::string path){
 void Bullet::bulletLoop(int startPosX, SDL_Renderer* sl, const std::vector<EnemySprite*> &vec){
     
     setPosX(startPosX+16);
-
-
-        for(int i =400 ; i > -10 ; i-=20){
-
-            setPosY(i);
-
-            draw(sl, saveMyTex);
-           // draw(s1,saveMyTex);
-            
-            chekkCollision(this, vec);
-            
-            SDL_RenderPresent(sl);
-
-            std::cout<< i << std::endl;
-
-               SDL_RenderClear(sl);
-        }
+    
+    
+    for(int i =400 ; i > -10 ; i-=20){
+        
+        setPosY(i);
+        
+        draw(sl, getMyTex());
+        // draw(s1,saveMyTex);
+        
+        chekkCollision(this, vec);
+        
+        SDL_RenderPresent(sl);
+        
+        std::cout<< i << std::endl;
+        
+        SDL_RenderClear(sl);
+    }
     
     std::cout << "MEMORY CLEAN: SDL destroy texture BULLET " << std::endl;
     std::cout << "MEMORY CLEAN: SDL render clear  BULLET" << std::endl;
@@ -75,24 +75,24 @@ bool Bullet::chekkCollision( Bullet* bz, const std::vector<EnemySprite*> &vec) {
     
     
     for(EnemySprite* enemyInVec: vec){
-      
+        
         const SDL_Rect &enem = enemyInVec->getRectobj();
         const SDL_Rect* enemyRect = &enem;
         
         
         if( SDL_HasIntersection ( rectBullet, enemyRect ) == SDL_TRUE ) {
-        
+            
             enemyInVec->setDamaged(true);
             
             std::cout<< "COLLIDED"<< std::endl;
-        
+            
         } else {
-        
+            
             std::cout<< "Did not collide"<< std::endl;
-        
+            
         }
     }
-
+    
     
     return false;
 }

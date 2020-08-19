@@ -19,18 +19,18 @@
 #include <stdio.h>
 
 class EnemySprite: public Sprite {
-  
+    
 public:
     
     ~EnemySprite();
-   static EnemySprite* create(int x, int y, int w, int h) ;
+    static EnemySprite* create(int x, int y, int w, int h) ;
     bool isDamaged();
     void setDamaged(bool dmg);
-
+    
 private:
     EnemySprite (int x, int y, int w, int h);
     bool damagedFlag = false;
-  
+    
 };
 
 #endif /* EnemySprite_h */

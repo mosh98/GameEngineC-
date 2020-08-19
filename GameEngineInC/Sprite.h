@@ -27,7 +27,6 @@ protected:
     
 public:
     SDL_Surface* get_image() const;
-    
     SDL_Rect getRectobj() const;
     SDL_Texture* set_image_tex(const char filename[] = NULL, SDL_Renderer *ren = NULL);
     void setWidthAndHeight(int width, int height);
@@ -40,19 +39,16 @@ public:
     void setPosX(int x);
     // Cords Y
     void setPosY(int y);
-
     //setPath
     void setPath(std::string pth);
-    
+    string getPath() const;
     //virtual Sprite* create(int x, int y, int w, int h) = 0;
     
-protected:
+private:
     SDL_Rect rect;
     string path;
     SDL_Renderer *saveMyRen = NULL; //TODO: (FIXED)  Becarefull you might leak from here
     SDL_Texture *saveMyTex = NULL ;
-
-private:
     Sprite(const Sprite& rhs) = delete;
     const Sprite& operator=(const Sprite& rhs) = delete;
     

@@ -23,14 +23,14 @@ Sprite::Sprite(int x, int y, int w, int h ){
 
 
 
- Sprite::~Sprite(){
+Sprite::~Sprite(){
     
     SDL_DestroyRenderer(saveMyRen);
     saveMyRen = NULL;
     
     SDL_DestroyTexture(saveMyTex);
     saveMyTex = NULL;
-   
+    
     IMG_Quit();
     SDL_Quit();
     
@@ -45,7 +45,7 @@ SDL_Rect Sprite::getRectobj() const {
 
 //    getter for image becuase it is a private variable
 SDL_Surface* Sprite:: get_image() const {
-     return NULL;
+    return NULL;
 }
 
 void Sprite::setWidthAndHeight(int width, int height){
@@ -56,19 +56,19 @@ void Sprite::setWidthAndHeight(int width, int height){
 
 
 SDL_Texture* Sprite:: set_image_tex(const char filename[], SDL_Renderer *ren ){
-
-       if( ! (IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG)){
-           std::cout << "Could not initalzie SDL image : " << IMG_GetError() << std::endl;
-       }
-        
-       SDL_Surface *imageSurface = NULL;
-       imageSurface = IMG_Load(filename);
-   
-  
-        saveMyTex = SDL_CreateTextureFromSurface(ren, imageSurface);
     
-        SDL_FreeSurface(imageSurface);
-       
+    if( ! (IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG)){
+        std::cout << "Could not initalzie SDL image : " << IMG_GetError() << std::endl;
+    }
+    
+    SDL_Surface *imageSurface = NULL;
+    imageSurface = IMG_Load(filename);
+    
+    
+    saveMyTex = SDL_CreateTextureFromSurface(ren, imageSurface);
+    
+    SDL_FreeSurface(imageSurface);
+    
     return saveMyTex;
 }
 
@@ -77,12 +77,15 @@ SDL_Renderer* Sprite::getMyRen() const{
 }
 SDL_Texture* Sprite::getMyTex() const{
     return saveMyTex;
+    
 }
 
 void Sprite:: draw(SDL_Renderer* ren, SDL_Texture* tex){
+    
     saveMyRen = ren;
     saveMyTex = tex;
     SDL_RenderCopy(ren, tex, NULL, &rect);
+    
 }
 
 int Sprite:: getPosX() const{
@@ -94,8 +97,18 @@ void Sprite:: setPosX(int x){
 }
 
 void Sprite::setPath(std::string pth){
-    path = pth;
+    path += pth;
 }
+
+//returns the image Path
+string Sprite::getPath() const{
+    
+    return path;
+    
+}
+
 void Sprite:: setPosY(int y){
     rect.y = y;
 }
+
+

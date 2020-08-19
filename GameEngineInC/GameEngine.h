@@ -33,7 +33,7 @@ public:
     
     GameEngine();
     ~GameEngine();
-
+    
     //intialize
     void init(const char*title, int xpos, int ypos, int width, int height, bool fullscreen); //needs to be pub
     
@@ -49,21 +49,8 @@ public:
     void addBulletImage(std::string pathToImage);//needs to be pub
     
     
-    private:
-    void shoot();
-    void remove(Sprite*); // found no use of this
-    void renderAllEnemy();
-    void freeEnemies();
-    void freeBullet();
-    void addEnemy( int howManyEnemyYouNeed);
-    void moveEnemies(); //should be moved back to protected
-    
-    void handleEvents();
-    void render();
-    void clean();
-    bool running();
-    
-
+private:
+   
     int cnt;
     int width;
     int height;
@@ -73,21 +60,34 @@ public:
     bool flag = false;
     bool moveLeftFlag = false;
     std::string enemyPath;
-    std::string bulletPath;
+    
+    PlayerSprite* playerSprite = NULL;
+    Bullet* b = NULL;
     
     SDL_Window *window;
     SDL_Renderer *renderer;
     SDL_Surface *screen;
-    PlayerSprite* playerSprite = NULL;
-    Bullet* b = NULL;
-    
     SDL_Texture *playerTex;
     SDL_Texture *bulletTex;
-    
     Uint32 startTick = SDL_GetTicks();  // .............
-   
+    
     std::vector< EnemySprite* > vecOfEnemy; //enemy obj
-
+    
+    void shoot();
+    void remove(Sprite*); // found no use of this
+    void renderAllEnemy();
+    void freeEnemies();
+    void freeBullet();
+    void addEnemy( int howManyEnemyYouNeed);
+    void moveEnemies(); //should be moved back to protected
+    void handleEvents();
+    void render();
+    void clean();
+    bool running();
+    
+    
+    
+    
     
 };
 

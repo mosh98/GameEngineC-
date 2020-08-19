@@ -28,8 +28,8 @@ public:
     ~Bullet();
     void shoot( int posX, SDL_Renderer* ren,  const std::vector<EnemySprite*> &vec );
     //SDL_Texture *texMex = NULL;
-     
-  
+    
+    
     
 private:
     const int VERTICAL_HEIGHT = 600;

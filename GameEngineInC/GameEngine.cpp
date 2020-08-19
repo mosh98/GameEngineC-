@@ -1,7 +1,7 @@
 //
 //  GameEngine.cpp
 //  GameEngineInC
-//
+
 //  Created by Mosleh Mahamud (moma1820, -) on 2020-06-19.
 //  Co-Creator Nyamgarig Naranbaatar (nyna2000)
 //  Co-Creator Jimmy Ljungman  (jilj1595)
@@ -13,17 +13,16 @@
 #include <iostream>
 
 
- 
+
 
 GameEngine::GameEngine( )
 {
-   playerSprite =  playerSprite->create(400,500,48,48);
-    b = b->create(20,20,bulletPath.c_str());
+    playerSprite =  playerSprite->create(400,500,48,48);
+   
 }
 
 GameEngine::~GameEngine(){
     clean();
-    freeEnemies();
     delete playerSprite;
     delete b;
     window = NULL;
@@ -36,24 +35,24 @@ GameEngine::~GameEngine(){
 
 void GameEngine::initialize_Loop(GameEngine *gameEngine){
     
-  //  int FPS = 25;
+      int FPS = 25;
     
     //Uint32 start = SDL_GetTicks(); // should be moved to .h class
     
     while(gameEngine -> running()){
         
         if(gameEngine->running() == false){
-              break;
-          }
+            break;
+        }
         
         gameEngine->handleEvents();
         gameEngine->render();
-                  
-     //    if(1000/FPS > SDL_GetTicks() - start)
-         //     SDL_Delay(1000/FPS);
-                moveEnemies();
-      }
-     delete gameEngine;
+        
+            if(1000/FPS > SDL_GetTicks() - startTick)
+             SDL_Delay(1000/FPS);
+        moveEnemies();
+    }
+    delete gameEngine;
 }
 
 //INITIALIZE
@@ -82,7 +81,7 @@ void GameEngine::init(const char *title, int xpos, int ypos, int width, int heig
         
         
         screen = SDL_GetWindowSurface(window); //This "canvas" is where we gonna append our bmp picture to!
-    
+        
         renderAllEnemy();
         
         /* Up until now everything was drawn behind the scenes.
@@ -96,7 +95,7 @@ void GameEngine::init(const char *title, int xpos, int ypos, int width, int heig
     }
     else {
         isRuning = false;
-    
+        
     }
 }
 
@@ -106,11 +105,11 @@ void GameEngine::handleEvents(){
     
     SDL_PollEvent(&event);
     
-        if(SDL_QUIT == event.type){
-            isRuning = false;
-        }
-      switch ( event.key.keysym.sym ) {
-
+    if(SDL_QUIT == event.type){
+        isRuning = false;
+    }
+    switch ( event.key.keysym.sym ) {
+            
         case SDLK_LEFT:
             playerSprite->decreaseX();
             SDL_UpdateWindowSurface(window);
@@ -123,7 +122,7 @@ void GameEngine::handleEvents(){
             SDL_UpdateWindowSurface(window);
             render();
             break;
-        
+            
         case SDLK_SPACE:
             shoot();
             SDL_FreeSurface(screen);
@@ -144,14 +143,16 @@ void GameEngine:: addPlayerSprite(int width, int height, std::string pathToImage
     flag = true;
     
     if( ! ( width <= 10 && height <= 10 ) ){
-          playerSprite->setWidthAndHeight(width, height);
+        playerSprite->setWidthAndHeight(width, height);
     }
-   
+    
+    playerSprite->setPath(pathToImage);
+    
     //set the texture
     playerTex = playerSprite->set_image_tex( pathToImage.c_str(), renderer );
     
-      playerSprite->draw(renderer, playerTex);
-  
+    playerSprite->draw(renderer, playerTex);
+    
 }
 
 void GameEngine::setEnemyAttributes(int width, int height, std::string pathToImage, int enemy){
@@ -160,6 +161,7 @@ void GameEngine::setEnemyAttributes(int width, int height, std::string pathToIma
     this->enemyHeight = height;
     
     enemyPath = pathToImage;
+    
     addEnemy(enemy);
     
 }
@@ -168,35 +170,27 @@ void GameEngine:: addEnemy( int howManyEnemyYouNeed ) {
     
     
     int counter = 0;
-
+    
+   
     int x = 25;
     int y = 100;
     
     //Loop
     while( counter < howManyEnemyYouNeed) {
-
-    
+        
+        
         std::cout << counter <<std::endl;
-    
+        
         //enemyObj
-          //EnemySprite* enemySpritez = new EnemySprite( x,y,enemyWidth,enemyHeight  ) ; //variying x and y attributes
+        //EnemySprite* enemySpritez = new EnemySprite( x,y,enemyWidth,enemyHeight  ) ; //variying x and y attributes
         EnemySprite* enemySpritez = nullptr;
         enemySpritez = enemySpritez->create(x,y, enemyWidth, enemyHeight);
-    
-    enemySpritez->set_image_tex( enemyPath.c_str(), renderer );
-    
-        vecOfEnemy.push_back(enemySpritez);
-    
-        counter++;
         
-//        if(counter == (howManyEnemyYouNeed/2) ){
-//            x = 25;
-//            y += 35;
-//
-//        } else {
-//            //x += 75;
-//            x += 20;
-//        }
+        enemySpritez->set_image_tex( enemyPath.c_str(), renderer );
+        
+        vecOfEnemy.push_back(enemySpritez);
+        
+        counter++;
         
         x += 20;
         
@@ -212,46 +206,34 @@ void GameEngine:: addEnemy( int howManyEnemyYouNeed ) {
 
 //if last enemy in the vector has x 
 void GameEngine::moveEnemies(){
-
-   // std::map <EnemySprite*, SDL_Texture*>:: iterator it;
-
+    
+    // std::map <EnemySprite*, SDL_Texture*>:: iterator it;
+    
     for(EnemySprite* enemy: vecOfEnemy){
-       
+        
         if(moveLeftFlag == true ){
-           
-             enemy->setPosX( enemy->getPosX()-5 );
-            if(vecOfEnemy.back()->getPosX() <= 0){
+            
+            enemy->setPosX( enemy->getPosX() - 5 );
+            std::cout << enemy->getPosX() << std::endl;
+            if(vecOfEnemy.back()->getPosX() == 10 ){
                 moveLeftFlag = false;
             }
         }else{
             
-           enemy->setPosX( enemy->getPosX()+5 );
+            enemy->setPosX( enemy->getPosX() + 5 );
             
             if(vecOfEnemy.back()->getPosX() >= 750){
                 moveLeftFlag = true;
             }
-            std::cout << " Increasing X in ENEMY" << std::endl;
+           
         }
         
         enemy->draw(renderer, enemy->getMyTex());
     }
 }
 
-//if(enemy->getPosX() >= 750){
-//           moveLeftFlag = true;
-//       }
-//       if(moveLeftFlag == true){
-//           if(enemy->getPosX() <= -20){
-//               moveLeftFlag = false;
-//           }
-//            enemy->setPosX(enemy->getPosX()-5);
-//       }else{
-//           enemy->setPosX(enemy->getPosX()+5);
-//       }
-//       enemy->draw(renderer, enemy->getMyTex());
 
 
-        
 void GameEngine::freeEnemies(){
     
     for(EnemySprite* enemy: vecOfEnemy){
@@ -265,25 +247,25 @@ void GameEngine::freeEnemies(){
 
 
 void GameEngine:: addBulletImage(std::string pathToImage){
-    
-    bulletPath += pathToImage;
-    
+     
+    b = b->create(20,20,pathToImage.c_str());
+    b->setPath(pathToImage);
+    b->set_image_tex(b->getPath().c_str(),renderer); //bullet path
 }
 
 
 void GameEngine::shoot(){
     
-    //b->texMex =
-    b->set_image_tex(bulletPath.c_str(),renderer);
+   
     b->shoot(playerSprite->getPosX(),renderer, vecOfEnemy);
-    //b->shoot(playerSprite->getRect()->x,renderer);
+    
     renderAllEnemy();
     
 }
 
 
 
-    
+
 
 void GameEngine::render(){
     
@@ -301,14 +283,14 @@ void GameEngine::render(){
 void GameEngine::renderAllEnemy() {
     
     std::vector<EnemySprite*>:: iterator it;
-
+    
     for(it = vecOfEnemy.begin(); it != vecOfEnemy.end(); ++it){
         SDL_Texture *tx = (*it)->getMyTex();
         if((*it)->isDamaged() == false){
-           //std::cout <<
+            //std::cout <<
             (*it)->draw(renderer, tx);
         }
-      
+        
     }
 }
 
@@ -317,6 +299,7 @@ void GameEngine::clean(){
     SDL_DestroyWindow(window);
     SDL_DestroyRenderer(renderer);
     SDL_DestroyTexture(playerTex);
+   // SDL_DestroyTexture(bulletTex);
     freeEnemies();
     SDL_Quit();
     
