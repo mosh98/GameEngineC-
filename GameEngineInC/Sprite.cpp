@@ -75,6 +75,7 @@ SDL_Texture* Sprite:: set_image_tex(const char filename[], SDL_Renderer *ren ){
 SDL_Renderer* Sprite::getMyRen() const{
     return saveMyRen;
 }
+
 SDL_Texture* Sprite::getMyTex() const{
     return saveMyTex;
     

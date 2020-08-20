@@ -18,6 +18,7 @@
 GameEngine::GameEngine( )
 {
     playerSprite =  playerSprite->create(400,500,48,48);
+    
    
 }
 
@@ -65,6 +66,8 @@ void GameEngine::init(const char *title, int xpos, int ypos, int width, int heig
     }
     this->width = width;
     this->height = height;
+    
+    playerSprite->setWindowWidth(width);
     
     if( SDL_Init(SDL_INIT_EVERYTHING) == 0 ) {
         
@@ -128,6 +131,7 @@ void GameEngine::handleEvents(){
             SDL_FreeSurface(screen);
             SDL_UpdateWindowSurface(window);
             render();
+            break;
             
         default:
             break;
@@ -177,7 +181,6 @@ void GameEngine:: addEnemy( int howManyEnemyYouNeed ) {
     
     //Loop
     while( counter < howManyEnemyYouNeed) {
-        
         
         std::cout << counter <<std::endl;
         

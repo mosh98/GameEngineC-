@@ -27,10 +27,11 @@ public:
     ~PlayerSprite();
     void increaseX(); //right button
     void decreaseX();//left button
+    void setWindowWidth(int width);
     
 private:
     PlayerSprite (int x, int y, int w, int h);
-    
+    int windowWidth;
     
     
 };

@@ -15,6 +15,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <string>
+
 using namespace std;
 
 
@@ -33,7 +34,7 @@ public:
     void draw(SDL_Renderer* ren, SDL_Texture* tex);
     SDL_Renderer* getMyRen() const;
     SDL_Texture* getMyTex() const;
-  
+    
     //Cords X
     int getPosX() const;
     void setPosX(int x);

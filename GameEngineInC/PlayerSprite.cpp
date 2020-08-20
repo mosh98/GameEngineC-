@@ -28,7 +28,7 @@ PlayerSprite:: ~PlayerSprite(){
 
 
 void PlayerSprite:: increaseX(){
-    if(getPosX() < 750){
+    if(getPosX() < windowWidth){
         setPosX(getPosX()+25);
         std::cout<<"Rect_Increase x: "<<getPosX()<<std::endl;
     }else{
@@ -37,12 +37,17 @@ void PlayerSprite:: increaseX(){
 }
 
 void PlayerSprite::  decreaseX(){
-    if(getPosX() > -20){
+    if(getPosX() > 10){
         setPosX(getPosX() - 25);
         std::cout<<"Rect_decrease x: "<<getPosX()<<std::endl;
     }else{
         std::cout<<"x cord LOCKED! "<< getPosX()<<std::endl;
     }
+}
+
+
+void PlayerSprite:: setWindowWidth(int width){
+    windowWidth = width-50;
 }
 
 

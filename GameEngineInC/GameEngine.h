@@ -51,7 +51,7 @@ public:
     
 private:
    
-    int cnt;
+    //int cnt;
     int width;
     int height;
     int enemyWidth;
