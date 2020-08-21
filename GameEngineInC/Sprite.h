@@ -16,7 +16,7 @@
 #include <SDL2/SDL_image.h>
 #include <string>
 
-using namespace std;
+
 
 namespace gameengine {
 class Sprite{
@@ -32,7 +32,6 @@ public:
     SDL_Texture* set_image_tex(const char filename[] = NULL, SDL_Renderer *ren = NULL);
     void setWidthAndHeight(int width, int height);
     void draw(SDL_Renderer* ren, SDL_Texture* tex);
-    SDL_Renderer* getMyRen() const;
     SDL_Texture* getMyTex() const;
     
     virtual ~Sprite();
@@ -45,15 +44,14 @@ public:
     int getPosY() const;
     //setPath
     void setPath(std::string pth);
-    string getPath() const;
+    std::string getPath() const;
     //virtual Sprite* create(int x, int y, int w, int h) = 0;
     
     virtual void tick(){};
     
 private:
     SDL_Rect rect;
-    string path;
-    SDL_Renderer *saveMyRen = NULL; //TODO: (FIXED)  Becarefull you might leak from here
+    std::string path;
     SDL_Texture *saveMyTex = NULL ;
     
     Sprite(const Sprite& rhs) = delete;

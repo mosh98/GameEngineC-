@@ -38,31 +38,31 @@ GameEngine::~GameEngine(){
 }
 
 
-void GameEngine::initialize_Loop(GameEngine *gameEngine){
+void GameEngine::initialize_Loop(){
     
     
     //Uint32 start = SDL_GetTicks(); // should be moved to .h class
     
-    while(gameEngine -> running()) {
+    while(running()) {
         
-        if(gameEngine->running() == false){
+        if( running() == false){
             break;
         }
         
         
-        gameEngine->handleEvents();
+        handleEvents();
         
-        gameEngine->tickSprites();
-        gameEngine->drawSprites();
+        tickSprites();
+        drawSprites();
         
-        gameEngine->updateSprites(); //tar bort removed sprites
+        updateSprites(); //tar bort removed sprites
        
     
         if(1000/FPS > SDL_GetTicks() - startTick)
             SDL_Delay(1000/FPS);
     }
     
-    delete gameEngine;
+
 }
 
 
@@ -95,7 +95,7 @@ void GameEngine::tickSprites(){
    
     for(Bullet* bull: vecOfBullet){
        
-        bull->tick();
+        bull->tick( &removedBullet );
         
     }
     
@@ -145,7 +145,8 @@ void GameEngine::updateSprites(){
     
     
     for(Bullet* b: removedBullet){
-    for(vector<Bullet*>::iterator i = vecOfBullet.begin(); i != vecOfBullet.end();){
+   
+        for(std::vector<Bullet*>::iterator i = vecOfBullet.begin(); i != vecOfBullet.end();) {
        
         if((*i) == b){
             i = vecOfBullet.erase(i);
@@ -158,7 +159,7 @@ void GameEngine::updateSprites(){
     
     
     for(EnemySprite* enemyInVec: removedEnenmy){
-       for(vector<EnemySprite*>::iterator i = vecOfEnemy.begin(); i != vecOfEnemy.end();){
+       for(std::vector<EnemySprite*>::iterator i = vecOfEnemy.begin(); i != vecOfEnemy.end();){
           
            if((*i) == enemyInVec){
                i = vecOfEnemy.erase(i);
@@ -172,19 +173,8 @@ void GameEngine::updateSprites(){
     removedEnenmy.clear();
     removedBullet.clear();
     
-//    for(vector<Bullet*>::iterator i = vecOfBullet.begin(); i != vecOfBullet.end(); ){
-//
-//
-//
-//        if(*i == b){
-//                 i = vecOfBullets.erase(i);
-//                 delete b;
-//
-//             }else{
-//                 i++;
-//             }
-//    }
 }
+
 //INITIALIZE
 void GameEngine::init(const char *title, int xpos, int ypos, int width, int height, bool fullscreen)
 {
@@ -193,8 +183,10 @@ void GameEngine::init(const char *title, int xpos, int ypos, int width, int heig
     if(fullscreen){
         flag = SDL_WINDOW_FULLSCREEN;
     }
+    //this->width = width;
     this->width = width;
     
+    //this->height = height;
     this->height = height;
     
 //    playerSprite->setWindowWidth(width);
@@ -216,8 +208,6 @@ void GameEngine::init(const char *title, int xpos, int ypos, int width, int heig
         
         
         screen = SDL_GetWindowSurface(window); //This "canvas" is where we gonna append our bmp picture to!
-        
-        renderAllEnemy();
         
         /* Up until now everything was drawn behind the scenes.
          This will show the new contents of the window. */
@@ -246,26 +236,19 @@ void GameEngine::handleEvents(){
     switch ( event.key.keysym.sym ) {
             
         case SDLK_LEFT:
-            playerSprite->decreaseX();
+            if( ! (playerSprite->getPosX() < 10) )
+                playerSprite->decreaseX();
             //SDL_UpdateWindowSurface(window);
             //render();
             break;
             
         case SDLK_RIGHT:
-            playerSprite->increaseX();
-            //SDL_FreeSurface(screen);
-            //SDL_UpdateWindowSurface(window);
-           // render();
+            if( ! (playerSprite->getPosX() > (width-70)) )
+                playerSprite->increaseX();
             break;
-            
-
-            
-            
+        
         case SDLK_SPACE:
             shoot();
-            //SDL_FreeSurface(screen);
-            //SDL_UpdateWindowSurface(window);
-            //render();
             break;
             
         default:
@@ -279,7 +262,7 @@ void GameEngine::handleEvents(){
 
 void GameEngine:: addPlayerSprite(int width, int height, std::string pathToImage){
     
-    flag = true;
+    //flag = true;
     
     if( ! ( width <= 10 && height <= 10 ) ){
         playerSprite->setWidthAndHeight(width, height);
@@ -364,7 +347,7 @@ void GameEngine:: setFPS(int fps){
     
 }
 
-void GameEngine::freeEnemies(){
+void GameEngine::freeEnemies(){ // den här ska bort
     
     for(EnemySprite* enemy: vecOfEnemy){
         delete enemy;
@@ -418,33 +401,19 @@ void GameEngine::shoot(){
 
 
 
-void GameEngine::render(){
-    
-    //This is used to redner things, kinda like a refresh after every event occurs.
-    SDL_UpdateWindowSurface(window);
-    SDL_RenderClear(renderer);
-    
-    playerSprite->draw(renderer, playerTex);
-    renderAllEnemy();
-    
-    SDL_RenderPresent(renderer);
-    
-}
+//void GameEngine::render(){
+//
+//    //This is used to redner things, kinda like a refresh after every event occurs.
+//    SDL_UpdateWindowSurface(window);
+//    SDL_RenderClear(renderer);
+//
+//    playerSprite->draw(renderer, playerTex);
+//   // renderAllEnemy();
+//
+//    SDL_RenderPresent(renderer);
+//
+//}
 
-void GameEngine::renderAllEnemy() {
-    
-    std::vector<EnemySprite*>:: iterator it;
-    
-    for(it = vecOfEnemy.begin(); it != vecOfEnemy.end(); ++it){
-        SDL_Texture *tx = (*it)->getMyTex();
-       
-        if((*it)->isDamaged() == false){
-            //std::cout <<
-            (*it)->draw(renderer, tx);
-        }
-        
-    }
-}
 
 void GameEngine::clean(){
     

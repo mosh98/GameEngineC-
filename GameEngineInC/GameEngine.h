@@ -15,11 +15,10 @@
 
 
 #include <SDL2/SDL.h>
-#include <iostream>
+
 #include "Sprite.h"
 
 #include <SDL2/SDL_image.h>
-#include <map>
 #include <stdlib.h>
 #include "Bullet.h"
 #include "PlayerSprite.h"
@@ -42,7 +41,7 @@ public:
     //intialize
     void init(const char*title, int xpos, int ypos, int width, int height, bool fullscreen); //needs to be pub
     
-    void initialize_Loop( GameEngine *gameEngine );
+    void initialize_Loop( );
     
     //Add Features
     void addPlayerSprite(int width, int height, std::string pathToImage);//needs to be pub
@@ -58,6 +57,9 @@ public:
     // implement these
     void removeSprite(Sprite* sprite);
     
+    std::vector<EnemySprite*> getVecOfEnemies(){
+        return vecOfEnemy;
+    }
     
     
     void setFPS(int fps);
@@ -82,15 +84,14 @@ public:
 private:
     
     //int cnt;
-    int width;
-    int height;
-    int enemyWidth;
-    int enemyHeight;
+    int width; //get
+    int height; //get
+    int enemyWidth;//get
+    int enemyHeight;//get
     bool isRuning;
-    bool flag = false;
-    bool moveLeftFlag = false;
-    std::string enemyPath;
-    std::string bulletPath;
+  //  bool moveLeftFlag = false;
+    std::string enemyPath;//get
+    std::string bulletPath;//get
     int FPS = 25;
     
     PlayerSprite* playerSprite = NULL;
@@ -101,7 +102,7 @@ private:
     SDL_Surface *screen;
     SDL_Texture *playerTex;
     SDL_Texture *bulletTex;
-    Uint32 startTick = SDL_GetTicks();  //.............
+    Uint32 startTick = SDL_GetTicks();
     
     std::vector< EnemySprite* > vecOfEnemy; //enemy obj
     std::vector< EnemySprite* > removedEnenmy; //enemy obj
@@ -110,7 +111,7 @@ private:
     
     void shoot();
     void remove(Sprite*); // found no use of this
-    void renderAllEnemy();
+    //void renderAllEnemy();
     void freeEnemies();
     void freeBullet();
     void addEnemy( int howManyEnemyYouNeed);
@@ -125,7 +126,7 @@ private:
     
     
 };
-
+ 
 extern GameEngine gE;
 
 }

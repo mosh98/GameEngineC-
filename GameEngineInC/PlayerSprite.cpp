@@ -26,20 +26,14 @@ PlayerSprite* PlayerSprite::create(int x, int y, int w, int h){
 
 void PlayerSprite:: increaseX(){
     std::cout << "getWidth: " << gE.getWidth() << std::endl;
-    if(getPosX() < gE.getWidth() ){
-        
+   
         setPosX(getPosX()+25);
     
-    }
+    
 }
 
 void PlayerSprite::  decreaseX(){
-    
-    if(getPosX() > 10){
-       
         setPosX(getPosX() - 25);
-        
-    }
 }
 
 

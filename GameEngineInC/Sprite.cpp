@@ -33,8 +33,6 @@ Sprite::~Sprite(){
     SDL_DestroyTexture(saveMyTex);
     saveMyTex = NULL;
     
-   
-    
     std::cout<<"MEMORY CLEAN: SDL memory freed from Sprite class"<<std::endl;
 }
 
@@ -73,9 +71,7 @@ SDL_Texture* Sprite:: set_image_tex(const char filename[], SDL_Renderer *ren ){
     return saveMyTex;
 }
 
-SDL_Renderer* Sprite::getMyRen() const{
-    return saveMyRen;
-}
+
 
 SDL_Texture* Sprite::getMyTex() const{
     return saveMyTex;
@@ -84,7 +80,7 @@ SDL_Texture* Sprite::getMyTex() const{
 
 void Sprite:: draw(SDL_Renderer* ren, SDL_Texture* tex){
     
-    saveMyRen = ren;
+    //saveMyRen = ren;
     saveMyTex = tex;
     
     SDL_RenderCopy(ren, tex, NULL, &rect);
@@ -107,7 +103,7 @@ void Sprite::setPath(std::string pth){
 }
 
 //returns the image Path
-string Sprite::getPath() const{
+std::string Sprite::getPath() const{
     
     return path;
     

@@ -20,22 +20,20 @@
 #include <stdio.h>
 
 
+
+
 namespace gameengine {
 class Bullet : public Sprite {
     
 public:
     static Bullet* create(int x, int y, std::string path);
-    ~Bullet();
-    void shoot( int posX, SDL_Renderer* ren,  std::vector<EnemySprite*> &vec );
-    //SDL_Texture *texMex = NULL;
-    void tick();
+    //~Bullet(){};
+    void tick(std::vector<Bullet*> *removedBullet);
     
     
 private:
-    const int VERTICAL_HEIGHT = 600;
     Bullet(int w, int h, std::string pathz);
-    void bulletLoop(int startPosX, SDL_Renderer* sl,  std::vector<EnemySprite*> &vec  );
-    bool chekkCollision(Bullet* bz,  std::vector<EnemySprite*> &vec  );
+   
     
 };
 

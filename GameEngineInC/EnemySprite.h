@@ -24,17 +24,12 @@ namespace gameengine {
 class EnemySprite: public Sprite {
     
 public:
-    
-    ~EnemySprite();
-    static EnemySprite* create(int x, int y, int w, int h) ;
-    bool isDamaged();
-    void setDamaged(bool dmg);
+    ~EnemySprite(){};
+    static EnemySprite* create(int x, int y, int w, int h);
     void tick();
     
 private:
-    
     EnemySprite (int x, int y, int w, int h);
-    bool damagedFlag = false;
     bool moveLeftFlag = false;
     
 };
