@@ -76,10 +76,12 @@ public:
     void updateSprites();
     void checkCollision();
     
-    int getWidth() const {
-        return width;
-        
-    }
+    int getWidth() const {return width;}
+    int getHeight() const {return height;}
+    int getEnemyHeight() const {return enemyHeight;}
+    int getEnemyWidth() const{return enemyHeight;}
+    bool getIsRunning() const {return isRuning;}
+    
     
 private:
     
@@ -111,24 +113,14 @@ private:
     
     void shoot();
     void remove(Sprite*); // found no use of this
-    //void renderAllEnemy();
-    void freeEnemies();
-    void freeBullet();
     void addEnemy( int howManyEnemyYouNeed);
-    void moveEnemies(); //should be moved back to protected
+    void moveEnemies(); 
     void handleEvents();
     void render();
     void clean();
     bool running();
     
-    
-    
-    
-    
 };
- 
-extern GameEngine gE;
-
 }
 
 

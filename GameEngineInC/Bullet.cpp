@@ -32,14 +32,13 @@ void Bullet::tick(std::vector<Bullet*> *removedBullet ){
 
     setPosY(getPosY()-7);
     
-    cout << "Size of gE vec : "<<gE.getVecOfEnemies().size() << endl;
+   
     
     if(getPosY() <= 0) {
         
-        //engine->removeBullet(this);
         removedBullet->push_back(this);
         
-        //setPosY( VERTICAL_HEIGHT );
+        
         
     }
 }
