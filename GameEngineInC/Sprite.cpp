@@ -27,14 +27,13 @@ Sprite::Sprite(int x, int y, int w, int h ){
 
 Sprite::~Sprite(){
     
-    SDL_DestroyRenderer(saveMyRen);
-    saveMyRen = NULL;
+//    SDL_DestroyRenderer(saveMyRen);
+//    saveMyRen = NULL;
     
     SDL_DestroyTexture(saveMyTex);
     saveMyTex = NULL;
     
-    IMG_Quit();
-    SDL_Quit();
+   
     
     std::cout<<"MEMORY CLEAN: SDL memory freed from Sprite class"<<std::endl;
 }

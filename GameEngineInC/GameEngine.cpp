@@ -31,6 +31,9 @@ GameEngine::~GameEngine(){
     renderer = NULL;
     screen = NULL;
     
+    IMG_Quit();
+    SDL_Quit();
+    
     std::cout<<"GameEngine destructor called "<< std::endl;
 }
 
@@ -46,8 +49,6 @@ void GameEngine::initialize_Loop(GameEngine *gameEngine){
             break;
         }
         
-     
-     
         
         gameEngine->handleEvents();
         
@@ -55,15 +56,8 @@ void GameEngine::initialize_Loop(GameEngine *gameEngine){
         gameEngine->drawSprites();
         
         gameEngine->updateSprites(); //tar bort removed sprites
-        gameEngine->render();
-        
-        
-            
-        
-        moveEnemies();
-        
-       // SDL_RenderPresent(renderer);
-        
+       
+    
         if(1000/FPS > SDL_GetTicks() - startTick)
             SDL_Delay(1000/FPS);
     }
@@ -73,11 +67,25 @@ void GameEngine::initialize_Loop(GameEngine *gameEngine){
 
 
 void GameEngine::drawSprites(){
-    for(Bullet* bull: vecOfBullet){
     
+    SDL_UpdateWindowSurface(window);
+    SDL_RenderClear(renderer);
+    
+    for(Bullet* bull: vecOfBullet){
+       
         bull->draw(renderer,bull->getMyTex());
-      
+        
     }
+    
+     for(EnemySprite* enemy: vecOfEnemy){
+         
+         enemy->draw(renderer, enemy->getMyTex());
+         
+     }
+       
+       playerSprite->draw(renderer, playerTex);
+    
+       SDL_RenderPresent(renderer);
     
 }
 
@@ -90,6 +98,43 @@ void GameEngine::tickSprites(){
         bull->tick();
         
     }
+    
+    checkCollision();
+    
+    for(EnemySprite* enemy: vecOfEnemy){
+        enemy->tick();
+        
+    }
+    
+    
+}
+
+void GameEngine::checkCollision(){
+    
+    for(EnemySprite* enemyInVec: vecOfEnemy){
+       
+        const SDL_Rect &enem = enemyInVec->getRectobj();
+        const SDL_Rect* enemyRect = &enem;
+        
+        for(Bullet* bull: vecOfBullet){
+           
+            
+            const SDL_Rect &bulletPointer = bull->getRectobj();
+            const SDL_Rect* rectBullet = &bulletPointer;
+              
+        
+                if( SDL_HasIntersection ( rectBullet, enemyRect ) == SDL_TRUE ) {
+                    
+                    removedEnenmy.push_back(enemyInVec);
+                    
+                    std::cout<< "COLLIDED"<< std::endl;
+                    
+                }
+            
+        }
+    
+    }
+    
 }
 
 void GameEngine::removeBullet(Bullet *bullet){
@@ -110,6 +155,21 @@ void GameEngine::updateSprites(){
         }
         }//inner
     }//outer
+    
+    
+    for(EnemySprite* enemyInVec: removedEnenmy){
+       for(vector<EnemySprite*>::iterator i = vecOfEnemy.begin(); i != vecOfEnemy.end();){
+          
+           if((*i) == enemyInVec){
+               i = vecOfEnemy.erase(i);
+               delete enemyInVec;
+           }else{
+               i++;
+           }
+           }//inner
+       }//outer
+    
+    removedEnenmy.clear();
     removedBullet.clear();
     
 //    for(vector<Bullet*>::iterator i = vecOfBullet.begin(); i != vecOfBullet.end(); ){
@@ -134,9 +194,10 @@ void GameEngine::init(const char *title, int xpos, int ypos, int width, int heig
         flag = SDL_WINDOW_FULLSCREEN;
     }
     this->width = width;
+    
     this->height = height;
     
-    playerSprite->setWindowWidth(width);
+//    playerSprite->setWindowWidth(width);
     
     if( SDL_Init(SDL_INIT_EVERYTHING) == 0 ) {
         
@@ -186,15 +247,15 @@ void GameEngine::handleEvents(){
             
         case SDLK_LEFT:
             playerSprite->decreaseX();
-            SDL_UpdateWindowSurface(window);
-            render();
+            //SDL_UpdateWindowSurface(window);
+            //render();
             break;
             
         case SDLK_RIGHT:
             playerSprite->increaseX();
-            SDL_FreeSurface(screen);
-            SDL_UpdateWindowSurface(window);
-            render();
+            //SDL_FreeSurface(screen);
+            //SDL_UpdateWindowSurface(window);
+           // render();
             break;
             
 
@@ -202,9 +263,9 @@ void GameEngine::handleEvents(){
             
         case SDLK_SPACE:
             shoot();
-            SDL_FreeSurface(screen);
-            SDL_UpdateWindowSurface(window);
-            render();
+            //SDL_FreeSurface(screen);
+            //SDL_UpdateWindowSurface(window);
+            //render();
             break;
             
         default:
@@ -290,25 +351,7 @@ void GameEngine::moveEnemies(){
         
         
         enemy->tick();
-        
-//        if(moveLeftFlag == true ){
-//
-//            enemy->setPosX( enemy->getPosX() - 5 );
-//            std::cout << enemy->getPosX() << std::endl;
-//            if(vecOfEnemy.back()->getPosX() == 10 ){
-//                moveLeftFlag = false;
-//            }
-//
-//        } else{
-//
-//            enemy->setPosX( enemy->getPosX() + 5 );
-//
-//            if(vecOfEnemy.back()->getPosX() >= 750){
-//                moveLeftFlag = true;
-//            }
-//
-//        }
-        
+    
         enemy->draw(renderer, enemy->getMyTex());
     }
 }
@@ -410,8 +453,7 @@ void GameEngine::clean(){
     SDL_DestroyTexture(playerTex);
    // SDL_DestroyTexture(bulletTex);
     freeEnemies();
-    SDL_Quit();
-    
+
     std::cout << "SDL CLEANED and DESTROYED!...." << std::endl;
 }
 

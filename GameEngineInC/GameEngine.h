@@ -72,7 +72,12 @@ public:
     void removeBullet(Bullet* bullet);
     
     void updateSprites();
+    void checkCollision();
     
+    int getWidth() const {
+        return width;
+        
+    }
     
 private:
     
@@ -99,6 +104,7 @@ private:
     Uint32 startTick = SDL_GetTicks();  //.............
     
     std::vector< EnemySprite* > vecOfEnemy; //enemy obj
+    std::vector< EnemySprite* > removedEnenmy; //enemy obj
     std::vector< Bullet* > vecOfBullet; //Bullet obj
     std::vector< Bullet* > removedBullet; //Bullet obj
     

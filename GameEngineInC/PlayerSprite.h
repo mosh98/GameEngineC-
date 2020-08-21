@@ -14,9 +14,7 @@
 #include "Sprite.h"
 
 
-#include <stdio.h>
-#include <string>
-#include <iostream>
+
 
 
 namespace gameengine {
@@ -25,14 +23,14 @@ class PlayerSprite: public Sprite {
     
 public:
     static PlayerSprite* create(int x, int y, int w, int h);
-    ~PlayerSprite();
+    ~PlayerSprite(){};
     void increaseX(); //right button
     void decreaseX();//left button
-    void setWindowWidth(int width);
+    
     
 private:
     PlayerSprite (int x, int y, int w, int h);
-    int windowWidth;
+    
     
     
 };

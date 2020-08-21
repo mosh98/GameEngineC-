@@ -10,9 +10,9 @@
 // Basnivå1
 
 #include "PlayerSprite.h"
-
-#include <iostream>
 #include <SDL2/SDL_image.h>
+#include "GameEngine.h"
+#include <iostream>
 
 
 namespace gameengine {
@@ -24,39 +24,25 @@ PlayerSprite* PlayerSprite::create(int x, int y, int w, int h){
     return new PlayerSprite(x,y,w,h);
 }
 
-PlayerSprite:: ~PlayerSprite(){
-    std::cout<<"DELETING PLAYER SPRITE "<<std::endl;
-}
-
-
 void PlayerSprite:: increaseX(){
-   
-    if(getPosX() < windowWidth){
+    std::cout << "getWidth: " << gE.getWidth() << std::endl;
+    if(getPosX() < gE.getWidth() ){
         
         setPosX(getPosX()+25);
-        
-        std::cout<<"Rect_Increase x: "<<getPosX()<<std::endl;
-    
-    }else{
-        
-        std::cout<<"x cord LOCKED! "<< getPosX()<<std::endl;
     
     }
 }
 
 void PlayerSprite::  decreaseX(){
+    
     if(getPosX() > 10){
+       
         setPosX(getPosX() - 25);
-        std::cout<<"Rect_decrease x: "<<getPosX()<<std::endl;
-    }else{
-        std::cout<<"x cord LOCKED! "<< getPosX()<<std::endl;
+        
     }
 }
 
 
-void PlayerSprite:: setWindowWidth(int width){
-    windowWidth = width-50;
-}
 }
 
 

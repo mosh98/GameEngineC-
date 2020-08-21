@@ -32,7 +32,6 @@ Bullet::~Bullet()
     //free surfaces and other memory bound items
     //SDL_DestroyTexture(texMex);
     //texMex = NULL;
-    IMG_Quit();
     std::cout << " BULLET memory FREED " << std::endl;
 }
 
@@ -69,7 +68,7 @@ void Bullet::bulletLoop(int startPosX, SDL_Renderer* sl,  std::vector<EnemySprit
 
 void Bullet::tick( ){
 
-    setPosY(getPosY()-1);
+    setPosY(getPosY()-7);
     
     if( getPosY() <= 0) {
         
@@ -115,31 +114,7 @@ bool Bullet::chekkCollision( Bullet* bz,  std::vector<EnemySprite*> &vec) {
         }
     }
     
-    
 
-//    auto enemyItr = vec.begin();
-
-//    for(EnemySprite* enemySprit : vec){
-//
-//        for(vector<EnemySprite*>::iterator i = discardedEnemy.begin(); i != discardedEnemy.end();){
-//
-//            if(*i == enemySprit ){
-//
-//                i = vec.erase(i);
-//                delete enemySprit;
-//
-//            } else{
-//
-//                i++;
-//
-//            }
-//
-//        }
-//    }
-//    discardedEnemy.clear();
-//
-//    std::cout<< "size of vektorn: "<< vec.size()<< std::endl;
-    
     return false;
 }
 }
