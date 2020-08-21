@@ -10,8 +10,9 @@
 // Basnivå1
 
 #include "EnemySprite.h"
+#include "Sprite.h"
 
-
+namespace gameengine {
 EnemySprite::EnemySprite(int x, int y, int w, int h):Sprite(x, y, w, h){
 }
 
@@ -33,3 +34,27 @@ EnemySprite* EnemySprite::create(int x, int y, int w, int h){
     return new EnemySprite(x, y,  w, h);
 }
 
+void EnemySprite:: tick(){
+    
+    if(moveLeftFlag == true ){
+        
+        setPosX( getPosX( ) - 5 );
+        
+        std::cout << getPosX( ) << std::endl;
+        
+        if( getPosX() == 10 ){
+            moveLeftFlag = false;
+        }
+        
+    } else{
+        
+        setPosX( getPosX() + 5 );
+        
+        if(getPosX() >= 750){
+            moveLeftFlag = true;
+        }
+        
+    }
+}
+
+}

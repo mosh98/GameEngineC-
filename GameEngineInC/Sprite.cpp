@@ -14,6 +14,8 @@
 #include <SDL2/SDL_image.h>
 
 
+namespace gameengine {
+
 Sprite::Sprite(int x, int y, int w, int h ){
     rect.h = h;
     rect.w = w;
@@ -85,9 +87,11 @@ void Sprite:: draw(SDL_Renderer* ren, SDL_Texture* tex){
     
     saveMyRen = ren;
     saveMyTex = tex;
+    
     SDL_RenderCopy(ren, tex, NULL, &rect);
     
 }
+
 
 int Sprite:: getPosX() const{
     return rect.x;
@@ -96,7 +100,9 @@ int Sprite:: getPosX() const{
 void Sprite:: setPosX(int x){
     rect.x = x;
 }
-
+int Sprite:: getPosY() const{
+    return rect.y;
+}
 void Sprite::setPath(std::string pth){
     path += pth;
 }
@@ -111,5 +117,8 @@ string Sprite::getPath() const{
 void Sprite:: setPosY(int y){
     rect.y = y;
 }
+
+}
+
 
 

@@ -27,7 +27,12 @@
 #include <vector>
 
 
+
+namespace gameengine {
+
 class GameEngine {
+    
+    
     
 public:
     
@@ -48,9 +53,29 @@ public:
     
     void addBulletImage(std::string pathToImage);//needs to be pub
     
+    void createBullet();
+    
+    // implement these
+    void removeSprite(Sprite* sprite);
+    
+    
+    
+    void setFPS(int fps);
+    
+    int getFPS() const{
+        return FPS;
+    }
+    
+    void drawSprites();
+    void tickSprites();
+    
+    void removeBullet(Bullet* bullet);
+    
+    void updateSprites();
+    
     
 private:
-   
+    
     //int cnt;
     int width;
     int height;
@@ -60,6 +85,8 @@ private:
     bool flag = false;
     bool moveLeftFlag = false;
     std::string enemyPath;
+    std::string bulletPath;
+    int FPS = 25;
     
     PlayerSprite* playerSprite = NULL;
     Bullet* b = NULL;
@@ -69,9 +96,11 @@ private:
     SDL_Surface *screen;
     SDL_Texture *playerTex;
     SDL_Texture *bulletTex;
-    Uint32 startTick = SDL_GetTicks();  // .............
+    Uint32 startTick = SDL_GetTicks();  //.............
     
     std::vector< EnemySprite* > vecOfEnemy; //enemy obj
+    std::vector< Bullet* > vecOfBullet; //Bullet obj
+    std::vector< Bullet* > removedBullet; //Bullet obj
     
     void shoot();
     void remove(Sprite*); // found no use of this
@@ -90,5 +119,12 @@ private:
     
     
 };
+
+extern GameEngine gE;
+
+}
+
+
+
 
 #endif /* GameEngine_hpp */

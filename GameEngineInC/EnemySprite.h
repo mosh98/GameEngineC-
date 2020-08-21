@@ -18,6 +18,9 @@
 
 #include <stdio.h>
 
+
+namespace gameengine {
+
 class EnemySprite: public Sprite {
     
 public:
@@ -26,11 +29,16 @@ public:
     static EnemySprite* create(int x, int y, int w, int h) ;
     bool isDamaged();
     void setDamaged(bool dmg);
+    void tick();
     
 private:
+    
     EnemySprite (int x, int y, int w, int h);
     bool damagedFlag = false;
+    bool moveLeftFlag = false;
     
 };
+
+}
 
 #endif /* EnemySprite_h */

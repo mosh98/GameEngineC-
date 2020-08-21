@@ -19,6 +19,7 @@
 #include <iostream>
 
 
+namespace gameengine {
 class PlayerSprite: public Sprite {
     
     
@@ -35,5 +36,7 @@ private:
     
     
 };
+}
+
 
 #endif /* TriangleSprite_h*/

@@ -18,12 +18,12 @@
 
 using namespace std;
 
-
+namespace gameengine {
 class Sprite{
     
 protected:
     Sprite(int x, int y, int w, int h);
-    virtual ~Sprite();
+    
 
     
 public:
@@ -35,25 +35,34 @@ public:
     SDL_Renderer* getMyRen() const;
     SDL_Texture* getMyTex() const;
     
+    virtual ~Sprite();
+    
     //Cords X
     int getPosX() const;
     void setPosX(int x);
     // Cords Y
     void setPosY(int y);
+    int getPosY() const;
     //setPath
     void setPath(std::string pth);
     string getPath() const;
     //virtual Sprite* create(int x, int y, int w, int h) = 0;
+    
+    virtual void tick(){};
     
 private:
     SDL_Rect rect;
     string path;
     SDL_Renderer *saveMyRen = NULL; //TODO: (FIXED)  Becarefull you might leak from here
     SDL_Texture *saveMyTex = NULL ;
+    
     Sprite(const Sprite& rhs) = delete;
     const Sprite& operator=(const Sprite& rhs) = delete;
     
 
 };
 
+
+
+}
 #endif /* Sprite_hpp */

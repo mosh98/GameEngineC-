@@ -14,6 +14,7 @@
 
 
 
+namespace gameengine {
 
 GameEngine::GameEngine( )
 {
@@ -36,26 +37,94 @@ GameEngine::~GameEngine(){
 
 void GameEngine::initialize_Loop(GameEngine *gameEngine){
     
-      int FPS = 25;
     
     //Uint32 start = SDL_GetTicks(); // should be moved to .h class
     
-    while(gameEngine -> running()){
+    while(gameEngine -> running()) {
         
         if(gameEngine->running() == false){
             break;
         }
         
+     
+     
+        
         gameEngine->handleEvents();
+        
+        gameEngine->tickSprites();
+        gameEngine->drawSprites();
+        
+        gameEngine->updateSprites(); //tar bort removed sprites
         gameEngine->render();
         
-            if(1000/FPS > SDL_GetTicks() - startTick)
-             SDL_Delay(1000/FPS);
+        
+            
+        
         moveEnemies();
+        
+       // SDL_RenderPresent(renderer);
+        
+        if(1000/FPS > SDL_GetTicks() - startTick)
+            SDL_Delay(1000/FPS);
     }
+    
     delete gameEngine;
 }
 
+
+void GameEngine::drawSprites(){
+    for(Bullet* bull: vecOfBullet){
+    
+        bull->draw(renderer,bull->getMyTex());
+      
+    }
+    
+}
+
+
+
+void GameEngine::tickSprites(){
+   
+    for(Bullet* bull: vecOfBullet){
+       
+        bull->tick();
+        
+    }
+}
+
+void GameEngine::removeBullet(Bullet *bullet){
+    removedBullet.push_back(bullet);
+}
+
+void GameEngine::updateSprites(){
+    
+    
+    for(Bullet* b: removedBullet){
+    for(vector<Bullet*>::iterator i = vecOfBullet.begin(); i != vecOfBullet.end();){
+       
+        if((*i) == b){
+            i = vecOfBullet.erase(i);
+            delete b;
+        }else{
+            i++;
+        }
+        }//inner
+    }//outer
+    removedBullet.clear();
+    
+//    for(vector<Bullet*>::iterator i = vecOfBullet.begin(); i != vecOfBullet.end(); ){
+//
+//
+//
+//        if(*i == b){
+//                 i = vecOfBullets.erase(i);
+//                 delete b;
+//
+//             }else{
+//                 i++;
+//             }
+//    }
+}
 //INITIALIZE
 void GameEngine::init(const char *title, int xpos, int ypos, int width, int height, bool fullscreen)
 {
@@ -78,8 +147,10 @@ void GameEngine::init(const char *title, int xpos, int ypos, int width, int heig
         renderer = SDL_CreateRenderer(window, -1, 0);
         
         if(renderer){
+            
             SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
             std::cout << "Renderer Initialized!...." << std::endl;
+        
         }
         
         
@@ -125,6 +196,9 @@ void GameEngine::handleEvents(){
             SDL_UpdateWindowSurface(window);
             render();
             break;
+            
+
+            
             
         case SDLK_SPACE:
             shoot();
@@ -207,35 +281,45 @@ void GameEngine:: addEnemy( int howManyEnemyYouNeed ) {
 }
 
 
-//if last enemy in the vector has x 
+//if last enemy in the vector has x
 void GameEngine::moveEnemies(){
     
     // std::map <EnemySprite*, SDL_Texture*>:: iterator it;
     
     for(EnemySprite* enemy: vecOfEnemy){
         
-        if(moveLeftFlag == true ){
-            
-            enemy->setPosX( enemy->getPosX() - 5 );
-            std::cout << enemy->getPosX() << std::endl;
-            if(vecOfEnemy.back()->getPosX() == 10 ){
-                moveLeftFlag = false;
-            }
-        }else{
-            
-            enemy->setPosX( enemy->getPosX() + 5 );
-            
-            if(vecOfEnemy.back()->getPosX() >= 750){
-                moveLeftFlag = true;
-            }
-           
-        }
+        
+        enemy->tick();
+        
+//        if(moveLeftFlag == true ){
+//
+//            enemy->setPosX( enemy->getPosX() - 5 );
+//            std::cout << enemy->getPosX() << std::endl;
+//            if(vecOfEnemy.back()->getPosX() == 10 ){
+//                moveLeftFlag = false;
+//            }
+//
+//        } else{
+//
+//            enemy->setPosX( enemy->getPosX() + 5 );
+//
+//            if(vecOfEnemy.back()->getPosX() >= 750){
+//                moveLeftFlag = true;
+//            }
+//
+//        }
         
         enemy->draw(renderer, enemy->getMyTex());
     }
 }
 
 
+void GameEngine:: setFPS(int fps){
+    if(fps > 1){
+        FPS = fps;
+    }
+    
+}
 
 void GameEngine::freeEnemies(){
     
@@ -250,20 +334,41 @@ void GameEngine::freeEnemies(){
 
 
 void GameEngine:: addBulletImage(std::string pathToImage){
-     
+    bulletPath += pathToImage;
+    
     b = b->create(20,20,pathToImage.c_str());
     b->setPath(pathToImage);
     b->set_image_tex(b->getPath().c_str(),renderer); //bullet path
 }
 
+void GameEngine::createBullet(){
+    b = b->create(20,20,bulletPath.c_str());
+       b->setPath(bulletPath);
+       b->set_image_tex(b->getPath().c_str(),renderer); //bullet path
+}
 
 void GameEngine::shoot(){
-    
+
    
-    b->shoot(playerSprite->getPosX(),renderer, vecOfEnemy);
+   // b->shoot( playerSprite->getPosX(),renderer, vecOfEnemy );
+     
+    Bullet* tmpBullet = nullptr;
+    tmpBullet = tmpBullet->create(20, 20, bulletPath.c_str());
     
-    renderAllEnemy();
+    tmpBullet->setPosY(playerSprite->getPosY());
+    tmpBullet->setPosX(playerSprite->getPosX());
     
+    tmpBullet->setPath(bulletPath);
+    tmpBullet->set_image_tex(tmpBullet->getPath().c_str(),renderer); //bullet path
+    
+    //tmpBullet->shoot(playerSprite->getPosX(), renderer, vecOfEnemy);
+    
+    vecOfBullet.push_back(tmpBullet);
+    
+
+  // renderAllEnemy();
+    
+    //delete bullet;
 }
 
 
@@ -289,6 +394,7 @@ void GameEngine::renderAllEnemy() {
     
     for(it = vecOfEnemy.begin(); it != vecOfEnemy.end(); ++it){
         SDL_Texture *tx = (*it)->getMyTex();
+       
         if((*it)->isDamaged() == false){
             //std::cout <<
             (*it)->draw(renderer, tx);
@@ -309,6 +415,16 @@ void GameEngine::clean(){
     std::cout << "SDL CLEANED and DESTROYED!...." << std::endl;
 }
 
+void GameEngine::removeSprite(Sprite* sprite){
+    delete playerSprite;
+}
+
+
+
 bool GameEngine::running(){
     return isRuning;
 }
+
+GameEngine gE;
+}
+

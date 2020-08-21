@@ -10,9 +10,13 @@
 // Basnivå1
 
 #include "Bullet.h"
+#include "GameEngine.h"
 
 
+using namespace std;
 
+
+namespace gameengine {
 //Constructor
 Bullet:: Bullet(int w, int h,std::string pathz)
 : Sprite(0,0,w,h)
@@ -22,8 +26,8 @@ Bullet:: Bullet(int w, int h,std::string pathz)
 
 
 //Destructor
-Bullet::~Bullet(){
-    
+Bullet::~Bullet()
+{
     std::cout << " :BULLET" << std::endl;
     //free surfaces and other memory bound items
     //SDL_DestroyTexture(texMex);
@@ -37,7 +41,7 @@ Bullet* Bullet::create(int x, int y, std::string path){
 }
 
 
-void Bullet::bulletLoop(int startPosX, SDL_Renderer* sl, const std::vector<EnemySprite*> &vec){
+void Bullet::bulletLoop(int startPosX, SDL_Renderer* sl,  std::vector<EnemySprite*> &vec){
     
     setPosX(startPosX+16);
     
@@ -63,12 +67,27 @@ void Bullet::bulletLoop(int startPosX, SDL_Renderer* sl, const std::vector<Enemy
     
 }
 
-void Bullet::shoot(int posX, SDL_Renderer* ren, const std::vector<EnemySprite*> &vec ){
+void Bullet::tick( ){
+
+    setPosY(getPosY()-1);
+    
+    if( getPosY() <= 0) {
+        
+        gE.removeBullet(this);
+        
+        //setPosY( VERTICAL_HEIGHT );
+        
+    }
+}
+
+void Bullet::shoot(int posX, SDL_Renderer* ren,  std::vector<EnemySprite*> &vec ){
     
     bulletLoop(posX,ren,vec);
 }
 
-bool Bullet::chekkCollision( Bullet* bz, const std::vector<EnemySprite*> &vec) {
+bool Bullet::chekkCollision( Bullet* bz,  std::vector<EnemySprite*> &vec) {
+    
+    std::vector< EnemySprite* > discardedEnemy;
     
     const SDL_Rect &bulletPointer = bz->getRectobj();
     const SDL_Rect* rectBullet = &bulletPointer;
@@ -84,6 +103,9 @@ bool Bullet::chekkCollision( Bullet* bz, const std::vector<EnemySprite*> &vec) {
             
             enemyInVec->setDamaged(true);
             
+            //vec.erase(enemyInVec);
+            discardedEnemy.push_back(enemyInVec);
+            
             std::cout<< "COLLIDED"<< std::endl;
             
         } else {
@@ -94,7 +116,33 @@ bool Bullet::chekkCollision( Bullet* bz, const std::vector<EnemySprite*> &vec) {
     }
     
     
+
+//    auto enemyItr = vec.begin();
+
+//    for(EnemySprite* enemySprit : vec){
+//
+//        for(vector<EnemySprite*>::iterator i = discardedEnemy.begin(); i != discardedEnemy.end();){
+//
+//            if(*i == enemySprit ){
+//
+//                i = vec.erase(i);
+//                delete enemySprit;
+//
+//            } else{
+//
+//                i++;
+//
+//            }
+//
+//        }
+//    }
+//    discardedEnemy.clear();
+//
+//    std::cout<< "size of vektorn: "<< vec.size()<< std::endl;
+    
     return false;
 }
+}
+
 
 

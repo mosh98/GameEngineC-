@@ -16,12 +16,16 @@
 #include <SDL2/SDL.h>
 #include "GameEngine.h"
 
+using namespace gameengine;
 
 GameEngine *gameEngine = nullptr;
 
 int main(int argc, const char * argv[]) {
        
     gameEngine = new GameEngine();
+    
+    gameEngine->setFPS(30);
+    
     gameEngine->init("MOSH_Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, false);
     
     gameEngine-> setEnemyAttributes(30, 30, "/Users/moslehmahamud/Documents/GameEngineC-CloneFromGit/enemy.png", 8);

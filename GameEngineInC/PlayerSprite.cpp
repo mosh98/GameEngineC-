@@ -15,6 +15,8 @@
 #include <SDL2/SDL_image.h>
 
 
+namespace gameengine {
+
 PlayerSprite::PlayerSprite(int x, int y, int w, int h): Sprite(x, y, w, h){
 }
 
@@ -28,11 +30,17 @@ PlayerSprite:: ~PlayerSprite(){
 
 
 void PlayerSprite:: increaseX(){
+   
     if(getPosX() < windowWidth){
+        
         setPosX(getPosX()+25);
+        
         std::cout<<"Rect_Increase x: "<<getPosX()<<std::endl;
+    
     }else{
+        
         std::cout<<"x cord LOCKED! "<< getPosX()<<std::endl;
+    
     }
 }
 
@@ -49,6 +57,8 @@ void PlayerSprite::  decreaseX(){
 void PlayerSprite:: setWindowWidth(int width){
     windowWidth = width-50;
 }
+}
+
 
 
 
