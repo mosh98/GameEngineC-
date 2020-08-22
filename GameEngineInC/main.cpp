@@ -32,7 +32,7 @@ int main(int argc, const char * argv[]) {
     gameEngine-> addPlayerSprite(48,48,"/Users/moslehmahamud/Documents/GameEngineC-CloneFromGit/triangle-clipart-triangle-shape-1-original.png");
     gameEngine-> addBulletImage("/Users/moslehmahamud/Documents/GameEngineC-CloneFromGit/bullet.png");
    
-    gameEngine-> initialize_Loop(  );
+    gameEngine-> initialize_Loop();
     
     return 0;
 }

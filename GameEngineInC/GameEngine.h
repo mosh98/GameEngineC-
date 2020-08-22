@@ -97,8 +97,7 @@ private:
     int FPS = 25;
     
     PlayerSprite* playerSprite = NULL;
-    Bullet* b = NULL;
-    
+
     SDL_Window *window;
     SDL_Renderer *renderer;
     SDL_Surface *screen;

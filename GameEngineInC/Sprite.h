@@ -31,7 +31,7 @@ public:
     SDL_Rect getRectobj() const;
     SDL_Texture* set_image_tex(const char filename[] = NULL, SDL_Renderer *ren = NULL);
     void setWidthAndHeight(int width, int height);
-    void draw(SDL_Renderer* ren, SDL_Texture* tex);
+    void draw(SDL_Renderer* ren);
     SDL_Texture* getMyTex() const;
     
     virtual ~Sprite();

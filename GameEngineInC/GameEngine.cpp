@@ -19,15 +19,12 @@ namespace gameengine {
 GameEngine::GameEngine( )
 {
     playerSprite =  playerSprite->create(400,500,48,48);
-    
-   
 }
 
 GameEngine::~GameEngine(){
     
     clean();
     delete playerSprite;
-    delete b;
     window = NULL;
     renderer = NULL;
     screen = NULL;
@@ -68,15 +65,18 @@ void GameEngine::drawSprites(){
     SDL_RenderClear(renderer);
     
     for(Bullet* bull: vecOfBullet){
-        bull->draw(renderer,bull->getMyTex());
+        //bull->draw(renderer,bull->getMyTex());
+        bull->draw(renderer);
     }
     
      for(EnemySprite* enemy: vecOfEnemy){
-         enemy->draw(renderer, enemy->getMyTex());
+         enemy->draw(renderer);
      }
        
-       playerSprite->draw(renderer, playerTex);
-       SDL_RenderPresent(renderer);
+       //playerSprite->draw(renderer, playerTex);
+        playerSprite->draw(renderer);
+       
+    SDL_RenderPresent(renderer);
     
 }
 
@@ -93,8 +93,6 @@ void GameEngine::tickSprites(){
     for(EnemySprite* enemy: vecOfEnemy) {
         enemy->tick();
     }
-    
-    
 }
 
 void GameEngine::checkCollision(){
@@ -106,7 +104,6 @@ void GameEngine::checkCollision(){
         
         for(Bullet* bull: vecOfBullet) {
            
-            
             const SDL_Rect &bulletPointer = bull->getRectobj();
             const SDL_Rect* rectBullet = &bulletPointer;
               
@@ -115,7 +112,6 @@ void GameEngine::checkCollision(){
                     std::cout<< "COLLIDED"<< std::endl;
                     
                 }
-            
         }
     
     }
@@ -129,32 +125,32 @@ void GameEngine::removeBullet(Bullet *bullet) {
 }
 
 void GameEngine::updateSprites(){
-        
+    
     for(Bullet* b: removedBullet){
-   
+        
         for(std::vector<Bullet*>::iterator i = vecOfBullet.begin(); i != vecOfBullet.end();) {
-       
-        if((*i) == b){
-            i = vecOfBullet.erase(i);
-            delete b;
-        }else{
-            i++;
-        }
+            
+            if((*i) == b){
+                i = vecOfBullet.erase(i);
+                delete b;
+            }else{
+                i++;
+            }
         }//inner
     }//outer
     
     
     for(EnemySprite* enemyInVec: removedEnenmy){
-       for(std::vector<EnemySprite*>::iterator i = vecOfEnemy.begin(); i != vecOfEnemy.end();){
-          
-           if((*i) == enemyInVec){
-               i = vecOfEnemy.erase(i);
-               delete enemyInVec;
-           }else{
-               i++;
-           }
-           }//inner
-       }//outer
+        for(std::vector<EnemySprite*>::iterator i = vecOfEnemy.begin(); i != vecOfEnemy.end();){
+            
+            if((*i) == enemyInVec){
+                i = vecOfEnemy.erase(i);
+                delete enemyInVec;
+            }else{
+                i++;
+            }
+        }//inner
+    }//outer
     
     removedEnenmy.clear();
     removedBullet.clear();
@@ -187,7 +183,7 @@ void GameEngine::init(const char *title, int xpos, int ypos, int width, int heig
             
             SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
             std::cout << "Renderer Initialized!...." << std::endl;
-        
+            
         }
         
         
@@ -228,7 +224,7 @@ void GameEngine::handleEvents(){
             if( ! (playerSprite->getPosX() > (width-70)) )
                 playerSprite->increaseX();
             break;
-        
+            
         case SDLK_SPACE:
             shoot();
             break;
@@ -241,14 +237,15 @@ void GameEngine::handleEvents(){
 
 
 void GameEngine:: addPlayerSprite(int width, int height, std::string pathToImage){
-        
+    
     if( ! ( width <= 10 && height <= 10 ) ){
         playerSprite->setWidthAndHeight(width, height);
     }
     
     playerSprite->setPath(pathToImage);
     playerTex = playerSprite->set_image_tex( pathToImage.c_str(), renderer );
-    playerSprite->draw(renderer, playerTex);
+    //playerSprite->draw(renderer, playerTex);
+    playerSprite->draw(renderer);
     
 }
 
@@ -296,7 +293,7 @@ void GameEngine::moveEnemies(){
         
     for(EnemySprite* enemy: vecOfEnemy){
         enemy->tick();
-        enemy->draw(renderer, enemy->getMyTex());
+        enemy->draw(renderer);
     }
 }
 
@@ -308,28 +305,20 @@ void GameEngine:: setFPS(int fps){
     
 }
 
-void GameEngine:: addBulletImage(std::string pathToImage){
+void GameEngine:: addBulletImage(std::string pathToImage)
+{
     bulletPath += pathToImage;
-    
-    b = b->create(20,20,pathToImage.c_str());
-    b->setPath(pathToImage);
-    b->set_image_tex(b->getPath().c_str(),renderer); //bullet path
+
 }
 
-void GameEngine::createBullet(){
-    b = b->create(20,20,bulletPath.c_str());
-       b->setPath(bulletPath);
-       b->set_image_tex(b->getPath().c_str(),renderer); //bullet path
-}
+
 
 void GameEngine::shoot(){
 
     Bullet* tmpBullet = nullptr;
     tmpBullet = tmpBullet->create(20, 20, bulletPath.c_str());
-    
     tmpBullet->setPosY(playerSprite->getPosY());
     tmpBullet->setPosX(playerSprite->getPosX());
-    
     tmpBullet->setPath(bulletPath);
     tmpBullet->set_image_tex(tmpBullet->getPath().c_str(),renderer); //bullet path
         

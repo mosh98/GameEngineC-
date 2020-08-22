@@ -78,15 +78,18 @@ SDL_Texture* Sprite::getMyTex() const{
     
 }
 
-void Sprite:: draw(SDL_Renderer* ren, SDL_Texture* tex){
-    
-    //saveMyRen = ren;
-    saveMyTex = tex;
-    
-    SDL_RenderCopy(ren, tex, NULL, &rect);
+//void Sprite:: draw(SDL_Renderer* ren, SDL_Texture* tex){
+//
+//    SDL_RenderCopy(ren, saveMyTex, NULL, &rect);
+//
+//}
+
+
+void Sprite:: draw(SDL_Renderer* ren){
+        
+    SDL_RenderCopy(ren, saveMyTex, NULL, &rect);
     
 }
-
 
 int Sprite:: getPosX() const{
     return rect.x;
