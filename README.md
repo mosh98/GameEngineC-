@@ -1,11 +1,11 @@
 # GameEngineC-
-
+![DEMO](https://github.com/mosh98/GameEngineC-/blob/master/ezgif.com-crop.gif)
 ## Quick Start Guide
 
 ### How to use the space invaders GameEngine API?
 
-Make a GameEngine Object
-0. 
+0.Make a GameEngine Object
+
 ```
 GameEngine *gameEngine =  new GameEngine();
 
@@ -65,4 +65,4 @@ int main(int argc, const char * argv[]) {
 }
 ```
 
-![alt text](https://github.com/mosh98/GameEngineC-/blob/master/demo.png)
+
