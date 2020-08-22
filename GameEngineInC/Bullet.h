@@ -27,8 +27,8 @@ class Bullet : public Sprite {
     
 public:
     static Bullet* create(int x, int y, std::string path);
-    //~Bullet(){};
-    void tick(std::vector<Bullet*> *removedBullet);
+    ~Bullet(){};
+    void tick(std::vector<Sprite*> *removedBullet);
     
     
 private:

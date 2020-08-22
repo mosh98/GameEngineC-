@@ -28,12 +28,11 @@ Bullet* Bullet::create(int x, int y, std::string path){
     return new Bullet(x,y,path);
 }
 
-void Bullet::tick(std::vector<Bullet*> *removedBullet ){
+void Bullet::tick( std::vector<Sprite*> *removedBullet ){
 
     setPosY(getPosY()-7);
     
    
-    
     if(getPosY() <= 0) {
         
         removedBullet->push_back(this);

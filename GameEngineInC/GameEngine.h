@@ -55,7 +55,7 @@ public:
     void createBullet();
     
     // implement these
-    void removeSprite(Sprite* sprite);
+    void removePlayerSprite();
     
     std::vector<EnemySprite*> getVecOfEnemies(){
         return vecOfEnemy;
@@ -71,7 +71,7 @@ public:
     void drawSprites();
     void tickSprites();
     
-    void removeBullet(Bullet* bullet);
+  
     
     void updateSprites();
     void checkCollision();
@@ -82,6 +82,10 @@ public:
     int getEnemyWidth() const{return enemyHeight;}
     bool getIsRunning() const {return isRuning;}
     
+    std::string getEnemyPath(){return enemyPath;}
+    std::string getBulletPath(){return bulletPath;}
+   // void removeBullet(Bullet* bullet);
+    void remove(Sprite*); // found no use of this
     
 private:
     
@@ -101,9 +105,9 @@ private:
     SDL_Window *window;
     SDL_Renderer *renderer;
     SDL_Surface *screen;
-    SDL_Texture *playerTex;
-    SDL_Texture *bulletTex;
     Uint32 startTick = SDL_GetTicks();
+    
+    std::vector< Sprite* > removedSprites;
     
     std::vector< EnemySprite* > vecOfEnemy; //enemy obj
     std::vector< EnemySprite* > removedEnenmy; //enemy obj
@@ -111,11 +115,10 @@ private:
     std::vector< Bullet* > removedBullet; //Bullet obj
     
     void shoot();
-    void remove(Sprite*); // found no use of this
+ 
+    
     void addEnemy( int howManyEnemyYouNeed);
-    void moveEnemies(); 
     void handleEvents();
-    void render();
     void clean();
     bool running();
     

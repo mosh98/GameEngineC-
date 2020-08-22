@@ -58,6 +58,17 @@ void GameEngine::initialize_Loop(){
 
 }
 
+void GameEngine::remove(Sprite* sprite){
+    
+    if( PlayerSprite* player = dynamic_cast<PlayerSprite*>(sprite) ){
+        delete playerSprite;
+        playerSprite = NULL;
+    }else{
+        removedSprites.push_back(sprite);
+    }
+    
+}
+
 
 void GameEngine::drawSprites(){
     
@@ -74,7 +85,11 @@ void GameEngine::drawSprites(){
      }
        
        //playerSprite->draw(renderer, playerTex);
+    
+    if(playerSprite != NULL){
         playerSprite->draw(renderer);
+    }
+     
        
     SDL_RenderPresent(renderer);
     
@@ -85,7 +100,7 @@ void GameEngine::drawSprites(){
 void GameEngine::tickSprites(){
    
     for(Bullet* bull: vecOfBullet){
-        bull->tick( &removedBullet );
+        bull->tick( &removedSprites );
     }
     
     checkCollision();
@@ -108,7 +123,7 @@ void GameEngine::checkCollision(){
             const SDL_Rect* rectBullet = &bulletPointer;
               
                 if( SDL_HasIntersection ( rectBullet, enemyRect ) == SDL_TRUE ) {
-                    removedEnenmy.push_back(enemyInVec);
+                    removedSprites.push_back(enemyInVec); //changed from removedEnenmy
                     std::cout<< "COLLIDED"<< std::endl;
                     
                 }
@@ -118,15 +133,16 @@ void GameEngine::checkCollision(){
     
 }
 
-void GameEngine::removeBullet(Bullet *bullet) {
+//void GameEngine::removeBullet(Bullet *bullet) {
+//
+//    removedBullet.push_back(bullet);
+//    removedSprites.push_back(bullet);
+//}
 
-    removedBullet.push_back(bullet);
-
-}
 
 void GameEngine::updateSprites(){
     
-    for(Bullet* b: removedBullet){
+    for(Sprite* b: removedSprites){
         
         for(std::vector<Bullet*>::iterator i = vecOfBullet.begin(); i != vecOfBullet.end();) {
             
@@ -140,20 +156,24 @@ void GameEngine::updateSprites(){
     }//outer
     
     
-    for(EnemySprite* enemyInVec: removedEnenmy){
+    for(Sprite* enemyInVec: removedSprites){
+        
         for(std::vector<EnemySprite*>::iterator i = vecOfEnemy.begin(); i != vecOfEnemy.end();){
             
             if((*i) == enemyInVec){
+                
                 i = vecOfEnemy.erase(i);
                 delete enemyInVec;
+                
             }else{
                 i++;
             }
         }//inner
     }//outer
     
-    removedEnenmy.clear();
-    removedBullet.clear();
+//    removedEnenmy.clear();
+//    removedBullet.clear();
+    removedSprites.clear();
     
 }
 
@@ -243,7 +263,7 @@ void GameEngine:: addPlayerSprite(int width, int height, std::string pathToImage
     }
     
     playerSprite->setPath(pathToImage);
-    playerTex = playerSprite->set_image_tex( pathToImage.c_str(), renderer );
+    playerSprite->set_image_tex( pathToImage.c_str(), renderer );
     //playerSprite->draw(renderer, playerTex);
     playerSprite->draw(renderer);
     
@@ -254,7 +274,7 @@ void GameEngine::setEnemyAttributes(int width, int height, std::string pathToIma
     this->enemyWidth = width;
     this->enemyHeight = height;
     
-    enemyPath = pathToImage;
+    enemyPath += pathToImage;
     addEnemy(enemy);
     
 }
@@ -289,13 +309,7 @@ void GameEngine:: addEnemy( int howManyEnemyYouNeed ) {
 
 
 //if last enemy in the vector has x
-void GameEngine::moveEnemies(){
-        
-    for(EnemySprite* enemy: vecOfEnemy){
-        enemy->tick();
-        enemy->draw(renderer);
-    }
-}
+
 
 
 void GameEngine:: setFPS(int fps){
@@ -331,12 +345,12 @@ void GameEngine::clean(){
     
     SDL_DestroyWindow(window);
     SDL_DestroyRenderer(renderer);
-    SDL_DestroyTexture(playerTex);
     std::cout << "SDL CLEANED and DESTROYED!...." << std::endl;
 }
 
-void GameEngine::removeSprite(Sprite* sprite){
+void GameEngine::removePlayerSprite(){
     delete playerSprite;
+    playerSprite = NULL;
 }
 
 
