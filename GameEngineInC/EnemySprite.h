@@ -25,11 +25,11 @@ class EnemySprite: public Sprite {
     
 public:
     ~EnemySprite(){};
-    static EnemySprite* create(int x, int y, int w, int h);
+    static EnemySprite* create(int x, int y, int w, int h, std::string path);
     void tick();
     
 private:
-    EnemySprite (int x, int y, int w, int h);
+    EnemySprite (int x, int y, int w, int h,std::string path);
     bool moveLeftFlag = false;
     
 };

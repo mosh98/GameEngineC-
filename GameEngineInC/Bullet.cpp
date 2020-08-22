@@ -19,7 +19,7 @@ using namespace std;
 namespace gameengine {
 //Constructor
 Bullet:: Bullet(int w, int h,std::string pathz)
-: Sprite(0,0,w,h)
+: Sprite(0,0,w,h,pathz)
 {
     
 }

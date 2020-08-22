@@ -16,7 +16,7 @@
 
 namespace gameengine {
 
-Sprite::Sprite(int x, int y, int w, int h ){
+Sprite::Sprite (int x, int y, int w, int h, std::string path ):path(path) {
     rect.h = h;
     rect.w = w;
     rect.x = x;

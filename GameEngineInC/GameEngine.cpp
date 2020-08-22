@@ -18,7 +18,8 @@ namespace gameengine {
 
 GameEngine::GameEngine( )
 {
-    playerSprite =  playerSprite->create(400,500,48,48);
+    
+  
 }
 
 GameEngine::~GameEngine(){
@@ -257,12 +258,13 @@ void GameEngine::handleEvents(){
 
 
 void GameEngine:: addPlayerSprite(int width, int height, std::string pathToImage){
-    
+      
+    playerSprite =  playerSprite->create(400,500,48,48,pathToImage.c_str());
     if( ! ( width <= 10 && height <= 10 ) ){
         playerSprite->setWidthAndHeight(width, height);
     }
     
-    playerSprite->setPath(pathToImage);
+    playerSprite->setPath(pathToImage); // unnecessary
     playerSprite->set_image_tex( pathToImage.c_str(), renderer );
     //playerSprite->draw(renderer, playerTex);
     playerSprite->draw(renderer);
@@ -294,7 +296,7 @@ void GameEngine:: addEnemy( int howManyEnemyYouNeed ) {
         std::cout << counter <<std::endl;
         
         EnemySprite* enemySpritez = nullptr;
-        enemySpritez = enemySpritez->create(x,y, enemyWidth, enemyHeight);
+        enemySpritez = enemySpritez->create(x,y, enemyWidth, enemyHeight,enemyPath.c_str());
         enemySpritez->set_image_tex( enemyPath.c_str(), renderer );
         vecOfEnemy.push_back(enemySpritez);
         
@@ -331,10 +333,11 @@ void GameEngine::shoot(){
 
     Bullet* tmpBullet = nullptr;
     tmpBullet = tmpBullet->create(20, 20, bulletPath.c_str());
+     tmpBullet->set_image_tex(bulletPath.c_str(),renderer); //bullet path
     tmpBullet->setPosY(playerSprite->getPosY());
     tmpBullet->setPosX(playerSprite->getPosX());
     tmpBullet->setPath(bulletPath);
-    tmpBullet->set_image_tex(tmpBullet->getPath().c_str(),renderer); //bullet path
+   
         
     vecOfBullet.push_back(tmpBullet);
     

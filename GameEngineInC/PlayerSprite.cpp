@@ -17,11 +17,11 @@
 
 namespace gameengine {
 
-PlayerSprite::PlayerSprite(int x, int y, int w, int h): Sprite(x, y, w, h){
+PlayerSprite::PlayerSprite(int x, int y, int w, int h, std::string path): Sprite(x, y, w, h, path){
 }
 
-PlayerSprite* PlayerSprite::create(int x, int y, int w, int h){
-    return new PlayerSprite(x,y,w,h);
+PlayerSprite* PlayerSprite::create(int x, int y, int w, int h, std::string path){
+    return new PlayerSprite(x,y,w,h,path);
 }
 
 void PlayerSprite:: increaseX(){

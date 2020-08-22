@@ -13,15 +13,15 @@
 #include "Sprite.h"
 
 namespace gameengine {
-EnemySprite::EnemySprite(int x, int y, int w, int h):Sprite(x, y, w, h){
+EnemySprite::EnemySprite(int x, int y, int w, int h, std::string path): Sprite(x, y, w, h, path){
 }
 
 
 
 
 
-EnemySprite* EnemySprite::create(int x, int y, int w, int h){
-    return new EnemySprite(x, y,  w, h);
+EnemySprite* EnemySprite::create( int x, int y, int w, int h, std::string path){
+    return new EnemySprite(x, y,  w, h, path);
 }
 
 void EnemySprite:: tick(){

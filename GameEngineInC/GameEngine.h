@@ -70,9 +70,7 @@ public:
     
     void drawSprites();
     void tickSprites();
-    
-  
-    
+
     void updateSprites();
     void checkCollision();
     
@@ -84,12 +82,11 @@ public:
     
     std::string getEnemyPath(){return enemyPath;}
     std::string getBulletPath(){return bulletPath;}
-   // void removeBullet(Bullet* bullet);
     void remove(Sprite*); // found no use of this
     
 private:
     
-    //int cnt;
+    
     int width; //get
     int height; //get
     int enemyWidth;//get

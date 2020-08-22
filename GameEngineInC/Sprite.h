@@ -22,7 +22,7 @@ namespace gameengine {
 class Sprite{
     
 protected:
-    Sprite(int x, int y, int w, int h);
+    Sprite(int x, int y, int w, int h, std::string path);
     
 
     
