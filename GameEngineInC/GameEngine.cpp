@@ -56,7 +56,6 @@ void GameEngine::initialize_Loop(){
             SDL_Delay(1000/FPS);
     }
     
-    delete this;
 }
 
 void GameEngine::remove(Sprite* sprite){

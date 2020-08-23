@@ -31,5 +31,7 @@ int main(int argc, const char * argv[]) {
     gameEngine-> addBulletImage("/Users/moslehmahamud/Documents/GameEngineC-CloneFromGit/bullet.png");
     gameEngine-> initialize_Loop();
     
+    delete gameEngine;
+    
     return 0;
 }
