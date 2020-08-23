@@ -87,12 +87,12 @@ public:
 private:
     
     
-    int width; //get
-    int height; //get
-    int enemyWidth;//get
-    int enemyHeight;//get
+    int width;
+    int height;
+    int enemyWidth;
+    int enemyHeight;
     bool isRuning;
-  //  bool moveLeftFlag = false;
+  
     std::string enemyPath;//get
     std::string bulletPath;//get
     int FPS = 25;
@@ -105,11 +105,9 @@ private:
     Uint32 startTick = SDL_GetTicks();
     
     std::vector< Sprite* > removedSprites;
-    
     std::vector< EnemySprite* > vecOfEnemy; //enemy obj
-    std::vector< EnemySprite* > removedEnenmy; //enemy obj
     std::vector< Bullet* > vecOfBullet; //Bullet obj
-    std::vector< Bullet* > removedBullet; //Bullet obj
+    
     
     void shoot();
  

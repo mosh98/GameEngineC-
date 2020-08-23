@@ -56,7 +56,7 @@ void GameEngine::initialize_Loop(){
             SDL_Delay(1000/FPS);
     }
     
-
+    delete this;
 }
 
 void GameEngine::remove(Sprite* sprite){
@@ -77,7 +77,7 @@ void GameEngine::drawSprites(){
     SDL_RenderClear(renderer);
     
     for(Bullet* bull: vecOfBullet){
-        //bull->draw(renderer,bull->getMyTex());
+        
         bull->draw(renderer);
     }
     
@@ -85,15 +85,11 @@ void GameEngine::drawSprites(){
          enemy->draw(renderer);
      }
        
-       //playerSprite->draw(renderer, playerTex);
-    
     if(playerSprite != NULL){
         playerSprite->draw(renderer);
     }
-     
-       
+
     SDL_RenderPresent(renderer);
-    
 }
 
 
@@ -134,12 +130,6 @@ void GameEngine::checkCollision(){
     
 }
 
-//void GameEngine::removeBullet(Bullet *bullet) {
-//
-//    removedBullet.push_back(bullet);
-//    removedSprites.push_back(bullet);
-//}
-
 
 void GameEngine::updateSprites(){
     
@@ -172,8 +162,6 @@ void GameEngine::updateSprites(){
         }//inner
     }//outer
     
-//    removedEnenmy.clear();
-//    removedBullet.clear();
     removedSprites.clear();
     
 }
@@ -208,10 +196,9 @@ void GameEngine::init(const char *title, int xpos, int ypos, int width, int heig
         }
         
         
-        screen = SDL_GetWindowSurface(window); //This "canvas" is where we gonna append our bmp picture to!
+        screen = SDL_GetWindowSurface(window);
         
-        /* Up until now everything was drawn behind the scenes.
-         This will show the new contents of the window. */
+   
         
         //clearing stuff
         SDL_RenderClear(renderer);
@@ -264,9 +251,7 @@ void GameEngine:: addPlayerSprite(int width, int height, std::string pathToImage
         playerSprite->setWidthAndHeight(width, height);
     }
     
-    playerSprite->setPath(pathToImage); // unnecessary
     playerSprite->set_image_tex( pathToImage.c_str(), renderer );
-    //playerSprite->draw(renderer, playerTex);
     playerSprite->draw(renderer);
     
 }
@@ -333,12 +318,12 @@ void GameEngine::shoot(){
 
     Bullet* tmpBullet = nullptr;
     tmpBullet = tmpBullet->create(20, 20, bulletPath.c_str());
-     tmpBullet->set_image_tex(bulletPath.c_str(),renderer); //bullet path
+    tmpBullet->set_image_tex(bulletPath.c_str(),renderer); //bullet path
     tmpBullet->setPosY(playerSprite->getPosY());
     tmpBullet->setPosX(playerSprite->getPosX());
     tmpBullet->setPath(bulletPath);
-   
-        
+    
+    
     vecOfBullet.push_back(tmpBullet);
     
 }
