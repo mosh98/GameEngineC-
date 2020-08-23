@@ -19,6 +19,7 @@ namespace gameengine {
 GameEngine::GameEngine( )
 {
     
+    
   
 }
 
@@ -122,7 +123,7 @@ void GameEngine::checkCollision(){
             const SDL_Rect* rectBullet = &bulletPointer;
               
                 if( SDL_HasIntersection ( rectBullet, enemyRect ) == SDL_TRUE ) {
-                    removedSprites.push_back(enemyInVec); //changed from removedEnenmy
+                    removedSprites.push_back(enemyInVec);
                     std::cout<< "COLLIDED"<< std::endl;
                     
                 }
@@ -326,28 +327,31 @@ void GameEngine::shoot(){
 }
 
 
+
 void GameEngine::clean(){
-        
+
     for(EnemySprite* enemy: vecOfEnemy){
         delete enemy;
     }
-    std::cout << "Size of VECofEnemy: " << vecOfEnemy.size() << std::endl;
     
+    
+  
+
     for(Bullet* bullet: vecOfBullet){
         delete bullet;
     }
 
-     std::cout << "Size of VECofBullet: " << vecOfBullet.size() << std::endl;
-    
-    
+   
+
+
     for(Sprite* b: removedSprites){
         delete b;
     }
-    
+
     removedSprites.clear();
     vecOfEnemy.clear();
     vecOfBullet.clear();
-    
+
     SDL_DestroyWindow(window);
     SDL_DestroyRenderer(renderer);
     std::cout << "SDL CLEANED and DESTROYED!...." << std::endl;
