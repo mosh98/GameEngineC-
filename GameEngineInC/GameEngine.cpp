@@ -28,7 +28,7 @@ GameEngine::~GameEngine(){
     delete playerSprite;
     window = NULL;
     renderer = NULL;
-    screen = NULL;
+   // screen = NULL;
     
     IMG_Quit();
     SDL_Quit();
@@ -195,9 +195,7 @@ void GameEngine::init(const char *title, int xpos, int ypos, int width, int heig
         }
         
         
-        screen = SDL_GetWindowSurface(window);
-        
-   
+//        screen = SDL_GetWindowSurface(window);
         
         //clearing stuff
         SDL_RenderClear(renderer);
@@ -270,7 +268,6 @@ void GameEngine:: addEnemy( int howManyEnemyYouNeed ) {
     
     int counter = 0;
     
-   
     int x = 25;
     int y = 100;
     
@@ -285,7 +282,6 @@ void GameEngine:: addEnemy( int howManyEnemyYouNeed ) {
         vecOfEnemy.push_back(enemySpritez);
         
         counter++;
-        
         x += 20;
         
         if(counter > howManyEnemyYouNeed)
@@ -296,9 +292,8 @@ void GameEngine:: addEnemy( int howManyEnemyYouNeed ) {
 
 //if last enemy in the vector has x
 
-
-
 void GameEngine:: setFPS(int fps){
+
     if(fps > 1){
         FPS = fps;
     }
@@ -329,6 +324,27 @@ void GameEngine::shoot(){
 
 
 void GameEngine::clean(){
+    
+    for(std::vector<EnemySprite*>::iterator i = vecOfEnemy.begin(); i != vecOfEnemy.end();){
+         
+        
+        i = vecOfEnemy.erase(i);
+            delete (*i);
+        
+        i++;
+    }
+    
+     std::cout << "Size of VECofEnemy: " << vecOfEnemy.size() << std::endl;
+    
+    
+    for(std::vector<Bullet*>::iterator i = vecOfBullet.begin(); i != vecOfBullet.end();){
+         i = vecOfBullet.erase(i);
+        delete (*i);
+        
+        i++;
+    }
+    
+     std::cout << "Size of VECofBullet: " << vecOfBullet.size() << std::endl;
     
     SDL_DestroyWindow(window);
     SDL_DestroyRenderer(renderer);

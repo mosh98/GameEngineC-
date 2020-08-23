@@ -101,7 +101,6 @@ private:
 
     SDL_Window *window;
     SDL_Renderer *renderer;
-    SDL_Surface *screen;
     Uint32 startTick = SDL_GetTicks();
     
     std::vector< Sprite* > removedSprites;
