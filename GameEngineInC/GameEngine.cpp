@@ -25,10 +25,13 @@ GameEngine::GameEngine( )
 GameEngine::~GameEngine(){
     
     clean();
-    delete playerSprite;
+    if(playerSprite != NULL){
+        delete playerSprite;
+    }
+    
     window = NULL;
     renderer = NULL;
-   // screen = NULL;
+
     
     IMG_Quit();
     SDL_Quit();
@@ -324,27 +327,26 @@ void GameEngine::shoot(){
 
 
 void GameEngine::clean(){
-    
-    for(std::vector<EnemySprite*>::iterator i = vecOfEnemy.begin(); i != vecOfEnemy.end();){
-         
         
-        i = vecOfEnemy.erase(i);
-            delete (*i);
-        
-        i++;
+    for(EnemySprite* enemy: vecOfEnemy){
+        delete enemy;
     }
+    std::cout << "Size of VECofEnemy: " << vecOfEnemy.size() << std::endl;
     
-     std::cout << "Size of VECofEnemy: " << vecOfEnemy.size() << std::endl;
-    
-    
-    for(std::vector<Bullet*>::iterator i = vecOfBullet.begin(); i != vecOfBullet.end();){
-         i = vecOfBullet.erase(i);
-        delete (*i);
-        
-        i++;
+    for(Bullet* bullet: vecOfBullet){
+        delete bullet;
     }
-    
+
      std::cout << "Size of VECofBullet: " << vecOfBullet.size() << std::endl;
+    
+    
+    for(Sprite* b: removedSprites){
+        delete b;
+    }
+    
+    removedSprites.clear();
+    vecOfEnemy.clear();
+    vecOfBullet.clear();
     
     SDL_DestroyWindow(window);
     SDL_DestroyRenderer(renderer);
