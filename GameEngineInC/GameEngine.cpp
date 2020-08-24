@@ -10,8 +10,6 @@
 // Basnivå1
 
 #include "GameEngine.h"
-#include <iostream>
-
 
 
 namespace gameengine {
@@ -26,18 +24,18 @@ GameEngine::GameEngine( )
 GameEngine::~GameEngine(){
     
     clean();
+    
     if(playerSprite != NULL){
         delete playerSprite;
     }
     
     window = NULL;
+    
     renderer = NULL;
 
-    
     IMG_Quit();
-    SDL_Quit();
     
-    std::cout<<"GameEngine destructor called "<< std::endl;
+    SDL_Quit();
 }
 
 
@@ -124,7 +122,7 @@ void GameEngine::checkCollision(){
               
                 if( SDL_HasIntersection ( rectBullet, enemyRect ) == SDL_TRUE ) {
                     removedSprites.push_back(enemyInVec);
-                    std::cout<< "COLLIDED"<< std::endl;
+                    
                     
                 }
         }
@@ -185,7 +183,7 @@ void GameEngine::init(const char *title, int xpos, int ypos, int width, int heig
     
     if( SDL_Init(SDL_INIT_EVERYTHING) == 0 ) {
         
-        std::cout << "Subsystems Initialized!...." << std::endl;
+    
         
         window = SDL_CreateWindow(title, xpos, ypos, width, height, flag);
         
@@ -194,12 +192,9 @@ void GameEngine::init(const char *title, int xpos, int ypos, int width, int heig
         if(renderer){
             
             SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
-            std::cout << "Renderer Initialized!...." << std::endl;
+            
             
         }
-        
-        
-//        screen = SDL_GetWindowSurface(window);
         
         //clearing stuff
         SDL_RenderClear(renderer);
@@ -278,7 +273,7 @@ void GameEngine:: addEnemy( int howManyEnemyYouNeed ) {
     //Loop
     while( counter < howManyEnemyYouNeed) {
         
-        std::cout << counter <<std::endl;
+       
         
         EnemySprite* enemySpritez = nullptr;
         enemySpritez = enemySpritez->create(x,y, enemyWidth, enemyHeight,enemyPath.c_str());
@@ -293,8 +288,6 @@ void GameEngine:: addEnemy( int howManyEnemyYouNeed ) {
     }
 }
 
-
-//if last enemy in the vector has x
 
 void GameEngine:: setFPS(int fps){
 
@@ -335,13 +328,9 @@ void GameEngine::clean(){
     }
     
     
-  
-
     for(Bullet* bullet: vecOfBullet){
         delete bullet;
     }
-
-   
 
 
     for(Sprite* b: removedSprites){
@@ -354,7 +343,7 @@ void GameEngine::clean(){
 
     SDL_DestroyWindow(window);
     SDL_DestroyRenderer(renderer);
-    std::cout << "SDL CLEANED and DESTROYED!...." << std::endl;
+   
 }
 
 void GameEngine::removePlayerSprite(){

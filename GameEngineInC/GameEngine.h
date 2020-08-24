@@ -15,9 +15,7 @@
 
 
 #include <SDL2/SDL.h>
-
 #include "Sprite.h"
-
 #include <SDL2/SDL_image.h>
 #include <stdlib.h>
 #include "Bullet.h"
@@ -109,8 +107,6 @@ private:
     
     
     void shoot();
- 
-    
     void addEnemy( int howManyEnemyYouNeed);
     void handleEvents();
     void clean();

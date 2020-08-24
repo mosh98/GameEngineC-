@@ -32,7 +32,6 @@ void Bullet::tick( std::vector<Sprite*> *removedBullet ){
 
     setPosY(getPosY()-7);
     
-   
     if(getPosY() <= 0) {
         
         removedBullet->push_back(this);

@@ -10,7 +10,6 @@
 
 #include "Sprite.h"
 #include <SDL2/SDL.h>
-#include <iostream>
 #include <SDL2/SDL_image.h>
 
 
@@ -26,14 +25,11 @@ Sprite::Sprite (int x, int y, int w, int h, std::string path ):path(path) {
 
 
 Sprite::~Sprite(){
-    
-//    SDL_DestroyRenderer(saveMyRen);
-//    saveMyRen = NULL;
-    
+        
     SDL_DestroyTexture(saveMyTex);
     saveMyTex = NULL;
     
-    std::cout<<"MEMORY CLEAN: SDL memory freed from Sprite class"<<std::endl;
+   
 }
 
 
@@ -42,7 +38,6 @@ SDL_Rect Sprite::getRectobj() const {
     return rect;
 }
 
-//    getter for image becuase it is a private variable
 SDL_Surface* Sprite:: get_image() const {
     return NULL;
 }
@@ -57,7 +52,7 @@ void Sprite::setWidthAndHeight(int width, int height){
 SDL_Texture* Sprite:: set_image_tex(const char filename[], SDL_Renderer *ren ){
     
     if( ! (IMG_Init(IMG_INIT_PNG) & IMG_INIT_PNG)){
-        std::cout << "Could not initalzie SDL image : " << IMG_GetError() << std::endl;
+       
     }
     
     SDL_Surface *imageSurface = NULL;

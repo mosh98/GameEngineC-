@@ -30,8 +30,6 @@ void EnemySprite:: tick(){
         
         setPosX( getPosX( ) - 5 );
         
-        std::cout << getPosX( ) << std::endl;
-        
         if( getPosX() == 10 ){
             moveLeftFlag = false;
         }
