@@ -49,16 +49,12 @@ public:
     
     
     void addBulletImage(std::string pathToImage);//needs to be pub
-    
-    void createBullet();
-    
-    // implement these
+ 
     void removePlayerSprite();
     
     std::vector<EnemySprite*> getVecOfEnemies(){
         return vecOfEnemy;
     }
-    
     
     void setFPS(int fps);
     
@@ -66,20 +62,10 @@ public:
         return FPS;
     }
     
-    void drawSprites();
-    void tickSprites();
-
-    void updateSprites();
-    void checkCollision();
-    
     int getWidth() const {return width;}
     int getHeight() const {return height;}
-    int getEnemyHeight() const {return enemyHeight;}
-    int getEnemyWidth() const{return enemyHeight;}
     bool getIsRunning() const {return isRuning;}
-    
-    std::string getEnemyPath(){return enemyPath;}
-    std::string getBulletPath(){return bulletPath;}
+   
     void remove(Sprite*); // found no use of this
     
 private:
@@ -91,7 +77,6 @@ private:
     int enemyHeight;
     bool isRuning;
   
-    std::string enemyPath;//get
     std::string bulletPath;//get
     int FPS = 25;
     
@@ -107,11 +92,21 @@ private:
     
     
     void shoot();
-    void addEnemy( int howManyEnemyYouNeed);
     void handleEvents();
     void clean();
     bool running();
     
+    int getEnemyHeight() const {return enemyHeight;}
+    int getEnemyWidth() const{return enemyHeight;}
+    
+    
+    void drawSprites();
+    void tickSprites();
+    
+    void updateSprites();
+    void checkCollision();
+    
+     std::string getBulletPath(){return bulletPath;}
 };
 }
 

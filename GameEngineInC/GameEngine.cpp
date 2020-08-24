@@ -257,35 +257,30 @@ void GameEngine::setEnemyAttributes(int width, int height, std::string pathToIma
     this->enemyWidth = width;
     this->enemyHeight = height;
     
-    enemyPath += pathToImage;
-    addEnemy(enemy);
-    
-}
+ 
 
-void GameEngine:: addEnemy( int howManyEnemyYouNeed ) {
-    
-    
     int counter = 0;
     
     int x = 25;
     int y = 100;
     
     //Loop
-    while( counter < howManyEnemyYouNeed) {
+    while( counter < enemy) {
         
        
         
         EnemySprite* enemySpritez = nullptr;
-        enemySpritez = enemySpritez->create(x,y, enemyWidth, enemyHeight,enemyPath.c_str());
-        enemySpritez->set_image_tex( enemyPath.c_str(), renderer );
+        enemySpritez = enemySpritez->create(x,y, enemyWidth, enemyHeight,pathToImage.c_str());
+        enemySpritez->set_image_tex( pathToImage.c_str(), renderer );
         vecOfEnemy.push_back(enemySpritez);
         
         counter++;
         x += 20;
         
-        if(counter > howManyEnemyYouNeed)
+        if(counter > enemy)
             break;
     }
+    
 }
 
 
