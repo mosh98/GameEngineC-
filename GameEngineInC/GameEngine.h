@@ -66,7 +66,7 @@ public:
     int getHeight() const {return height;}
     bool getIsRunning() const {return isRuning;}
    
-    void remove(Sprite*); // found no use of this
+    void remove(Sprite*);
     
 private:
     
